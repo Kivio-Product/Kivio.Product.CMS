@@ -1,0 +1,14 @@
+@inherits UmbracoViewPage<IHeaderProperties>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>@Model.Title</title>
+<meta name='robots' content='max-image-preview:large' />
+<meta name="generator" content="Elementor 3.22.3; features: e_optimized_assets_loading, e_optimized_css_loading, additional_custom_breakpoints; settings: css_print_method-external, google_font-enabled, font_display-auto">
+@if(Model.Favicon!=null){
+    <meta name="msapplication-TileImage" content="@Model.Favicon.Url()" />
+    <link rel="icon" href="@Model.Favicon.Url()" sizes="32x32" />
+    <link rel="icon" href="@Model.Favicon.Url()" sizes="192x192" />
+    <link rel="apple-touch-icon" href="@Model.Favicon.Url()" />
+}
+
