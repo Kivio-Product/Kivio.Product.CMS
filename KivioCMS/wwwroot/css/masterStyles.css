@@ -186,10 +186,6 @@
 			background-color: #f26522
 		}
 
-		.elementor-social-icon-shopping-cart {
-			background-color: #4caf50
-		}
-
 		.elementor-social-icon-skype {
 			background-color: #00aff0
 		}
@@ -706,35 +702,6 @@
 			border-radius: 8px;
 		}
 
-		/* Ajustes minicart*/
-		a.elementor-button.elementor-button--view-cart.elementor-size-md {
-			font-size: 14px;
-			font-family: "NeutraText-BookAlt", Sans-serif;
-		}
-
-		a.elementor-button.elementor-button--checkout.elementor-size-md {
-			font-size: 14px;
-			font-family: "NeutraText-BookAlt", Sans-serif;
-		}
-
-		a.elementor-button.elementor-button--view-cart.elementor-size-md {
-			background-color: #066eb1;
-			font-family: "NeutraText-BookAlt", Sans-serif;
-		}
-
-		a.elementor-button.elementor-button--checkout.elementor-size-md {
-			background: #9bc11c;
-		}
-
-		a {
-			color: #066eb1;
-		}
-
-		.elementor-menu-cart__product-price.product-price {
-			color: #000;
-		}
-
-		/* Fin Ajustes minicart*/
 		body {
 			overflow-x: hidden;
 		}
