@@ -1,5 +1,10 @@
 @inherits UmbracoViewPage<IMainMenu>
 
+@{
+    var homePage = Umbraco.AssignedContentItem.AncestorOrSelf<HomePage>();
+    var children = homePage?.Children?.Where(x => x.IsVisible()) ?? Enumerable.Empty<IPublishedContent>();
+}
+
 <!-- Start of main menu-->
 <div data-elementor-type="header" data-elementor-id="7" class="elementor elementor-7 elementor-location-header">
     <div class="elementor-section-wrap">
@@ -15,7 +20,7 @@
                             data-id="f1fa82e" data-element_type="widget" data-widget_type="image.default">
                             <div class="elementor-widget-container">
                                 @if(Model.NutrirLogo!=null){
-                                    <a href="/home">
+                                    <a href="@homePage.Url()">
                                         <img width="184" height="166"
                                             src="@Model.NutrirLogo.Url()"
                                             class="attachment-large size-large wp-image-242" alt="" />
@@ -40,29 +45,32 @@
                                     <ul id="menu-1-240a21f" class="elementor-nav-menu">
                                         <li
                                             class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-23 current_page_item menu-item-1423">
-                                            <a href="/" aria-current="page"
-                                                class="elementor-item elementor-item-active">Inicio</a>
+                                            <a href="@homePage.Url()" aria-current="page"
+                                                class="elementor-item elementor-item-active">@homePage.Name()</a>
                                         </li>
-                                        <li
-                                            class="menu-item menu-item-type-custom menu-item-object-custom menu-item-232">
-                                            <a href="/sobre-nosotros/"
-                                                class="elementor-item">Sobre Nosotros</a>
-                                        </li>
-                                        <li
-                                            class="menu-item menu-item-type-post_type menu-item-object-page menu-item-275">
-                                            <a href="https://www.nutrirong.com/problematica/"
-                                                class="elementor-item">Problemática</a>
-                                        </li>
-                                        <li
-                                            class="menu-item menu-item-type-custom menu-item-object-custom menu-item-235">
-                                            <a href="https://www.nutrirong.com/impacto/"
-                                                class="elementor-item">Impacto</a>
-                                        </li>
-                                        <li
-                                            class="menu-item menu-item-type-custom menu-item-object-custom menu-item-236">
-                                            <a href="https://www.nutrirong.com/ayuda/" class="elementor-item">Cómo
-                                                Ayudar</a>
-                                        </li>
+                                        @if(children != null && children.Any()){
+                                            foreach(var item in children){
+                                                var subChild = item.Children?.Where(x => x.IsVisible()) ?? Enumerable.Empty<IPublishedContent>();
+                                                @if(subChild != null && subChild.Any()){
+                                                    <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-460">
+                                                        <a href="@item.Url()" class="elementor-item">@item.Name()</a>
+                                                        <ul class="sub-menu elementor-nav-menu--dropdown">
+                                                            @foreach(var subC in subChild){
+                                                                <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1212">
+                                                                    <a href="@subC.Url()" class="elementor-sub-item">@subC.Name()</a>
+                                                                </li>
+                                                            }
+                                                        </ul>
+                                                    </li>
+                                                }else{
+                                                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-232">
+                                                        <a href="@item.Url()" class="elementor-item">@item.Name()</a>
+                                                    </li>
+                                                }
+                                                
+                                            }
+                                        }
+                                        
                                         <li
                                             class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-460">
                                             <a href="https://www.nutrirong.com/contactanos/"
@@ -104,102 +112,8 @@
                                                 </li>
                                             </ul>
                                         </li>
-                                        <li
-                                            class="menu-item menu-item-type-custom menu-item-object-custom menu-item-238">
-                                            <a href="https://www.nutrirong.com/tienda/"
-                                                class="elementor-item">Tienda</a>
-                                        </li>
                                     </ul>
-                                </nav>
-                                <div class="elementor-menu-toggle" role="button" tabindex="0"
-                                    aria-label="Alternar menú" aria-expanded="false">
-                                    <i aria-hidden="true" role="presentation"
-                                        class="elementor-menu-toggle__icon--open eicon-menu-bar"></i><i
-                                        aria-hidden="true" role="presentation"
-                                        class="elementor-menu-toggle__icon--close eicon-close"></i> <span
-                                        class="elementor-screen-only">Menú</span>
-                                </div>
-                                <nav class="elementor-nav-menu--dropdown elementor-nav-menu__container"
-                                    role="navigation" aria-hidden="true">
-                                    <ul id="menu-2-240a21f" class="elementor-nav-menu">
-                                        <li
-                                            class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-23 current_page_item menu-item-1423">
-                                            <a href="https://www.nutrirong.com/" aria-current="page"
-                                                class="elementor-item elementor-item-active"
-                                                tabindex="-1">Inicio</a>
-                                        </li>
-                                        <li
-                                            class="menu-item menu-item-type-custom menu-item-object-custom menu-item-232">
-                                            <a href="https://www.nutrirong.com/sobre-nosotros/"
-                                                class="elementor-item" tabindex="-1">Sobre Nosotros</a>
-                                        </li>
-                                        <li
-                                            class="menu-item menu-item-type-post_type menu-item-object-page menu-item-275">
-                                            <a href="https://www.nutrirong.com/problematica/" class="elementor-item"
-                                                tabindex="-1">Problemática</a>
-                                        </li>
-                                        <li
-                                            class="menu-item menu-item-type-custom menu-item-object-custom menu-item-235">
-                                            <a href="https://www.nutrirong.com/impacto/" class="elementor-item"
-                                                tabindex="-1">Impacto</a>
-                                        </li>
-                                        <li
-                                            class="menu-item menu-item-type-custom menu-item-object-custom menu-item-236">
-                                            <a href="https://www.nutrirong.com/ayuda/" class="elementor-item"
-                                                tabindex="-1">Cómo Ayudar</a>
-                                        </li>
-                                        <li
-                                            class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-460">
-                                            <a href="https://www.nutrirong.com/contactanos/" class="elementor-item"
-                                                tabindex="-1">Contáctanos</a>
-                                            <ul class="sub-menu elementor-nav-menu--dropdown">
-                                                <li
-                                                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1212">
-                                                    <a href="https://www.nutrirong.com/contactanos/"
-                                                        class="elementor-sub-item" tabindex="-1">Contacto</a>
-                                                </li>
-                                                <li
-                                                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-1933">
-                                                    <a href="https://www.nutrirong.com/encuestas-de-satisfaccion/"
-                                                        class="elementor-sub-item" tabindex="-1">Encuestas de
-                                                        Satisfacción</a>
-                                                    <ul class="sub-menu elementor-nav-menu--dropdown">
-                                                        <li
-                                                            class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1111">
-                                                            <a target="_blank" rel="noopener"
-                                                                href="https://docs.google.com/forms/d/e/1FAIpQLSe06FQz5y5yzag0_21sRfMJbCQR_FHp3bLBMsQvrvkn0UNJZA/viewform?usp=pp_url"
-                                                                class="elementor-sub-item" tabindex="-1">A
-                                                                Padrinos</a>
-                                                        </li>
-                                                        <li
-                                                            class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1112">
-                                                            <a target="_blank" rel="noopener"
-                                                                href="https://docs.google.com/forms/d/e/1FAIpQLScuiKCG8lyIVfZIzGmInEpeGHjnt1_HzGa8CN3PjhxhvG1pow/viewform?usp=pp_url"
-                                                                class="elementor-sub-item" tabindex="-1">Productos y
-                                                                Servicios</a>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                                <li
-                                                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1171">
-                                                    <a href="https://www.nutrirong.com/pqrfs/"
-                                                        class="elementor-sub-item" tabindex="-1">PQRFA</a>
-                                                </li>
-                                                <li
-                                                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1172">
-                                                    <a href="https://www.nutrirong.com/certificados-de-donacion/"
-                                                        class="elementor-sub-item" tabindex="-1">Certificados de
-                                                        Donación</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li
-                                            class="menu-item menu-item-type-custom menu-item-object-custom menu-item-238">
-                                            <a href="https://www.nutrirong.com/tienda/" class="elementor-item"
-                                                tabindex="-1">Tienda</a>
-                                        </li>
-                                    </ul>
-                                </nav>
+                                </nav>                                
                             </div>
                         </div>
                     </div>
@@ -247,7 +161,7 @@
                         <div class="elementor-element elementor-element-ae54e48 elementor-widget elementor-widget-image"
                             data-id="ae54e48" data-element_type="widget" data-widget_type="image.default">
                             <div class="elementor-widget-container">
-                                <a href="https://www.nutrirong.com/">
+                                <a href="/">
                                     <img width="184" height="166"
                                         src="https://www.nutrirong.com/wp-content/uploads/2021/11/logo-Nutrir.png"
                                         class="attachment-large size-large wp-image-242" alt="" /> </a>
@@ -271,13 +185,13 @@
                                     <ul id="menu-2-a67b74c" class="elementor-nav-menu">
                                         <li
                                             class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-23 current_page_item menu-item-1423">
-                                            <a href="https://www.nutrirong.com/" aria-current="page"
+                                            <a href="/" aria-current="page"
                                                 class="elementor-item elementor-item-active"
                                                 tabindex="-1">Inicio</a>
                                         </li>
                                         <li
                                             class="menu-item menu-item-type-custom menu-item-object-custom menu-item-232">
-                                            <a href="https://www.nutrirong.com/sobre-nosotros/"
+                                            <a href="/sobre-nosotros/"
                                                 class="elementor-item" tabindex="-1">Sobre Nosotros</a>
                                         </li>
                                         <li
