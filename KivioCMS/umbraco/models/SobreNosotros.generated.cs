@@ -18,9 +18,9 @@ using Umbraco.Extensions;
 
 namespace Umbraco.Cms.Web.Common.PublishedModels
 {
-	/// <summary>Sobre Nosotros</summary>
+	/// <summary>Standard Page</summary>
 	[PublishedModel("sobreNosotros")]
-	public partial class SobreNosotros : PublishedContentModel, IHeaderProperties, IMainMenu
+	public partial class SobreNosotros : PublishedContentModel, IHeaderProperties, IMainMenu, IVisibilityProperty
 	{
 		// helpers
 #pragma warning disable 0109 // new is redundant
@@ -72,5 +72,12 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
 		[ImplementPropertyType("nutrirLogo")]
 		public virtual global::Umbraco.Cms.Core.Models.MediaWithCrops NutrirLogo => global::Umbraco.Cms.Web.Common.PublishedModels.MainMenu.GetNutrirLogo(this, _publishedValueFallback);
+
+		///<summary>
+		/// Hide: Set this to true if you want to hide this page from navigation and search results site maps and general list pages.
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.4.1+d72fc5c")]
+		[ImplementPropertyType("umbracoNaviHide")]
+		public virtual bool UmbracoNaviHide => global::Umbraco.Cms.Web.Common.PublishedModels.VisibilityProperty.GetUmbracoNaviHide(this, _publishedValueFallback);
 	}
 }

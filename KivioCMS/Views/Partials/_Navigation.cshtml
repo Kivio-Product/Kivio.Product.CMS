@@ -1,8 +1,21 @@
+@using Umbraco.Cms.Core.Models
+@using Umbraco.Cms.Core.Models.Blocks
+@using Umbraco.Cms.Web.Common.PublishedModels
+@using System.Collections.Generic
 @inherits UmbracoViewPage<IMainMenu>
 
 @{
     var homePage = Umbraco.AssignedContentItem.AncestorOrSelf<HomePage>();
-    var children = homePage?.Children?.Where(x => x.IsVisible()) ?? Enumerable.Empty<IPublishedContent>();
+    var mainMenu = homePage?.MainNavigation;
+    var currentPageUrl = Umbraco.AssignedContentItem.Url();
+}
+
+@functions {
+    // Helper method to check if a URL matches the current page URL
+    bool IsActive(string itemUrl, string currentUrl)
+    {
+        return itemUrl.Equals(currentUrl, StringComparison.InvariantCultureIgnoreCase);
+    }
 }
 
 <!-- Start of main menu-->
@@ -42,76 +55,50 @@
                                     href="https://www.nutrirong.com/wp-content/plugins/elementor-pro/assets/css/widget-nav-menu.min.css">
                                 <nav migration_allowed="1" migrated="0" role="navigation"
                                     class="elementor-nav-menu--main elementor-nav-menu__container elementor-nav-menu--layout-horizontal e--pointer-none">
-                                    <ul id="menu-1-240a21f" class="elementor-nav-menu">
-                                        <li
-                                            class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-23 current_page_item menu-item-1423">
-                                            <a href="@homePage.Url()" aria-current="page"
-                                                class="elementor-item elementor-item-active">@homePage.Name()</a>
-                                        </li>
-                                        @if(children != null && children.Any()){
-                                            foreach(var item in children){
-                                                var subChild = item.Children?.Where(x => x.IsVisible()) ?? Enumerable.Empty<IPublishedContent>();
-                                                @if(subChild != null && subChild.Any()){
-                                                    <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-460">
-                                                        <a href="@item.Url()" class="elementor-item">@item.Name()</a>
+                                    <ul id="menu-1-240a21f" class="elementor-nav-menu">                       
+                                        @if (mainMenu != null)             
+                                        {
+                                            foreach (var menuItem in mainMenu.ToList())
+                                            {
+                                                var content = menuItem.Content as IPublishedElement;
+                                                var subMenu = content.Value<IEnumerable<BlockListItem>>("childLinks2");
+                                                if (subMenu != null && subMenu.Any())
+                                                {
+                                                    @if (content.HasValue("link"))
+                                                    {
+                                                        var link = content.Value<Link>("link");
+                                                        var isActive = IsActive(link.Url, currentPageUrl);
+                                                        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children">
+                                                        <a href="@link.Url" class="elementor-item @(isActive ? "elementor-item-active" : "")">@content.Value("title")</a>
                                                         <ul class="sub-menu elementor-nav-menu--dropdown">
-                                                            @foreach(var subC in subChild){
-                                                                <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1212">
-                                                                    <a href="@subC.Url()" class="elementor-sub-item">@subC.Name()</a>
-                                                                </li>
+                                                            @foreach(var subMenuItem in subMenu){
+                                                                var subContent = subMenuItem.Content as IPublishedElement;
+                                                                @if (subContent.HasValue("link"))
+                                                                {
+                                                                    var subLink = subContent.Value<Link>("link");
+                                                                    var isSubActive = IsActive(subLink.Url, currentPageUrl);
+                                                                    <li class="menu-item menu-item-type-post_type menu-item-object-page">
+                                                                        <a href="@subLink.Url" class="elementor-sub-item @(isSubActive ? "elementor-item-active" : "")">@subContent.Value("title")</a>
+                                                                    </li>
+                                                                }
+                                                                
                                                             }
                                                         </ul>
                                                     </li>
+                                                    }
                                                 }else{
-                                                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-232">
-                                                        <a href="@item.Url()" class="elementor-item">@item.Name()</a>
+                                                    <li class="menu-item menu-item-type-custom menu-item-object-custom">
+                                                        @if (content.HasValue("link"))
+                                                        {
+                                                            var link = content.Value<Link>("link");
+                                                            var isActive = IsActive(link.Url, currentPageUrl);
+                                                            <a href="@link.Url" aria-current="page" class="elementor-item @(isActive ? "elementor-item-active" : "")">@content.Value("title")</a>
+                                                        }
                                                     </li>
                                                 }
                                                 
                                             }
-                                        }
-                                        
-                                        <li
-                                            class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-460">
-                                            <a href="https://www.nutrirong.com/contactanos/"
-                                                class="elementor-item">Contáctanos</a>
-                                            <ul class="sub-menu elementor-nav-menu--dropdown">
-                                                <li
-                                                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1212">
-                                                    <a href="https://www.nutrirong.com/contactanos/"
-                                                        class="elementor-sub-item">Contacto</a>
-                                                </li>
-                                                <li
-                                                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-1933">
-                                                    <a href="https://www.nutrirong.com/encuestas-de-satisfaccion/"
-                                                        class="elementor-sub-item">Encuestas de Satisfacción</a>
-                                                    <ul class="sub-menu elementor-nav-menu--dropdown">
-                                                        <li
-                                                            class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1111">
-                                                            <a target="_blank" rel="noopener"
-                                                                href="https://docs.google.com/forms/d/e/1FAIpQLSe06FQz5y5yzag0_21sRfMJbCQR_FHp3bLBMsQvrvkn0UNJZA/viewform?usp=pp_url"
-                                                                class="elementor-sub-item">A Padrinos</a>
-                                                        </li>
-                                                        <li
-                                                            class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1112">
-                                                            <a target="_blank" rel="noopener"
-                                                                href="https://docs.google.com/forms/d/e/1FAIpQLScuiKCG8lyIVfZIzGmInEpeGHjnt1_HzGa8CN3PjhxhvG1pow/viewform?usp=pp_url"
-                                                                class="elementor-sub-item">Productos y Servicios</a>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                                <li
-                                                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1171">
-                                                    <a href="https://www.nutrirong.com/pqrfs/"
-                                                        class="elementor-sub-item">PQRFA</a>
-                                                </li>
-                                                <li
-                                                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1172">
-                                                    <a href="https://www.nutrirong.com/certificados-de-donacion/"
-                                                        class="elementor-sub-item">Certificados de Donación</a>
-                                                </li>
-                                            </ul>
-                                        </li>
+                                        }  
                                     </ul>
                                 </nav>                                
                             </div>
@@ -183,82 +170,49 @@
                                 <nav class="elementor-nav-menu--dropdown elementor-nav-menu__container"
                                     role="navigation" aria-hidden="true">
                                     <ul id="menu-2-a67b74c" class="elementor-nav-menu">
-                                        <li
-                                            class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-23 current_page_item menu-item-1423">
-                                            <a href="/" aria-current="page"
-                                                class="elementor-item elementor-item-active"
-                                                tabindex="-1">Inicio</a>
-                                        </li>
-                                        <li
-                                            class="menu-item menu-item-type-custom menu-item-object-custom menu-item-232">
-                                            <a href="/sobre-nosotros/"
-                                                class="elementor-item" tabindex="-1">Sobre Nosotros</a>
-                                        </li>
-                                        <li
-                                            class="menu-item menu-item-type-post_type menu-item-object-page menu-item-275">
-                                            <a href="https://www.nutrirong.com/problematica/" class="elementor-item"
-                                                tabindex="-1">Problemática</a>
-                                        </li>
-                                        <li
-                                            class="menu-item menu-item-type-custom menu-item-object-custom menu-item-235">
-                                            <a href="https://www.nutrirong.com/impacto/" class="elementor-item"
-                                                tabindex="-1">Impacto</a>
-                                        </li>
-                                        <li
-                                            class="menu-item menu-item-type-custom menu-item-object-custom menu-item-236">
-                                            <a href="https://www.nutrirong.com/ayuda/" class="elementor-item"
-                                                tabindex="-1">Cómo Ayudar</a>
-                                        </li>
-                                        <li
-                                            class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-460">
-                                            <a href="https://www.nutrirong.com/contactanos/" class="elementor-item"
-                                                tabindex="-1">Contáctanos</a>
-                                            <ul class="sub-menu elementor-nav-menu--dropdown">
-                                                <li
-                                                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1212">
-                                                    <a href="https://www.nutrirong.com/contactanos/"
-                                                        class="elementor-sub-item" tabindex="-1">Contacto</a>
-                                                </li>
-                                                <li
-                                                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-1933">
-                                                    <a href="https://www.nutrirong.com/encuestas-de-satisfaccion/"
-                                                        class="elementor-sub-item" tabindex="-1">Encuestas de
-                                                        Satisfacción</a>
-                                                    <ul class="sub-menu elementor-nav-menu--dropdown">
-                                                        <li
-                                                            class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1111">
-                                                            <a target="_blank" rel="noopener"
-                                                                href="https://docs.google.com/forms/d/e/1FAIpQLSe06FQz5y5yzag0_21sRfMJbCQR_FHp3bLBMsQvrvkn0UNJZA/viewform?usp=pp_url"
-                                                                class="elementor-sub-item" tabindex="-1">A
-                                                                Padrinos</a>
-                                                        </li>
-                                                        <li
-                                                            class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1112">
-                                                            <a target="_blank" rel="noopener"
-                                                                href="https://docs.google.com/forms/d/e/1FAIpQLScuiKCG8lyIVfZIzGmInEpeGHjnt1_HzGa8CN3PjhxhvG1pow/viewform?usp=pp_url"
-                                                                class="elementor-sub-item" tabindex="-1">Productos y
-                                                                Servicios</a>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                                <li
-                                                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1171">
-                                                    <a href="https://www.nutrirong.com/pqrfs/"
-                                                        class="elementor-sub-item" tabindex="-1">PQRFA</a>
-                                                </li>
-                                                <li
-                                                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1172">
-                                                    <a href="https://www.nutrirong.com/certificados-de-donacion/"
-                                                        class="elementor-sub-item" tabindex="-1">Certificados de
-                                                        Donación</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li
-                                            class="menu-item menu-item-type-custom menu-item-object-custom menu-item-238">
-                                            <a href="https://www.nutrirong.com/tienda/" class="elementor-item"
-                                                tabindex="-1">Tienda</a>
-                                        </li>
+                                        @if (mainMenu != null)             
+                                        {
+                                            foreach (var menuItem in mainMenu.ToList())
+                                            {
+                                                var content = menuItem.Content as IPublishedElement;
+                                                var subMenu = content.Value<IEnumerable<BlockListItem>>("childLinks2");
+                                                if (subMenu != null && subMenu.Any())
+                                                {
+                                                    @if (content.HasValue("link"))
+                                                    {
+                                                        var link = content.Value<Link>("link");
+                                                        var isActive = IsActive(link.Url, currentPageUrl);
+                                                        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children">
+                                                        <a href="@link.Url" class="elementor-item @(isActive ? "elementor-item-active" : "")" tabindex="-1">@content.Value("title")</a>
+                                                        <ul class="sub-menu elementor-nav-menu--dropdown">
+                                                            @foreach(var subMenuItem in subMenu){
+                                                                var subContent = subMenuItem.Content as IPublishedElement;
+                                                                @if (subContent.HasValue("link"))
+                                                                {
+                                                                    var subLink = subContent.Value<Link>("link");
+                                                                    var isSubActive = IsActive(subLink.Url, currentPageUrl);
+                                                                    <li class="menu-item menu-item-type-post_type menu-item-object-page">
+                                                                        <a href="@subLink.Url" class="elementor-sub-item @(isSubActive ? "elementor-item-active" : "")"  tabindex="-1">@subContent.Value("title")</a>
+                                                                    </li>
+                                                                }
+                                                                
+                                                            }
+                                                        </ul>
+                                                    </li>
+                                                    }
+                                                }else{
+                                                    <li class="menu-item menu-item-type-custom menu-item-object-custom">
+                                                        @if (content.HasValue("link"))
+                                                        {
+                                                            var link = content.Value<Link>("link");
+                                                            var isActive = IsActive(link.Url, currentPageUrl);
+                                                            <a href="@link.Url" aria-current="page" class="elementor-item @(isActive ? "elementor-item-active" : "")" tabindex="-1">@content.Value("title")</a>
+                                                        }
+                                                    </li>
+                                                }
+                                                
+                                            }
+                                        }
                                     </ul>
                                 </nav>
                             </div>
