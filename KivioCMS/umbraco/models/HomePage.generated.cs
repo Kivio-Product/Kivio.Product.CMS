@@ -20,7 +20,7 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 {
 	/// <summary>Home Page</summary>
 	[PublishedModel("homePage")]
-	public partial class HomePage : PublishedContentModel, IHeaderProperties, IMainMenu
+	public partial class HomePage : PublishedContentModel, IFooterProperties, IHeaderProperties, IMainMenu
 	{
 		// helpers
 #pragma warning disable 0109 // new is redundant
@@ -56,6 +56,14 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
 		[ImplementPropertyType("mainNavigation")]
 		public virtual global::Umbraco.Cms.Core.Models.Blocks.BlockListModel MainNavigation => this.Value<global::Umbraco.Cms.Core.Models.Blocks.BlockListModel>(_publishedValueFallback, "mainNavigation");
+
+		///<summary>
+		/// Footer Social Links: Enter the social links to display in the footer.
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.4.1+d72fc5c")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("footerSocialLinks")]
+		public virtual global::System.Collections.Generic.IEnumerable<global::Umbraco.Cms.Core.Models.PublishedContent.SocialLink> FooterSocialLinks => global::Umbraco.Cms.Web.Common.PublishedModels.FooterProperties.GetFooterSocialLinks(this, _publishedValueFallback);
 
 		///<summary>
 		/// Favicon: Attach favicon.

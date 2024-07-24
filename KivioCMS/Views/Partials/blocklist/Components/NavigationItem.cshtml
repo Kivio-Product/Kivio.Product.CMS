@@ -1,9 +1,0 @@
-@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>;
-@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
-@{
-    var content = (ContentModels.NavigationItem)Model.Content;
-    //var settings = (ContentModels.NavigationItem)Model.Settings;
-}
-
-// Output the value of field with alias 'heading' from the Element Type selected as Content section
-<h1>@content.Value("heading")</h1>

@@ -1,5 +1,10 @@
 @inherits UmbracoViewPage<IMainMenu>
 
+@{
+    var homePage = Umbraco.AssignedContentItem.AncestorOrSelf<HomePage>();
+	var footerIcons = homePage.FooterSocialLinks;
+}
+
 <!-- Page Footer-->
 	<div data-elementor-type="footer" data-elementor-id="12" class="elementor elementor-12 elementor-location-footer">
 		<div class="elementor-section-wrap">
@@ -210,32 +215,18 @@
 												data-widget_type="social-icons.default">
 												<div class="elementor-widget-container">
 													<div class="elementor-social-icons-wrapper elementor-grid">
-														<span class="elementor-grid-item">
-															<a class="elementor-icon elementor-social-icon elementor-social-icon-facebook elementor-repeater-item-1d3786c"
-																href="https://www.facebook.com/nutrirong/"
-																target="_blank">
-																<span class="elementor-screen-only">Facebook</span>
-																<i class="fab fa-facebook"></i> </a>
-														</span>
-														<span class="elementor-grid-item">
-															<a class="elementor-icon elementor-social-icon elementor-social-icon-whatsapp elementor-repeater-item-b4ea1b2"
-																href="https://wa.me/+573216453086" target="_blank">
-																<span class="elementor-screen-only">Whatsapp</span>
-																<i class="fab fa-whatsapp"></i> </a>
-														</span>
-														<span class="elementor-grid-item">
-															<a class="elementor-icon elementor-social-icon elementor-social-icon-twitter elementor-repeater-item-06ae945"
-																href="https://twitter.com/NutrirONG" target="_blank">
-																<span class="elementor-screen-only">Twitter</span>
-																<i class="fab fa-twitter"></i> </a>
-														</span>
-														<span class="elementor-grid-item">
-															<a class="elementor-icon elementor-social-icon elementor-social-icon-instagram elementor-repeater-item-b30f0de"
-																href="https://instagram.com/nutrirong?utm_medium=copy_link"
-																target="_blank">
-																<span class="elementor-screen-only">Instagram</span>
-																<i class="fab fa-instagram"></i> </a>
-														</span>
+														@if(footerIcons != null){
+															@foreach(var socialIcon in footerIcons){
+																<span class="elementor-grid-item">
+																	<a class="elementor-icon elementor-social-icon elementor-social-icon-@socialIcon.Network elementor-repeater-item-1d3786c"
+																	href="@socialIcon.Url"
+																	target="_blank">
+																		<span class="elementor-screen-only">@socialIcon.Network</span>
+																		<i class="fab fa-@socialIcon.Network"></i>
+																	</a>
+																</span>
+															}
+														}
 													</div>
 												</div>
 											</div>
