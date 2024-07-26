@@ -1,0 +1,6 @@
+﻿@inherits Umbraco.Cms.Web.Common.Macros.PartialViewMacroPage
+@{
+    var dictionaryKey = (string)Model.MacroParameters["dictionaryKey"];
+    var dictionaryValue = Umbraco.GetDictionaryValue(dictionaryKey);
+}
+<span>@dictionaryValue</span>

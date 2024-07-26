@@ -4,8 +4,14 @@
     var homePage = Umbraco.AssignedContentItem.AncestorOrSelf<HomePage>();
 	var footerIcons = homePage.FooterSocialLinks;
 	var footerContent = homePage?.FooterContent;
-	
-	
+	var content = footerContent.ToArray()[0].Content as IPublishedElement;
+	var textCol1 = content.Value("content");
+	var content2 = footerContent.ToArray()[1].Content as IPublishedElement;
+	var textCol2 = content2.Value("content");
+	var content3 = footerContent.ToArray()[2].Content as IPublishedElement;
+	var imgColImg = content3.Value<IPublishedContent>("image");
+	var imgColLink = content3.Value<Umbraco.Cms.Core.Models.Link>("link");
+	var imgColCaption = content3.Value<String>("caption");
 	
 }
 
@@ -115,7 +121,7 @@
 												data-id="a3d9410" data-element_type="widget"
 												data-widget_type="text-editor.default">
 												<div class="elementor-widget-container">
-													<p>@Umbraco.GetDictionaryValue("Footer.Copyright")</p>
+													<p>@textCol1</p>
 												</div>
 											</div>
 										</div>
@@ -130,25 +136,8 @@
 													<link rel="stylesheet"
 														href="https://www.nutrirong.com/wp-content/plugins/elementor/assets/css/widget-icon-list.min.css">
 													<ul class="elementor-icon-list-items">
-														@{
-															if(footerContent != null){
-																foreach (var footerItem in footerContent.ToList())
-																	{
-
-																		var content = footerItem.Content as IPublishedElement;
-																		var textCol1 = content.Value("content");
-																		<li class="elementor-icon-list-item">
-																			<span class="elementor-icon-list-text">@textCol1</span>
-																		</li>
-																	}
-															}
-														}
-														
 														<li class="elementor-icon-list-item">
-															<span class="elementor-icon-list-text">@Umbraco.GetDictionaryValue("Footer.City")</span>
-														</li>
-														<li class="elementor-icon-list-item">
-															<span class="elementor-icon-list-text">@Umbraco.GetDictionaryValue("Footer.Address")</span>
+															<span class="elementor-icon-list-text">@textCol2</span>
 														</li>
 													</ul>
 												</div>
@@ -247,11 +236,11 @@
 												data-id="479920c" data-element_type="widget"
 												data-widget_type="image.default">
 												<div class="elementor-widget-container">
-													<a href="https://nutrirong-my.sharepoint.com/:b:/p/comunicacion/EWCUCd1rCxhGiNLVzc0PNEIB_IUeza-zdh5n37poSF5RXA?e=HCKpVQ"
+													<a href="@imgColLink.Url"
 														target="_blank">
-														<img src="https://www.nutrirong.com/wp-content/uploads/elementor/thumbs/img-certificado-icontec-codigo-nutrir-e1671501269903-pzf4eenq4icn8p5s2alqtqvk3d98yxkdcz97cupw0g.png"
-															title="img-certificado-icontec codigo nutrir"
-															alt="img-certificado-icontec codigo nutrir"
+														<img src="@imgColImg.Url()"
+															title="@imgColCaption"
+															alt="@imgColCaption"
 															loading="lazy" /> </a>
 												</div>
 											</div>
