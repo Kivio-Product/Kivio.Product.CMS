@@ -3,6 +3,10 @@
 @{
     var homePage = Umbraco.AssignedContentItem.AncestorOrSelf<HomePage>();
 	var footerIcons = homePage.FooterSocialLinks;
+	var footerContent = homePage?.FooterContent;
+	
+	
+	
 }
 
 <!-- Page Footer-->
@@ -111,8 +115,7 @@
 												data-id="a3d9410" data-element_type="widget"
 												data-widget_type="text-editor.default">
 												<div class="elementor-widget-container">
-													<p>Copyright C 2021 Fundación Nutrir Desarrollado por Grupo Impulzo
-													</p>
+													<p>@Umbraco.GetDictionaryValue("Footer.Copyright")</p>
 												</div>
 											</div>
 										</div>
@@ -127,16 +130,25 @@
 													<link rel="stylesheet"
 														href="https://www.nutrirong.com/wp-content/plugins/elementor/assets/css/widget-icon-list.min.css">
 													<ul class="elementor-icon-list-items">
+														@{
+															if(footerContent != null){
+																foreach (var footerItem in footerContent.ToList())
+																	{
+
+																		var content = footerItem.Content as IPublishedElement;
+																		var textCol1 = content.Value("content");
+																		<li class="elementor-icon-list-item">
+																			<span class="elementor-icon-list-text">@textCol1</span>
+																		</li>
+																	}
+															}
+														}
+														
 														<li class="elementor-icon-list-item">
-															<span class="elementor-icon-list-text">¡VISITANOS!</span>
+															<span class="elementor-icon-list-text">@Umbraco.GetDictionaryValue("Footer.City")</span>
 														</li>
 														<li class="elementor-icon-list-item">
-															<span class="elementor-icon-list-text">Manizales - Caldas -
-																Colombia</span>
-														</li>
-														<li class="elementor-icon-list-item">
-															<span class="elementor-icon-list-text">Carrera 19 No 72A -
-																18</span>
+															<span class="elementor-icon-list-text">@Umbraco.GetDictionaryValue("Footer.Address")</span>
 														</li>
 													</ul>
 												</div>
@@ -157,8 +169,7 @@
 												data-id="bcc97bd" data-element_type="widget"
 												data-widget_type="text-editor.default">
 												<div class="elementor-widget-container">
-													<p>Copyright C 2021 Fundación Nutrir Desarrollado por Grupo Impulzo
-													</p>
+													<p>@Umbraco.GetDictionaryValue("Footer.Copyright")</p>
 												</div>
 											</div>
 										</div>
@@ -172,15 +183,13 @@
 												<div class="elementor-widget-container">
 													<ul class="elementor-icon-list-items">
 														<li class="elementor-icon-list-item">
-															<span class="elementor-icon-list-text">¡VISITANOS!</span>
+															<span class="elementor-icon-list-text">@Umbraco.GetDictionaryValue("Footer.VisitUs")</span>
 														</li>
 														<li class="elementor-icon-list-item">
-															<span class="elementor-icon-list-text">Manizales - Caldas -
-																Colombia</span>
+															<span class="elementor-icon-list-text">@Umbraco.GetDictionaryValue("Footer.City")</span>
 														</li>
 														<li class="elementor-icon-list-item">
-															<span class="elementor-icon-list-text">Carrera 19 No 72A -
-																18</span>
+															<span class="elementor-icon-list-text">@Umbraco.GetDictionaryValue("Footer.Address")</span>
 														</li>
 													</ul>
 												</div>
@@ -206,8 +215,7 @@
 												data-id="25fac3f" data-element_type="widget"
 												data-widget_type="heading.default">
 												<div class="elementor-widget-container">
-													<h5 class="elementor-heading-title elementor-size-default">SÍGUENOS
-														TAMBIEN AQUÍ:</h5>
+													<h5 class="elementor-heading-title elementor-size-default">@Umbraco.GetDictionaryValue("Footer.FollowUs")</h5>
 												</div>
 											</div>
 											<div class="elementor-element elementor-element-844357a elementor-shape-circle elementor-grid-0 e-grid-align-center elementor-widget elementor-widget-social-icons"
