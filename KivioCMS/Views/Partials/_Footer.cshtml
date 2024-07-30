@@ -1,7 +1,7 @@
-@inherits UmbracoViewPage<IMainMenu>
+@inherits UmbracoViewPage<IPaymentOptions>
 
 @{
-    var homePage = Umbraco.AssignedContentItem.AncestorOrSelf<HomePage>();
+	var homePage = Umbraco.AssignedContentItem.AncestorOrSelf<HomePage>();
 	var footerIcons = homePage.FooterSocialLinks;
 	var footerContent = homePage?.FooterContent;
 	var content = footerContent.ToArray()[0].Content as IPublishedElement;
@@ -12,245 +12,164 @@
 	var imgColImg = content3.Value<IPublishedContent>("image");
 	var imgColLink = content3.Value<Umbraco.Cms.Core.Models.Link>("link");
 	var imgColCaption = content3.Value<String>("caption");
-	
-}
+	var donationOptions = homePage.DonationOption;
 
-<!-- Page Footer-->
-	<div data-elementor-type="footer" data-elementor-id="12" class="elementor elementor-12 elementor-location-footer">
-		<div class="elementor-section-wrap">
-			<section
-				class="elementor-section elementor-top-section elementor-element elementor-element-f9b5300 elementor-section-content-middle elementor-section-boxed elementor-section-height-default elementor-section-height-default"
-				data-id="f9b5300" data-element_type="section"
-				data-settings="{&quot;background_background&quot;:&quot;classic&quot;,&quot;jet_parallax_layout_list&quot;:[{&quot;jet_parallax_layout_image&quot;:{&quot;url&quot;:&quot;&quot;,&quot;id&quot;:&quot;&quot;,&quot;size&quot;:&quot;&quot;},&quot;_id&quot;:&quot;a3d0a62&quot;,&quot;jet_parallax_layout_image_tablet&quot;:{&quot;url&quot;:&quot;&quot;,&quot;id&quot;:&quot;&quot;,&quot;size&quot;:&quot;&quot;},&quot;jet_parallax_layout_image_mobile&quot;:{&quot;url&quot;:&quot;&quot;,&quot;id&quot;:&quot;&quot;,&quot;size&quot;:&quot;&quot;},&quot;jet_parallax_layout_speed&quot;:{&quot;unit&quot;:&quot;%&quot;,&quot;size&quot;:50,&quot;sizes&quot;:[]},&quot;jet_parallax_layout_type&quot;:&quot;scroll&quot;,&quot;jet_parallax_layout_direction&quot;:null,&quot;jet_parallax_layout_fx_direction&quot;:null,&quot;jet_parallax_layout_z_index&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_x&quot;:50,&quot;jet_parallax_layout_bg_x_tablet&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_x_mobile&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_y&quot;:50,&quot;jet_parallax_layout_bg_y_tablet&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_y_mobile&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_size&quot;:&quot;auto&quot;,&quot;jet_parallax_layout_bg_size_tablet&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_size_mobile&quot;:&quot;&quot;,&quot;jet_parallax_layout_animation_prop&quot;:&quot;transform&quot;,&quot;jet_parallax_layout_on&quot;:[&quot;desktop&quot;,&quot;tablet&quot;]}]}">
-				<div class="elementor-container elementor-column-gap-default">
-					<div class="elementor-column elementor-col-25 elementor-top-column elementor-element elementor-element-ce76efd"
-						data-id="ce76efd" data-element_type="column">
-						<div class="elementor-widget-wrap elementor-element-populated">
-							<div class="elementor-element elementor-element-56343fa elementor-widget elementor-widget-spacer"
-								data-id="56343fa" data-element_type="widget" data-widget_type="spacer.default">
-								<div class="elementor-widget-container">
-									<div class="elementor-spacer">
-										<div class="elementor-spacer-inner"></div>
+}
+<div data-elementor-type="footer" data-elementor-id="12" class="elementor elementor-12 elementor-location-footer">
+	<div class="elementor-section-wrap">
+		<section
+			class="elementor-section elementor-top-section elementor-element elementor-element-c792208 elementor-section-content-middle elementor-section-boxed elementor-section-height-default elementor-section-height-default"
+			data-id="c792208" data-element_type="section"
+			data-settings="{&quot;background_background&quot;:&quot;classic&quot;,&quot;jet_parallax_layout_list&quot;:[{&quot;jet_parallax_layout_image&quot;:{&quot;url&quot;:&quot;&quot;,&quot;id&quot;:&quot;&quot;,&quot;size&quot;:&quot;&quot;},&quot;_id&quot;:&quot;f3fe13a&quot;,&quot;jet_parallax_layout_image_tablet&quot;:{&quot;url&quot;:&quot;&quot;,&quot;id&quot;:&quot;&quot;,&quot;size&quot;:&quot;&quot;},&quot;jet_parallax_layout_image_mobile&quot;:{&quot;url&quot;:&quot;&quot;,&quot;id&quot;:&quot;&quot;,&quot;size&quot;:&quot;&quot;},&quot;jet_parallax_layout_speed&quot;:{&quot;unit&quot;:&quot;%&quot;,&quot;size&quot;:50,&quot;sizes&quot;:[]},&quot;jet_parallax_layout_type&quot;:&quot;scroll&quot;,&quot;jet_parallax_layout_direction&quot;:null,&quot;jet_parallax_layout_fx_direction&quot;:null,&quot;jet_parallax_layout_z_index&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_x&quot;:50,&quot;jet_parallax_layout_bg_x_tablet&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_x_mobile&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_y&quot;:50,&quot;jet_parallax_layout_bg_y_tablet&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_y_mobile&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_size&quot;:&quot;auto&quot;,&quot;jet_parallax_layout_bg_size_tablet&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_size_mobile&quot;:&quot;&quot;,&quot;jet_parallax_layout_animation_prop&quot;:&quot;transform&quot;,&quot;jet_parallax_layout_on&quot;:[&quot;desktop&quot;,&quot;tablet&quot;]}]}">
+			<div class="elementor-container elementor-column-gap-default">
+				<div class="elementor-column elementor-col-50 elementor-top-column elementor-element elementor-element-ff3621b"
+					data-id="ff3621b" data-element_type="column">
+					<div class="elementor-widget-wrap elementor-element-populated">
+						<section
+							class="elementor-section elementor-inner-section elementor-element elementor-element-7754963 elementor-section-content-middle elementor-hidden-tablet elementor-hidden-mobile elementor-section-boxed elementor-section-height-default elementor-section-height-default"
+							data-id="7754963" data-element_type="section"
+							data-settings="{&quot;jet_parallax_layout_list&quot;:[{&quot;jet_parallax_layout_image&quot;:{&quot;url&quot;:&quot;&quot;,&quot;id&quot;:&quot;&quot;,&quot;size&quot;:&quot;&quot;},&quot;_id&quot;:&quot;36e1192&quot;,&quot;jet_parallax_layout_image_tablet&quot;:{&quot;url&quot;:&quot;&quot;,&quot;id&quot;:&quot;&quot;,&quot;size&quot;:&quot;&quot;},&quot;jet_parallax_layout_image_mobile&quot;:{&quot;url&quot;:&quot;&quot;,&quot;id&quot;:&quot;&quot;,&quot;size&quot;:&quot;&quot;},&quot;jet_parallax_layout_speed&quot;:{&quot;unit&quot;:&quot;%&quot;,&quot;size&quot;:50,&quot;sizes&quot;:[]},&quot;jet_parallax_layout_type&quot;:&quot;scroll&quot;,&quot;jet_parallax_layout_direction&quot;:null,&quot;jet_parallax_layout_fx_direction&quot;:null,&quot;jet_parallax_layout_z_index&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_x&quot;:50,&quot;jet_parallax_layout_bg_x_tablet&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_x_mobile&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_y&quot;:50,&quot;jet_parallax_layout_bg_y_tablet&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_y_mobile&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_size&quot;:&quot;auto&quot;,&quot;jet_parallax_layout_bg_size_tablet&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_size_mobile&quot;:&quot;&quot;,&quot;jet_parallax_layout_animation_prop&quot;:&quot;transform&quot;,&quot;jet_parallax_layout_on&quot;:[&quot;desktop&quot;,&quot;tablet&quot;]}]}">
+							<div class="elementor-container elementor-column-gap-default">
+								<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-270fe29"
+									data-id="270fe29" data-element_type="column">
+									<div class="elementor-widget-wrap elementor-element-populated">
+										<div class="elementor-element elementor-element-a3d9410 elementor-widget elementor-widget-text-editor"
+											data-id="a3d9410" data-element_type="widget"
+											data-widget_type="text-editor.default">
+											<div class="elementor-widget-container">
+												<p>@textCol1</p>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-88fe4fa"
+									data-id="88fe4fa" data-element_type="column">
+									<div class="elementor-widget-wrap elementor-element-populated">
+										<div class="elementor-element elementor-element-d78e655 elementor-icon-list--layout-traditional elementor-list-item-link-full_width elementor-widget elementor-widget-icon-list"
+											data-id="d78e655" data-element_type="widget"
+											data-widget_type="icon-list.default">
+											<div class="elementor-widget-container">
+												<link rel="stylesheet"
+													href="https://www.nutrirong.com/wp-content/plugins/elementor/assets/css/widget-icon-list.min.css">
+												<ul class="elementor-icon-list-items">
+													<li class="elementor-icon-list-item">
+														<span class="elementor-icon-list-text">@textCol2</span>
+													</li>
+												</ul>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
-							<div class="elementor-element elementor-element-1c4446a elementor-align-center elementor-widget elementor-widget-button"
-								data-id="1c4446a" data-element_type="widget" data-widget_type="button.default">
-								<div class="elementor-widget-container">
-									<div class="elementor-button-wrapper">
-										<a class="elementor-button elementor-button-link elementor-size-sm"
-											href="#elementor-action%3Aaction%3Dpopup%3Aopen%26settings%3DeyJpZCI6IjMzOSIsInRvZ2dsZSI6ZmFsc2V9">
-											<span class="elementor-button-content-wrapper">
-												<span class="elementor-button-text">¡DONA AHORA!</span>
-											</span>
-										</a>
+						</section>
+						<section
+							class="elementor-section elementor-inner-section elementor-element elementor-element-68b83f6 elementor-section-content-middle elementor-hidden-desktop elementor-section-boxed elementor-section-height-default elementor-section-height-default"
+							data-id="68b83f6" data-element_type="section"
+							data-settings="{&quot;jet_parallax_layout_list&quot;:[{&quot;jet_parallax_layout_image&quot;:{&quot;url&quot;:&quot;&quot;,&quot;id&quot;:&quot;&quot;,&quot;size&quot;:&quot;&quot;},&quot;_id&quot;:&quot;e231e6e&quot;,&quot;jet_parallax_layout_image_tablet&quot;:{&quot;url&quot;:&quot;&quot;,&quot;id&quot;:&quot;&quot;,&quot;size&quot;:&quot;&quot;},&quot;jet_parallax_layout_image_mobile&quot;:{&quot;url&quot;:&quot;&quot;,&quot;id&quot;:&quot;&quot;,&quot;size&quot;:&quot;&quot;},&quot;jet_parallax_layout_speed&quot;:{&quot;unit&quot;:&quot;%&quot;,&quot;size&quot;:50,&quot;sizes&quot;:[]},&quot;jet_parallax_layout_type&quot;:&quot;scroll&quot;,&quot;jet_parallax_layout_direction&quot;:null,&quot;jet_parallax_layout_fx_direction&quot;:null,&quot;jet_parallax_layout_z_index&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_x&quot;:50,&quot;jet_parallax_layout_bg_x_tablet&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_x_mobile&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_y&quot;:50,&quot;jet_parallax_layout_bg_y_tablet&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_y_mobile&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_size&quot;:&quot;auto&quot;,&quot;jet_parallax_layout_bg_size_tablet&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_size_mobile&quot;:&quot;&quot;,&quot;jet_parallax_layout_animation_prop&quot;:&quot;transform&quot;,&quot;jet_parallax_layout_on&quot;:[&quot;desktop&quot;,&quot;tablet&quot;]}]}">
+							<div class="elementor-container elementor-column-gap-default">
+								<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-3d8aeab"
+									data-id="3d8aeab" data-element_type="column">
+									<div class="elementor-widget-wrap elementor-element-populated">
+										<div class="elementor-element elementor-element-bcc97bd elementor-widget elementor-widget-text-editor"
+											data-id="bcc97bd" data-element_type="widget"
+											data-widget_type="text-editor.default">
+											<div class="elementor-widget-container">
+												<p>@Umbraco.GetDictionaryValue("Footer.Copyright")</p>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-59821db"
+									data-id="59821db" data-element_type="column">
+									<div class="elementor-widget-wrap elementor-element-populated">
+										<div class="elementor-element elementor-element-015bebc elementor-mobile-align-center elementor-icon-list--layout-traditional elementor-list-item-link-full_width elementor-widget elementor-widget-icon-list"
+											data-id="015bebc" data-element_type="widget"
+											data-widget_type="icon-list.default">
+											<div class="elementor-widget-container">
+												<ul class="elementor-icon-list-items">
+													<li class="elementor-icon-list-item">
+														<span
+															class="elementor-icon-list-text">@Umbraco.GetDictionaryValue("Footer.VisitUs")</span>
+													</li>
+													<li class="elementor-icon-list-item">
+														<span
+															class="elementor-icon-list-text">@Umbraco.GetDictionaryValue("Footer.City")</span>
+													</li>
+													<li class="elementor-icon-list-item">
+														<span
+															class="elementor-icon-list-text">@Umbraco.GetDictionaryValue("Footer.Address")</span>
+													</li>
+												</ul>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-					</div>
-					<div class="elementor-column elementor-col-25 elementor-top-column elementor-element elementor-element-93afc54"
-						data-id="93afc54" data-element_type="column">
-						<div class="elementor-widget-wrap elementor-element-populated">
-							<div class="elementor-element elementor-element-a9a745f elementor-hidden-tablet elementor-hidden-mobile elementor-widget elementor-widget-image"
-								data-id="a9a745f" data-element_type="widget" data-widget_type="image.default">
-								<div class="elementor-widget-container">
-									<img width="135" height="179"
-										src="https://www.nutrirong.com/wp-content/uploads/2021/11/flechas.png"
-										class="attachment-large size-large wp-image-226" alt="" />
-								</div>
-							</div>
-							<div class="elementor-element elementor-element-3ebc40b elementor-hidden-desktop elementor-widget elementor-widget-image"
-								data-id="3ebc40b" data-element_type="widget" data-widget_type="image.default">
-								<div class="elementor-widget-container">
-									<img width="135" height="121"
-										src="https://www.nutrirong.com/wp-content/uploads/2021/11/flechas-abajo.png"
-										class="attachment-large size-large wp-image-261" alt="" />
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="elementor-column elementor-col-25 elementor-top-column elementor-element elementor-element-b252efd"
-						data-id="b252efd" data-element_type="column">
-						<div class="elementor-widget-wrap elementor-element-populated">
-							<div class="elementor-element elementor-element-066412a elementor-widget elementor-widget-image"
-								data-id="066412a" data-element_type="widget" data-widget_type="image.default">
-								<div class="elementor-widget-container">
-									<a href="https://www.psepagos.co/PSEHostingUI/ShowTicketOffice.aspx?ID=1665"
-										target="_blank">
-										<img width="157" height="179"
-											src="https://www.nutrirong.com/wp-content/uploads/2021/11/pse.png"
-											class="attachment-large size-large wp-image-228" alt="" /> </a>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="elementor-column elementor-col-25 elementor-top-column elementor-element elementor-element-233e9c0"
-						data-id="233e9c0" data-element_type="column">
-						<div class="elementor-widget-wrap elementor-element-populated">
-							<div class="elementor-element elementor-element-52b6535 elementor-widget elementor-widget-image"
-								data-id="52b6535" data-element_type="widget" data-widget_type="image.default">
-								<div class="elementor-widget-container">
-									<a href="https://www.nutrirong.com/payu/" target="_blank">
-										<img width="174" height="179"
-											src="https://www.nutrirong.com/wp-content/uploads/2021/11/payu.png"
-											class="attachment-large size-large wp-image-227" alt="" /> </a>
-								</div>
-							</div>
-						</div>
+						</section>
 					</div>
 				</div>
-			</section>
-			<section
-				class="elementor-section elementor-top-section elementor-element elementor-element-c792208 elementor-section-content-middle elementor-section-boxed elementor-section-height-default elementor-section-height-default"
-				data-id="c792208" data-element_type="section"
-				data-settings="{&quot;background_background&quot;:&quot;classic&quot;,&quot;jet_parallax_layout_list&quot;:[{&quot;jet_parallax_layout_image&quot;:{&quot;url&quot;:&quot;&quot;,&quot;id&quot;:&quot;&quot;,&quot;size&quot;:&quot;&quot;},&quot;_id&quot;:&quot;f3fe13a&quot;,&quot;jet_parallax_layout_image_tablet&quot;:{&quot;url&quot;:&quot;&quot;,&quot;id&quot;:&quot;&quot;,&quot;size&quot;:&quot;&quot;},&quot;jet_parallax_layout_image_mobile&quot;:{&quot;url&quot;:&quot;&quot;,&quot;id&quot;:&quot;&quot;,&quot;size&quot;:&quot;&quot;},&quot;jet_parallax_layout_speed&quot;:{&quot;unit&quot;:&quot;%&quot;,&quot;size&quot;:50,&quot;sizes&quot;:[]},&quot;jet_parallax_layout_type&quot;:&quot;scroll&quot;,&quot;jet_parallax_layout_direction&quot;:null,&quot;jet_parallax_layout_fx_direction&quot;:null,&quot;jet_parallax_layout_z_index&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_x&quot;:50,&quot;jet_parallax_layout_bg_x_tablet&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_x_mobile&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_y&quot;:50,&quot;jet_parallax_layout_bg_y_tablet&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_y_mobile&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_size&quot;:&quot;auto&quot;,&quot;jet_parallax_layout_bg_size_tablet&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_size_mobile&quot;:&quot;&quot;,&quot;jet_parallax_layout_animation_prop&quot;:&quot;transform&quot;,&quot;jet_parallax_layout_on&quot;:[&quot;desktop&quot;,&quot;tablet&quot;]}]}">
-				<div class="elementor-container elementor-column-gap-default">
-					<div class="elementor-column elementor-col-50 elementor-top-column elementor-element elementor-element-ff3621b"
-						data-id="ff3621b" data-element_type="column">
-						<div class="elementor-widget-wrap elementor-element-populated">
-							<section
-								class="elementor-section elementor-inner-section elementor-element elementor-element-7754963 elementor-section-content-middle elementor-hidden-tablet elementor-hidden-mobile elementor-section-boxed elementor-section-height-default elementor-section-height-default"
-								data-id="7754963" data-element_type="section"
-								data-settings="{&quot;jet_parallax_layout_list&quot;:[{&quot;jet_parallax_layout_image&quot;:{&quot;url&quot;:&quot;&quot;,&quot;id&quot;:&quot;&quot;,&quot;size&quot;:&quot;&quot;},&quot;_id&quot;:&quot;36e1192&quot;,&quot;jet_parallax_layout_image_tablet&quot;:{&quot;url&quot;:&quot;&quot;,&quot;id&quot;:&quot;&quot;,&quot;size&quot;:&quot;&quot;},&quot;jet_parallax_layout_image_mobile&quot;:{&quot;url&quot;:&quot;&quot;,&quot;id&quot;:&quot;&quot;,&quot;size&quot;:&quot;&quot;},&quot;jet_parallax_layout_speed&quot;:{&quot;unit&quot;:&quot;%&quot;,&quot;size&quot;:50,&quot;sizes&quot;:[]},&quot;jet_parallax_layout_type&quot;:&quot;scroll&quot;,&quot;jet_parallax_layout_direction&quot;:null,&quot;jet_parallax_layout_fx_direction&quot;:null,&quot;jet_parallax_layout_z_index&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_x&quot;:50,&quot;jet_parallax_layout_bg_x_tablet&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_x_mobile&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_y&quot;:50,&quot;jet_parallax_layout_bg_y_tablet&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_y_mobile&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_size&quot;:&quot;auto&quot;,&quot;jet_parallax_layout_bg_size_tablet&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_size_mobile&quot;:&quot;&quot;,&quot;jet_parallax_layout_animation_prop&quot;:&quot;transform&quot;,&quot;jet_parallax_layout_on&quot;:[&quot;desktop&quot;,&quot;tablet&quot;]}]}">
-								<div class="elementor-container elementor-column-gap-default">
-									<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-270fe29"
-										data-id="270fe29" data-element_type="column">
-										<div class="elementor-widget-wrap elementor-element-populated">
-											<div class="elementor-element elementor-element-a3d9410 elementor-widget elementor-widget-text-editor"
-												data-id="a3d9410" data-element_type="widget"
-												data-widget_type="text-editor.default">
-												<div class="elementor-widget-container">
-													<p>@textCol1</p>
-												</div>
+				<div class="elementor-column elementor-col-50 elementor-top-column elementor-element elementor-element-f526ab9"
+					data-id="f526ab9" data-element_type="column">
+					<div class="elementor-widget-wrap elementor-element-populated">
+						<section
+							class="elementor-section elementor-inner-section elementor-element elementor-element-bd2c6bf elementor-section-content-middle elementor-section-boxed elementor-section-height-default elementor-section-height-default"
+							data-id="bd2c6bf" data-element_type="section"
+							data-settings="{&quot;jet_parallax_layout_list&quot;:[{&quot;jet_parallax_layout_image&quot;:{&quot;url&quot;:&quot;&quot;,&quot;id&quot;:&quot;&quot;,&quot;size&quot;:&quot;&quot;},&quot;_id&quot;:&quot;c79b522&quot;,&quot;jet_parallax_layout_image_tablet&quot;:{&quot;url&quot;:&quot;&quot;,&quot;id&quot;:&quot;&quot;,&quot;size&quot;:&quot;&quot;},&quot;jet_parallax_layout_image_mobile&quot;:{&quot;url&quot;:&quot;&quot;,&quot;id&quot;:&quot;&quot;,&quot;size&quot;:&quot;&quot;},&quot;jet_parallax_layout_speed&quot;:{&quot;unit&quot;:&quot;%&quot;,&quot;size&quot;:50,&quot;sizes&quot;:[]},&quot;jet_parallax_layout_type&quot;:&quot;scroll&quot;,&quot;jet_parallax_layout_direction&quot;:null,&quot;jet_parallax_layout_fx_direction&quot;:null,&quot;jet_parallax_layout_z_index&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_x&quot;:50,&quot;jet_parallax_layout_bg_x_tablet&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_x_mobile&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_y&quot;:50,&quot;jet_parallax_layout_bg_y_tablet&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_y_mobile&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_size&quot;:&quot;auto&quot;,&quot;jet_parallax_layout_bg_size_tablet&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_size_mobile&quot;:&quot;&quot;,&quot;jet_parallax_layout_animation_prop&quot;:&quot;transform&quot;,&quot;jet_parallax_layout_on&quot;:[&quot;desktop&quot;,&quot;tablet&quot;]}]}">
+							<div class="elementor-container elementor-column-gap-default">
+								<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-74c39fe"
+									data-id="74c39fe" data-element_type="column">
+									<div class="elementor-widget-wrap elementor-element-populated">
+										<div class="elementor-element elementor-element-25fac3f elementor-widget elementor-widget-heading"
+											data-id="25fac3f" data-element_type="widget"
+											data-widget_type="heading.default">
+											<div class="elementor-widget-container">
+												<h5 class="elementor-heading-title elementor-size-default">
+													@Umbraco.GetDictionaryValue("Footer.FollowUs")</h5>
 											</div>
 										</div>
-									</div>
-									<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-88fe4fa"
-										data-id="88fe4fa" data-element_type="column">
-										<div class="elementor-widget-wrap elementor-element-populated">
-											<div class="elementor-element elementor-element-d78e655 elementor-icon-list--layout-traditional elementor-list-item-link-full_width elementor-widget elementor-widget-icon-list"
-												data-id="d78e655" data-element_type="widget"
-												data-widget_type="icon-list.default">
-												<div class="elementor-widget-container">
-													<link rel="stylesheet"
-														href="https://www.nutrirong.com/wp-content/plugins/elementor/assets/css/widget-icon-list.min.css">
-													<ul class="elementor-icon-list-items">
-														<li class="elementor-icon-list-item">
-															<span class="elementor-icon-list-text">@textCol2</span>
-														</li>
-													</ul>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</section>
-							<section
-								class="elementor-section elementor-inner-section elementor-element elementor-element-68b83f6 elementor-section-content-middle elementor-hidden-desktop elementor-section-boxed elementor-section-height-default elementor-section-height-default"
-								data-id="68b83f6" data-element_type="section"
-								data-settings="{&quot;jet_parallax_layout_list&quot;:[{&quot;jet_parallax_layout_image&quot;:{&quot;url&quot;:&quot;&quot;,&quot;id&quot;:&quot;&quot;,&quot;size&quot;:&quot;&quot;},&quot;_id&quot;:&quot;e231e6e&quot;,&quot;jet_parallax_layout_image_tablet&quot;:{&quot;url&quot;:&quot;&quot;,&quot;id&quot;:&quot;&quot;,&quot;size&quot;:&quot;&quot;},&quot;jet_parallax_layout_image_mobile&quot;:{&quot;url&quot;:&quot;&quot;,&quot;id&quot;:&quot;&quot;,&quot;size&quot;:&quot;&quot;},&quot;jet_parallax_layout_speed&quot;:{&quot;unit&quot;:&quot;%&quot;,&quot;size&quot;:50,&quot;sizes&quot;:[]},&quot;jet_parallax_layout_type&quot;:&quot;scroll&quot;,&quot;jet_parallax_layout_direction&quot;:null,&quot;jet_parallax_layout_fx_direction&quot;:null,&quot;jet_parallax_layout_z_index&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_x&quot;:50,&quot;jet_parallax_layout_bg_x_tablet&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_x_mobile&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_y&quot;:50,&quot;jet_parallax_layout_bg_y_tablet&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_y_mobile&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_size&quot;:&quot;auto&quot;,&quot;jet_parallax_layout_bg_size_tablet&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_size_mobile&quot;:&quot;&quot;,&quot;jet_parallax_layout_animation_prop&quot;:&quot;transform&quot;,&quot;jet_parallax_layout_on&quot;:[&quot;desktop&quot;,&quot;tablet&quot;]}]}">
-								<div class="elementor-container elementor-column-gap-default">
-									<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-3d8aeab"
-										data-id="3d8aeab" data-element_type="column">
-										<div class="elementor-widget-wrap elementor-element-populated">
-											<div class="elementor-element elementor-element-bcc97bd elementor-widget elementor-widget-text-editor"
-												data-id="bcc97bd" data-element_type="widget"
-												data-widget_type="text-editor.default">
-												<div class="elementor-widget-container">
-													<p>@Umbraco.GetDictionaryValue("Footer.Copyright")</p>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-59821db"
-										data-id="59821db" data-element_type="column">
-										<div class="elementor-widget-wrap elementor-element-populated">
-											<div class="elementor-element elementor-element-015bebc elementor-mobile-align-center elementor-icon-list--layout-traditional elementor-list-item-link-full_width elementor-widget elementor-widget-icon-list"
-												data-id="015bebc" data-element_type="widget"
-												data-widget_type="icon-list.default">
-												<div class="elementor-widget-container">
-													<ul class="elementor-icon-list-items">
-														<li class="elementor-icon-list-item">
-															<span class="elementor-icon-list-text">@Umbraco.GetDictionaryValue("Footer.VisitUs")</span>
-														</li>
-														<li class="elementor-icon-list-item">
-															<span class="elementor-icon-list-text">@Umbraco.GetDictionaryValue("Footer.City")</span>
-														</li>
-														<li class="elementor-icon-list-item">
-															<span class="elementor-icon-list-text">@Umbraco.GetDictionaryValue("Footer.Address")</span>
-														</li>
-													</ul>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</section>
-						</div>
-					</div>
-					<div class="elementor-column elementor-col-50 elementor-top-column elementor-element elementor-element-f526ab9"
-						data-id="f526ab9" data-element_type="column">
-						<div class="elementor-widget-wrap elementor-element-populated">
-							<section
-								class="elementor-section elementor-inner-section elementor-element elementor-element-bd2c6bf elementor-section-content-middle elementor-section-boxed elementor-section-height-default elementor-section-height-default"
-								data-id="bd2c6bf" data-element_type="section"
-								data-settings="{&quot;jet_parallax_layout_list&quot;:[{&quot;jet_parallax_layout_image&quot;:{&quot;url&quot;:&quot;&quot;,&quot;id&quot;:&quot;&quot;,&quot;size&quot;:&quot;&quot;},&quot;_id&quot;:&quot;c79b522&quot;,&quot;jet_parallax_layout_image_tablet&quot;:{&quot;url&quot;:&quot;&quot;,&quot;id&quot;:&quot;&quot;,&quot;size&quot;:&quot;&quot;},&quot;jet_parallax_layout_image_mobile&quot;:{&quot;url&quot;:&quot;&quot;,&quot;id&quot;:&quot;&quot;,&quot;size&quot;:&quot;&quot;},&quot;jet_parallax_layout_speed&quot;:{&quot;unit&quot;:&quot;%&quot;,&quot;size&quot;:50,&quot;sizes&quot;:[]},&quot;jet_parallax_layout_type&quot;:&quot;scroll&quot;,&quot;jet_parallax_layout_direction&quot;:null,&quot;jet_parallax_layout_fx_direction&quot;:null,&quot;jet_parallax_layout_z_index&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_x&quot;:50,&quot;jet_parallax_layout_bg_x_tablet&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_x_mobile&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_y&quot;:50,&quot;jet_parallax_layout_bg_y_tablet&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_y_mobile&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_size&quot;:&quot;auto&quot;,&quot;jet_parallax_layout_bg_size_tablet&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_size_mobile&quot;:&quot;&quot;,&quot;jet_parallax_layout_animation_prop&quot;:&quot;transform&quot;,&quot;jet_parallax_layout_on&quot;:[&quot;desktop&quot;,&quot;tablet&quot;]}]}">
-								<div class="elementor-container elementor-column-gap-default">
-									<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-74c39fe"
-										data-id="74c39fe" data-element_type="column">
-										<div class="elementor-widget-wrap elementor-element-populated">
-											<div class="elementor-element elementor-element-25fac3f elementor-widget elementor-widget-heading"
-												data-id="25fac3f" data-element_type="widget"
-												data-widget_type="heading.default">
-												<div class="elementor-widget-container">
-													<h5 class="elementor-heading-title elementor-size-default">@Umbraco.GetDictionaryValue("Footer.FollowUs")</h5>
-												</div>
-											</div>
-											<div class="elementor-element elementor-element-844357a elementor-shape-circle elementor-grid-0 e-grid-align-center elementor-widget elementor-widget-social-icons"
-												data-id="844357a" data-element_type="widget"
-												data-widget_type="social-icons.default">
-												<div class="elementor-widget-container">
-													<div class="elementor-social-icons-wrapper elementor-grid">
-														@if(footerIcons != null){
-															@foreach(var socialIcon in footerIcons){
-																<span class="elementor-grid-item">
-																	<a class="elementor-icon elementor-social-icon elementor-social-icon-@socialIcon.Network elementor-repeater-item-1d3786c"
-																	href="@socialIcon.Url"
-																	target="_blank">
-																		<span class="elementor-screen-only">@socialIcon.Network</span>
-																		<i class="fab fa-@socialIcon.Network"></i>
-																	</a>
-																</span>
-															}
+										<div class="elementor-element elementor-element-844357a elementor-shape-circle elementor-grid-0 e-grid-align-center elementor-widget elementor-widget-social-icons"
+											data-id="844357a" data-element_type="widget"
+											data-widget_type="social-icons.default">
+											<div class="elementor-widget-container">
+												<div class="elementor-social-icons-wrapper elementor-grid">
+													@if (footerIcons != null)
+													{
+														@foreach (var socialIcon in footerIcons)
+														{
+															<span class="elementor-grid-item">
+																<a class="elementor-icon elementor-social-icon elementor-social-icon-@socialIcon.Network elementor-repeater-item-1d3786c"
+																	href="@socialIcon.Url" target="_blank">
+																	<span
+																		class="elementor-screen-only">@socialIcon.Network</span>
+																	<i class="fab fa-@socialIcon.Network"></i>
+																</a>
+															</span>
 														}
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-a3da8c0"
-										data-id="a3da8c0" data-element_type="column">
-										<div class="elementor-widget-wrap elementor-element-populated">
-											<div class="elementor-element elementor-element-479920c elementor-widget elementor-widget-image"
-												data-id="479920c" data-element_type="widget"
-												data-widget_type="image.default">
-												<div class="elementor-widget-container">
-													<a href="@imgColLink.Url"
-														target="_blank">
-														<img src="@imgColImg.Url()"
-															title="@imgColCaption"
-															alt="@imgColCaption"
-															loading="lazy" /> </a>
+													}
 												</div>
 											</div>
 										</div>
 									</div>
 								</div>
-							</section>
-						</div>
+								<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-a3da8c0"
+									data-id="a3da8c0" data-element_type="column">
+									<div class="elementor-widget-wrap elementor-element-populated">
+										<div class="elementor-element elementor-element-479920c elementor-widget elementor-widget-image"
+											data-id="479920c" data-element_type="widget"
+											data-widget_type="image.default">
+											<div class="elementor-widget-container">
+												<a href="@imgColLink.Url" target="_blank">
+													<img src="@imgColImg.Url()" title="@imgColCaption"
+														alt="@imgColCaption" loading="lazy" /> </a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</section>
 					</div>
 				</div>
-			</section>
-		</div>
+			</div>
+		</section>
 	</div>
+</div>
