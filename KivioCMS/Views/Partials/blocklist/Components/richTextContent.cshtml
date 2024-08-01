@@ -1,0 +1,68 @@
+@inherits UmbracoViewPage<BlockListItem>
+
+@{
+    var row = (RichTextContent)Model.Content;
+}
+
+<div class="elementor-container elementor-column-gap-default">
+			<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-d9f80b2"
+				data-id="d9f80b2" data-element_type="column">
+				<div class="elementor-widget-wrap elementor-element-populated">
+					<div class="elementor-element elementor-element-9efda4b elementor-widget elementor-widget-spacer"
+						data-id="9efda4b" data-element_type="widget" data-widget_type="spacer.default">
+						<div class="elementor-widget-container">
+							<div class="elementor-spacer">
+								<div class="elementor-spacer-inner"></div>
+							</div>
+						</div>
+					</div>
+					<div class="elementor-element elementor-element-fa9f012 elementor-widget elementor-widget-text-editor"
+						data-id="fa9f012" data-element_type="widget" data-widget_type="text-editor.default">
+						<div class="elementor-widget-container">
+							<style>
+								/*! elementor - v3.22.0 - 26-06-2024 */
+								.elementor-widget-text-editor.elementor-drop-cap-view-stacked .elementor-drop-cap {
+									background-color: #69727d;
+									color: #fff
+								}
+
+								.elementor-widget-text-editor.elementor-drop-cap-view-framed .elementor-drop-cap {
+									color: #69727d;
+									border: 3px solid;
+									background-color: transparent
+								}
+
+								.elementor-widget-text-editor:not(.elementor-drop-cap-view-default) .elementor-drop-cap {
+									margin-top: 8px
+								}
+
+								.elementor-widget-text-editor:not(.elementor-drop-cap-view-default) .elementor-drop-cap-letter {
+									width: 1em;
+									height: 1em
+								}
+
+								.elementor-widget-text-editor .elementor-drop-cap {
+									float: left;
+									text-align: center;
+									line-height: 1;
+									font-size: 50px
+								}
+
+								.elementor-widget-text-editor .elementor-drop-cap-letter {
+									display: inline-block
+								}
+							</style>
+							<p>@row.Content</p>
+						</div>
+					</div>
+					<div class="elementor-element elementor-element-bc4a795 elementor-widget elementor-widget-spacer"
+						data-id="bc4a795" data-element_type="widget" data-widget_type="spacer.default">
+						<div class="elementor-widget-container">
+							<div class="elementor-spacer">
+								<div class="elementor-spacer-inner"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>

@@ -20,7 +20,7 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 {
 	/// <summary>Home Page</summary>
 	[PublishedModel("homePage")]
-	public partial class HomePage : PublishedContentModel, IFooterProperties, IHeaderProperties, IMainMenu, IPaymentOptions
+	public partial class HomePage : PublishedContentModel, IContent, IDonationOptions, IFooterProperties, IHeaderProperties, IMainMenu
 	{
 		// helpers
 #pragma warning disable 0109 // new is redundant
@@ -66,6 +66,38 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		public virtual global::Umbraco.Cms.Core.Models.Blocks.BlockListModel MainNavigation => this.Value<global::Umbraco.Cms.Core.Models.Blocks.BlockListModel>(_publishedValueFallback, "mainNavigation");
 
 		///<summary>
+		/// Main Content: Enter the content in rows that you want to display on the page.
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.4.1+d72fc5c")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("mainContent")]
+		public virtual global::Umbraco.Cms.Core.Models.Blocks.BlockListModel MainContent => global::Umbraco.Cms.Web.Common.PublishedModels.Content.GetMainContent(this, _publishedValueFallback);
+
+		///<summary>
+		/// DesktopArrows: Attach the arrows for the desktop viewport.
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.4.1+d72fc5c")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("desktopArrows")]
+		public virtual global::Umbraco.Cms.Core.Models.MediaWithCrops DesktopArrows => global::Umbraco.Cms.Web.Common.PublishedModels.DonationOptions.GetDesktopArrows(this, _publishedValueFallback);
+
+		///<summary>
+		/// Donation Option
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.4.1+d72fc5c")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("DonationOption")]
+		public virtual global::Umbraco.Cms.Core.Models.Blocks.BlockListModel DonationOption => global::Umbraco.Cms.Web.Common.PublishedModels.DonationOptions.GetDonationOption(this, _publishedValueFallback);
+
+		///<summary>
+		/// MobileArrows: Enter arrows for mobile viewports.
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.4.1+d72fc5c")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("mobileArrows")]
+		public virtual global::Umbraco.Cms.Core.Models.MediaWithCrops MobileArrows => global::Umbraco.Cms.Web.Common.PublishedModels.DonationOptions.GetMobileArrows(this, _publishedValueFallback);
+
+		///<summary>
 		/// Footer Social Links: Enter the social links to display in the footer.
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.4.1+d72fc5c")]
@@ -96,29 +128,5 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
 		[ImplementPropertyType("nutrirLogo")]
 		public virtual global::Umbraco.Cms.Core.Models.MediaWithCrops NutrirLogo => global::Umbraco.Cms.Web.Common.PublishedModels.MainMenu.GetNutrirLogo(this, _publishedValueFallback);
-
-		///<summary>
-		/// DesktopArrows: Attach the arrows for the desktop viewport.
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.4.1+d72fc5c")]
-		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("desktopArrows")]
-		public virtual global::Umbraco.Cms.Core.Models.MediaWithCrops DesktopArrows => global::Umbraco.Cms.Web.Common.PublishedModels.PaymentOptions.GetDesktopArrows(this, _publishedValueFallback);
-
-		///<summary>
-		/// Donation Option
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.4.1+d72fc5c")]
-		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("DonationOption")]
-		public virtual global::Umbraco.Cms.Core.Models.Blocks.BlockListModel DonationOption => global::Umbraco.Cms.Web.Common.PublishedModels.PaymentOptions.GetDonationOption(this, _publishedValueFallback);
-
-		///<summary>
-		/// MobileArrows: Enter arrows for mobile viewports.
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.4.1+d72fc5c")]
-		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("mobileArrows")]
-		public virtual global::Umbraco.Cms.Core.Models.MediaWithCrops MobileArrows => global::Umbraco.Cms.Web.Common.PublishedModels.PaymentOptions.GetMobileArrows(this, _publishedValueFallback);
 	}
 }

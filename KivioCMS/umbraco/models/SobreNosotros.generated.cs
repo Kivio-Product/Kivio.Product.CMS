@@ -20,7 +20,7 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 {
 	/// <summary>Standard Page</summary>
 	[PublishedModel("sobreNosotros")]
-	public partial class SobreNosotros : PublishedContentModel, IHeaderProperties, IMainMenu, IVisibilityProperty
+	public partial class SobreNosotros : PublishedContentModel, IContent, IHeaderProperties, IMainMenu, IVisibilityProperty
 	{
 		// helpers
 #pragma warning disable 0109 // new is redundant
@@ -48,6 +48,14 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		}
 
 		// properties
+
+		///<summary>
+		/// Main Content: Enter the content in rows that you want to display on the page.
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.4.1+d72fc5c")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("mainContent")]
+		public virtual global::Umbraco.Cms.Core.Models.Blocks.BlockListModel MainContent => global::Umbraco.Cms.Web.Common.PublishedModels.Content.GetMainContent(this, _publishedValueFallback);
 
 		///<summary>
 		/// Favicon: Attach favicon.

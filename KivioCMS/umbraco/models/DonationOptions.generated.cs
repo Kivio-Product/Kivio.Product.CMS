@@ -18,9 +18,9 @@ using Umbraco.Extensions;
 
 namespace Umbraco.Cms.Web.Common.PublishedModels
 {
-	// Mixin Content Type with alias "paymentOptions"
+	// Mixin Content Type with alias "donationOptions"
 	/// <summary>Donation Options</summary>
-	public partial interface IPaymentOptions : IPublishedElement
+	public partial interface IDonationOptions : IPublishedElement
 	{
 		/// <summary>DesktopArrows</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.4.1+d72fc5c")]
@@ -39,13 +39,13 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 	}
 
 	/// <summary>Donation Options</summary>
-	[PublishedModel("paymentOptions")]
-	public partial class PaymentOptions : PublishedElementModel, IPaymentOptions
+	[PublishedModel("donationOptions")]
+	public partial class DonationOptions : PublishedElementModel, IDonationOptions
 	{
 		// helpers
 #pragma warning disable 0109 // new is redundant
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.4.1+d72fc5c")]
-		public new const string ModelTypeAlias = "paymentOptions";
+		public new const string ModelTypeAlias = "donationOptions";
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.4.1+d72fc5c")]
 		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.4.1+d72fc5c")]
@@ -54,14 +54,14 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 			=> PublishedModelUtility.GetModelContentType(publishedSnapshotAccessor, ModelItemType, ModelTypeAlias);
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.4.1+d72fc5c")]
 		[return: global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		public static IPublishedPropertyType GetModelPropertyType<TValue>(IPublishedSnapshotAccessor publishedSnapshotAccessor, Expression<Func<PaymentOptions, TValue>> selector)
+		public static IPublishedPropertyType GetModelPropertyType<TValue>(IPublishedSnapshotAccessor publishedSnapshotAccessor, Expression<Func<DonationOptions, TValue>> selector)
 			=> PublishedModelUtility.GetModelPropertyType(GetModelContentType(publishedSnapshotAccessor), selector);
 #pragma warning restore 0109
 
 		private IPublishedValueFallback _publishedValueFallback;
 
 		// ctor
-		public PaymentOptions(IPublishedElement content, IPublishedValueFallback publishedValueFallback)
+		public DonationOptions(IPublishedElement content, IPublishedValueFallback publishedValueFallback)
 			: base(content, publishedValueFallback)
 		{
 			_publishedValueFallback = publishedValueFallback;
@@ -80,7 +80,7 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		/// <summary>Static getter for DesktopArrows</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.4.1+d72fc5c")]
 		[return: global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		public static global::Umbraco.Cms.Core.Models.MediaWithCrops GetDesktopArrows(IPaymentOptions that, IPublishedValueFallback publishedValueFallback) => that.Value<global::Umbraco.Cms.Core.Models.MediaWithCrops>(publishedValueFallback, "desktopArrows");
+		public static global::Umbraco.Cms.Core.Models.MediaWithCrops GetDesktopArrows(IDonationOptions that, IPublishedValueFallback publishedValueFallback) => that.Value<global::Umbraco.Cms.Core.Models.MediaWithCrops>(publishedValueFallback, "desktopArrows");
 
 		///<summary>
 		/// Donation Option
@@ -93,7 +93,7 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		/// <summary>Static getter for Donation Option</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.4.1+d72fc5c")]
 		[return: global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		public static global::Umbraco.Cms.Core.Models.Blocks.BlockListModel GetDonationOption(IPaymentOptions that, IPublishedValueFallback publishedValueFallback) => that.Value<global::Umbraco.Cms.Core.Models.Blocks.BlockListModel>(publishedValueFallback, "DonationOption");
+		public static global::Umbraco.Cms.Core.Models.Blocks.BlockListModel GetDonationOption(IDonationOptions that, IPublishedValueFallback publishedValueFallback) => that.Value<global::Umbraco.Cms.Core.Models.Blocks.BlockListModel>(publishedValueFallback, "DonationOption");
 
 		///<summary>
 		/// MobileArrows: Enter arrows for mobile viewports.
@@ -106,6 +106,6 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		/// <summary>Static getter for MobileArrows</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.4.1+d72fc5c")]
 		[return: global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		public static global::Umbraco.Cms.Core.Models.MediaWithCrops GetMobileArrows(IPaymentOptions that, IPublishedValueFallback publishedValueFallback) => that.Value<global::Umbraco.Cms.Core.Models.MediaWithCrops>(publishedValueFallback, "mobileArrows");
+		public static global::Umbraco.Cms.Core.Models.MediaWithCrops GetMobileArrows(IDonationOptions that, IPublishedValueFallback publishedValueFallback) => that.Value<global::Umbraco.Cms.Core.Models.MediaWithCrops>(publishedValueFallback, "mobileArrows");
 	}
 }

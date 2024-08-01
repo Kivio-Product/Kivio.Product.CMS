@@ -1,17 +1,8 @@
-@inherits UmbracoViewPage<IPaymentOptions>
-
+@inherits UmbracoViewPage<IHeaderProperties>
 @{
 	var homePage = Umbraco.AssignedContentItem.AncestorOrSelf<HomePage>();
-	var footerIcons = homePage.FooterSocialLinks;
-	var footerContent = homePage?.FooterContent;
-	var content = footerContent.ToArray()[0].Content as IPublishedElement;
-	var textCol1 = content.Value("content");
-	var content2 = footerContent.ToArray()[1].Content as IPublishedElement;
-	var textCol2 = content2.Value("content");
-	var content3 = footerContent.ToArray()[2].Content as IPublishedElement;
-	var imgColImg = content3.Value<IPublishedContent>("image");
-	var imgColLink = content3.Value<Umbraco.Cms.Core.Models.Link>("link");
-	var imgColCaption = content3.Value<String>("caption");
+	var desktopA = homePage?.DesktopArrows;
+	var mobileA = homePage?.MobileArrows;
 	var donationOptions = homePage.DonationOption;
 
 }
@@ -58,7 +49,7 @@
 							data-id="a9a745f" data-element_type="widget" data-widget_type="image.default">
 							<div class="elementor-widget-container">
 								<img width="135" height="179"
-									src="@Model.DesktopArrows.Url()"
+									src="@desktopA.Url()"
 									class="attachment-large size-large wp-image-226" alt="" />
 							</div>
 						</div>
@@ -66,7 +57,7 @@
 							data-id="3ebc40b" data-element_type="widget" data-widget_type="image.default">
 							<div class="elementor-widget-container">
 								<img width="135" height="121"
-									src="@Model.MobileArrows.Url()"
+									src="@mobileA.Url()"
 									class="attachment-large size-large wp-image-261" alt="" />
 							</div>
 						</div>
