@@ -1,0 +1,18 @@
+@inherits UmbracoViewPage<BlockListItem>
+
+@{
+	var row = (Image_With_Title_Banner)Model.Content;
+	if (row == null) return;
+}
+<!-- Problematica Banner Section -->
+<section>
+	<div id="container" class="container">
+		<picture>
+			<source srcset="@row.ImageMobile.Url()" media="(max-width: 765px)">
+			<img src="@row.ImageDesktop.Url()" alt="Flowers">
+			<div class="centered">
+				<h1 class="bannerTitle" style="color: #@row.TitleColor;">@row.Title</h1>
+			</div>
+		</picture>
+	</div>
+</section>

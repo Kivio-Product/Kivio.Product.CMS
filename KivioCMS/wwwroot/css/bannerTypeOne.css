@@ -1,0 +1,32 @@
+@charset "UTF-8";
+
+#container img {
+    height: 250px;
+    width: 100%;
+    object-fit: cover;
+    position: relative;
+    text-align: center;
+}
+
+.container {
+    position: relative;
+    text-align: center;
+    color: white;
+}
+
+.centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.bannerTitle {
+    font-size: 70px;
+}
+
+@media (max-width: 768px) {
+    .bannerTitle {
+        font-size: 50px;
+    }
+}
