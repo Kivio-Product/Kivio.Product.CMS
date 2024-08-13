@@ -1,7 +1,7 @@
 @inherits UmbracoViewPage<BlockListItem>
 
 @{
-	var row = (ImageBanner)Model.Content;
+	var row = (ImageCarrousel)Model.Content;
 	if (row == null) return;
 	var listDesktop = row.DesktopImages.ToList();
 	var listMobile = row.MobileImages.ToList();
