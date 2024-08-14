@@ -6,57 +6,9 @@
 
 @{
 	var row = (ListOfButtonsType2)Model.Content;
-
 	if (row == null) return;
-
 	var listOfButtons = row.ButtonsList.ToList();
 }
-<style>
-	.containerButton {
-		width: 100%;
-		max-width: 1200px;
-		margin: 0 auto;
-		padding: 20px;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		justify-content: space-between;
-		flex-wrap: wrap;
-		gap: 20px;
-	}
-
-	.square {
-		width: 290px;
-		text-align: center;
-		padding: 20px;
-		box-sizing: border-box;
-		transition: transform 0.3s;
-		text-decoration: none;
-		color: white;
-		margin-bottom: 20px;
-	}
-
-	.square:hover {
-		transform: scale(1.05);
-	}
-
-	.square img {
-		height: 250px;
-		margin-bottom: -40px;
-	}
-
-	.square p {
-		font-weight: bold;
-		margin: 0;
-	}
-
-	@@media (max-width: 768px) {
-		.square {
-			flex: 0 1 100%;
-			max-width: 100%;
-		}
-	}
-</style>
 <!-- Button type 2 Section 
 	This section displays a list of squared buttons configured with a background image, background color, caption text and the link-->
 <section
@@ -82,37 +34,17 @@
 <section class="">
 	<div class="containerButton">
 		@foreach (var element in listOfButtons)
-
 		{
-
 			// Loop through each element in the block list
-
 			var content = element.Content as IPublishedElement;
-
-
-
 			// Access the text value
-
 			var text = content.Value<string>("text");
-
-
-
 			// Access the image
-
 			var image = content.Value<IPublishedContent>("image");
-
-
-
 			// Access the link
-
 			var link = content.Value<Link>("link");
-
-
-
 			// Access background color
-
 			var color = content.Value<string>("color");
-
 			<a href="@link.Url" class="square" style="background-color: #@color;">
 				<img src="@image.Url()" alt="@text">
 				<p>@text</p>

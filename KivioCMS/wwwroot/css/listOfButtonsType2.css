@@ -1,0 +1,46 @@
+@charset "UTF-8";
+
+.containerButton {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.square {
+    width: 290px;
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+    transition: transform 0.3s;
+    text-decoration: none;
+    color: white;
+    margin-bottom: 20px;
+}
+
+.square:hover {
+    transform: scale(1.05);
+}
+
+.square img {
+    height: 250px;
+    margin-bottom: -40px;
+}
+
+.square p {
+    font-weight: bold;
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .square {
+        flex: 0 1 100%;
+        max-width: 100%;
+    }
+}
