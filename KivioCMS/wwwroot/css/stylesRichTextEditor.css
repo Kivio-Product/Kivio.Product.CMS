@@ -1,0 +1,22 @@
+
+
+/**umb_name:TextType1*/
+.textType1 {
+	font-size:34px;
+	color: #000000;
+	font-family: "NeutraText-BookAlt", Sans-serif;
+}
+
+/**umb_name:TextType2*/
+.textType2 {
+	font-size: 48px;
+	color: #066EB1;
+	font-family: "NeutraText-BookAlt", Sans-serif;
+}
+
+/**umb_name:TextType3*/
+.textType3 {
+	font-size: 28px;
+	color: #066EB1;
+	font-family: "NeutraText-BookAlt", Sans-serif;
+}

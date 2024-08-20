@@ -15,22 +15,24 @@
 		<img src="@row.ImageDesktop.Url()" alt="Banner Image" id="banner-imgBanner2">
 	</picture>
 	<div id="overlayBanner2">
-		<div id="button-groupBanner2">
-			@foreach (var element in listOfButtons)
-					{
-						// Loop through each element in the block list
-						var content = element.Content as IPublishedElement;
-						// Access the image
-						var buttonImageDesktop = content.Value<IPublishedContent>("imageDesktop");
-						var buttonImageMobile = content.Value<IPublishedContent>("imageMobile");
-						// Access the link
-						var link = content.Value<Link>("link");
-						<div id="button-groupBanner2">
-							<a href="@link.Url" target="@link.Target" id="btnBanner2">
-								<img src="@buttonImageDesktop.Url()"
-									srcset="@buttonImageDesktop.Url(), @buttonImageMobile.Url()" /> </a>
-						</div>
-					}
-		</div>
+		@if(listOfButtons.Any()){
+			<div id="button-groupBanner2">
+				@foreach (var element in listOfButtons)
+				{
+					// Loop through each element in the block list
+					var content = element.Content as IPublishedElement;
+					// Access the image
+					var buttonImageDesktop = content.Value<IPublishedContent>("imageDesktop");
+					var buttonImageMobile = content.Value<IPublishedContent>("imageMobile");
+					// Access the link
+					var link = content.Value<Link>("link");
+					<div id="button-groupBanner2">
+						<a href="@link.Url" target="@link.Target" id="btnBanner2">
+							<img src="@buttonImageDesktop.Url()"
+								srcset="@buttonImageDesktop.Url(), @buttonImageMobile.Url()" /> </a>
+					</div>
+				}
+			</div>
+		}
 	</div>
 </section>
