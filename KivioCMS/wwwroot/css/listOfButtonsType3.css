@@ -1,0 +1,59 @@
+#buttonType3Section {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+}
+
+#overlayButtonType3 {
+    position: absolute;
+    top: 0%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 10px;
+}
+
+#button-ButtonType3 {
+    display: flex;
+    gap: 150px;
+}
+
+#btnButtonType3 {
+    display: inline-block;
+    padding: 10px 20px;
+    transition: transform 0.2s ease;
+}
+
+#btnButtonType3 img {
+    height: 140px;
+}
+
+#btnButtonType3:hover {
+    transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+    #button-ButtonType3 {
+        flex-direction: column;
+    }
+    
+    #btnButtonType3 {
+        width: 100%;
+        text-align: center;
+    }
+    #btnButtonType3 img {
+        height: 100px;
+    }
+    #overlayButtonType3 {
+        top: 10%;
+    }
+    #button-ButtonType3 {
+        gap: 10px;
+    }
+}
