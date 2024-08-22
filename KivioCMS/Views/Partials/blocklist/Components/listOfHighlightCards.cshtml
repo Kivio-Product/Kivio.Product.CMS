@@ -1,0 +1,27 @@
+@using Umbraco.Cms.Core.Models
+@using Umbraco.Cms.Core.Models.Blocks
+@using Umbraco.Cms.Web.Common.PublishedModels
+@inherits UmbracoViewPage<BlockListItem>
+
+@{
+	var row = (ListOfHighlightCards)Model.Content;
+	if (row == null) return;
+	var listOfCards = row.Cards.ToList();
+}
+<!-- Sección para desplegar un banner con una imágen de fondo con N botónes -->
+<section class="mission-vision-purpose">
+		@if(listOfCards.Any()){
+				@foreach (var element in listOfCards)
+				{
+					<div class="card">
+					@{// Loop through each element in the block list
+					var content = element.Content as IPublishedElement;
+					// Access the color
+					var color = content.Value<string>("color");
+					// Access the rich text editor
+					var text = content.Value<string>("text");}
+					@Html.Raw(text)
+					</div>
+				}
+		}
+</section>
