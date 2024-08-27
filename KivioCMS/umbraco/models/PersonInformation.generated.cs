@@ -18,14 +18,14 @@ using Umbraco.Extensions;
 
 namespace Umbraco.Cms.Web.Common.PublishedModels
 {
-	/// <summary>Image Carrousel</summary>
-	[PublishedModel("imageCarrousel")]
-	public partial class ImageCarrousel : PublishedElementModel
+	/// <summary>Person Information</summary>
+	[PublishedModel("personInformation")]
+	public partial class PersonInformation : PublishedElementModel
 	{
 		// helpers
 #pragma warning disable 0109 // new is redundant
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.4.1+d72fc5c")]
-		public new const string ModelTypeAlias = "imageCarrousel";
+		public new const string ModelTypeAlias = "personInformation";
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.4.1+d72fc5c")]
 		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.4.1+d72fc5c")]
@@ -34,14 +34,14 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 			=> PublishedModelUtility.GetModelContentType(publishedSnapshotAccessor, ModelItemType, ModelTypeAlias);
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.4.1+d72fc5c")]
 		[return: global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		public static IPublishedPropertyType GetModelPropertyType<TValue>(IPublishedSnapshotAccessor publishedSnapshotAccessor, Expression<Func<ImageCarrousel, TValue>> selector)
+		public static IPublishedPropertyType GetModelPropertyType<TValue>(IPublishedSnapshotAccessor publishedSnapshotAccessor, Expression<Func<PersonInformation, TValue>> selector)
 			=> PublishedModelUtility.GetModelPropertyType(GetModelContentType(publishedSnapshotAccessor), selector);
 #pragma warning restore 0109
 
 		private IPublishedValueFallback _publishedValueFallback;
 
 		// ctor
-		public ImageCarrousel(IPublishedElement content, IPublishedValueFallback publishedValueFallback)
+		public PersonInformation(IPublishedElement content, IPublishedValueFallback publishedValueFallback)
 			: base(content, publishedValueFallback)
 		{
 			_publishedValueFallback = publishedValueFallback;
@@ -50,26 +50,27 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		// properties
 
 		///<summary>
-		/// Desktop Images: Attach here all the images that will be displayed in the desktop banner.
+		/// Information: Enter the information for the person.
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.4.1+d72fc5c")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("desktopImages")]
-		public virtual global::Umbraco.Cms.Core.Models.Blocks.BlockListModel DesktopImages => this.Value<global::Umbraco.Cms.Core.Models.Blocks.BlockListModel>(_publishedValueFallback, "desktopImages");
+		[ImplementPropertyType("information")]
+		public virtual global::Umbraco.Cms.Core.Strings.IHtmlEncodedString Information => this.Value<global::Umbraco.Cms.Core.Strings.IHtmlEncodedString>(_publishedValueFallback, "information");
 
 		///<summary>
-		/// Mobile Images: Optional field -- Attach here all images that will be displayed in the mobile version.
+		/// Name of person: Enter the name of the person.
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.4.1+d72fc5c")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("mobileImages")]
-		public virtual global::Umbraco.Cms.Core.Models.Blocks.BlockListModel MobileImages => this.Value<global::Umbraco.Cms.Core.Models.Blocks.BlockListModel>(_publishedValueFallback, "mobileImages");
+		[ImplementPropertyType("nameOfPerson")]
+		public virtual string NameOfPerson => this.Value<string>(_publishedValueFallback, "nameOfPerson");
 
 		///<summary>
-		/// Multiple images at once: Turn on if you want multiple images to be displayed at the same time.
+		/// Picture: Attach the picture of the person.
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.4.1+d72fc5c")]
-		[ImplementPropertyType("multipleImagesAtOnce")]
-		public virtual bool MultipleImagesAtOnce => this.Value<bool>(_publishedValueFallback, "multipleImagesAtOnce");
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("picture")]
+		public virtual global::Umbraco.Cms.Core.Models.MediaWithCrops Picture => this.Value<global::Umbraco.Cms.Core.Models.MediaWithCrops>(_publishedValueFallback, "picture");
 	}
 }

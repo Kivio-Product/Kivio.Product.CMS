@@ -1,14 +1,21 @@
 @inherits UmbracoViewPage<BlockListItem>
+<link rel="stylesheet" id="jet-engine-frontend-css" href="https://www.nutrirong.com/wp-content/plugins/jet-engine/assets/css/frontend.css" media="all">
+<link rel="stylesheet" id="jet-elements-css" href="https://www.nutrirong.com/wp-content/plugins/jet-elements/assets/css/jet-elements.css" media="all">
+<link rel="stylesheet" id="elementor-post-125-css" href="https://www.nutrirong.com/wp-content/uploads/elementor/css/post-125.css" media="all">
+<link rel="stylesheet" id="elementor-post-701-css" href="https://www.nutrirong.com/wp-content/uploads/elementor/css/post-701.css" media="all">
+<script src="~/js/imageCarrousel_JS.js"></script>
 
 @{
 	var row = (ImageCarrousel)Model.Content;
 	if (row == null) return;
 	var listDesktop = row.DesktopImages.ToList();
 	var listMobile = row.MobileImages.ToList();
+	var multipleImageToggle = row.Value<bool>("multipleImagesAtOnce");
 }
 <!-- Image banner Section 
 	This section contains a banner. The section is divided in two. One for the desktop viewport and one for the 
 	mobile viewport-->
+@if(multipleImageToggle==false){
 <section
 		class="elementor-section elementor-top-section elementor-element elementor-element-01cd4c0 elementor-section-boxed elementor-section-height-default elementor-section-height-default"
 		data-id="01cd4c0" data-element_type="section"
@@ -80,41 +87,43 @@
 							</div>
 						</div>
 					</div>
-					<div class="elementor-element elementor-element-eadc176 elementor-hidden-desktop elementor-arrows-position-inside elementor-widget elementor-widget-image-carousel"
+					@if(listMobile.Any()){
+						<div class="elementor-element elementor-element-eadc176 elementor-hidden-desktop elementor-arrows-position-inside elementor-widget elementor-widget-image-carousel"
 						data-id="eadc176" data-element_type="widget"
 						data-settings="{&quot;slides_to_show&quot;:&quot;1&quot;,&quot;navigation&quot;:&quot;arrows&quot;,&quot;autoplay&quot;:&quot;yes&quot;,&quot;pause_on_hover&quot;:&quot;yes&quot;,&quot;pause_on_interaction&quot;:&quot;yes&quot;,&quot;autoplay_speed&quot;:5000,&quot;infinite&quot;:&quot;yes&quot;,&quot;effect&quot;:&quot;slide&quot;,&quot;speed&quot;:500}"
 						data-widget_type="image-carousel.default">
-						<div class="elementor-widget-container">
-							<div class="elementor-image-carousel-wrapper swiper" dir="ltr">
-								<div class="elementor-image-carousel swiper-wrapper" aria-live="off">
-									@foreach (var element in listMobile)
-									{
-										// Loop through each element in the block list
-										var content = element.Content as IPublishedElement;
-										// Access the text value
-										var caption = content.Value<string>("caption");
-										// Access the image (assuming it's a single image picker)
-										var image = content.Value<IPublishedContent>("image");
-										<div class="swiper-slide" role="group" aria-roledescription="slide"
-										aria-label="1 de 10">
-											<figure class="swiper-slide-inner"><img decoding="async"
-													class="swiper-slide-image"
-													src="@image.Url()"
-													alt="@caption" /></figure>
-										</div>
-									}
-								</div>
-								<div class="elementor-swiper-button elementor-swiper-button-prev" role="button"
-									tabindex="0">
-									<i aria-hidden="true" class="eicon-chevron-left"></i>
-								</div>
-								<div class="elementor-swiper-button elementor-swiper-button-next" role="button"
-									tabindex="0">
-									<i aria-hidden="true" class="eicon-chevron-right"></i>
+							<div class="elementor-widget-container">
+								<div class="elementor-image-carousel-wrapper swiper" dir="ltr">
+									<div class="elementor-image-carousel swiper-wrapper" aria-live="off">
+										@foreach (var element in listMobile)
+										{
+											// Loop through each element in the block list
+											var content = element.Content as IPublishedElement;
+											// Access the text value
+											var caption = content.Value<string>("caption");
+											// Access the image (assuming it's a single image picker)
+											var image = content.Value<IPublishedContent>("image");
+											<div class="swiper-slide" role="group" aria-roledescription="slide"
+											aria-label="1 de 10">
+												<figure class="swiper-slide-inner"><img decoding="async"
+														class="swiper-slide-image"
+														src="@image.Url()"
+														alt="@caption" /></figure>
+											</div>
+										}
+									</div>
+									<div class="elementor-swiper-button elementor-swiper-button-prev" role="button"
+										tabindex="0">
+										<i aria-hidden="true" class="eicon-chevron-left"></i>
+									</div>
+									<div class="elementor-swiper-button elementor-swiper-button-next" role="button"
+										tabindex="0">
+										<i aria-hidden="true" class="eicon-chevron-right"></i>
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
+					}
 					<div class="elementor-element elementor-element-8730987 elementor-widget elementor-widget-spacer"
 						data-id="8730987" data-element_type="widget" data-widget_type="spacer.default">
 						<div class="elementor-widget-container">
@@ -127,3 +136,31 @@
 			</div>
 		</div>
 	</section>
+}else{
+	<section>
+		<div class="carousel">
+        <button class="carousel-control prev">
+            <span>&lt;</span>
+        </button>
+        <div class="carousel-wrapper">
+            <div class="carousel-images">
+				@foreach (var element in listDesktop)
+				{
+					// Loop through each element in the block list
+					var content = element.Content as IPublishedElement;
+					// Access the text value
+					var caption = content.Value<string>("caption");
+					// Access the image (assuming it's a single image picker)
+					var image = content.Value<IPublishedContent>("image");
+					<img src="@image.Url()" alt="@caption" style="height: 150px;">
+				}
+            </div>
+        </div>
+        <button class="carousel-control next">
+            <span>&gt;</span>
+        </button>
+    </div>
+
+    <script src="script.js"></script>
+	</section>
+}

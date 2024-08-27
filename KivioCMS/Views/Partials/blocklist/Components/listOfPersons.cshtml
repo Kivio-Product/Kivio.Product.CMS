@@ -1,0 +1,37 @@
+@inherits UmbracoViewPage<BlockListItem>
+
+@{
+	var row = (ListOfPersons)Model.Content;
+	if (row == null) return;
+}
+<!-- This list allows users to add persons with their information, such as Name, Photo and additional information-->
+<style>
+   
+</style>
+<section class="team-section">
+        <div class="team-container">
+            @foreach (var element in row.Persons.ToList())
+            {
+               // Loop through each element in the block list
+               var content = element.Content as IPublishedElement;
+               // Access the text value
+               var name = content.Value<string>("nameOfPerson");
+               // Access the image
+               var picture = content.Value<IPublishedContent>("picture");
+               // Access the rich text editor
+               var information = content.Value<string>("Information");
+               // Access the size of each person's space
+               var sizeOfPicture = content.Value<int>("heightOfPicture");
+               // Render the content
+               <div class="team-member" style="width: @(sizeOfPicture + "px");">
+                  @if(picture!=null){
+                     <img src="@picture.Url()" alt="@name" class="member-photo">
+                  }
+                  <h3 class="member-name">@Html.Raw(name)</h3>
+                  <p class="member-role">@Html.Raw(information)</p>
+               </div>
+            
+            }
+
+        </div>
+    </section>

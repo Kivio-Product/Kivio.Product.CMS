@@ -34,3 +34,29 @@
 	color: #FFFFFF;
 	font-family: "NeutraText-BookAlt", Sans-serif;
 }
+
+/**umb_name:TextType6*/
+.textType6 {
+	color: #000000;
+	font-family: "NeutraText-BookAlt", Sans-serif;
+	font-size: 24px;
+	line-height: 18px;
+}
+
+/**umb_name:TextType7*/
+.textType7 {
+	color: #7a7a7a;
+	font-family: "NeutraText-BookAlt", Sans-serif;
+	font-size: 16px;
+	line-height: 17px;
+	letter-spacing: -0.8px;
+	word-spacing: 0px;
+}
+
+/**umb_name:TextType8*/
+.textType8 {
+	color: #000000;
+	font-family: "NeutraText-BookAlt", Sans-serif;
+	font-size: 26px;
+	font-weight: 400;
+}

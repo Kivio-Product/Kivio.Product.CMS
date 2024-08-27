@@ -13,13 +13,13 @@
 		@if(listOfCards.Any()){
 				@foreach (var element in listOfCards)
 				{
-					<div class="card">
-					@{// Loop through each element in the block list
+					// Loop through each element in the block list
 					var content = element.Content as IPublishedElement;
 					// Access the color
 					var color = content.Value<string>("color");
 					// Access the rich text editor
-					var text = content.Value<string>("text");}
+					var text = content.Value<string>("text");
+					<div class="card" style="background-color: #@color;">
 					@Html.Raw(text)
 					</div>
 				}
