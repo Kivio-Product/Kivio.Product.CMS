@@ -1,0 +1,42 @@
+@inherits UmbracoViewPage<BlockListItem>
+
+@{
+	var row = (ThreeColumnContent)Model.Content;
+	if (row == null) return;
+	var withColumn1 = row.Value<int>("widthOfColumn1");
+	var withColumn2 = row.Value<int>("widthOfColumn2");
+	var withColumn3 = row.Value<int>("widthOfColumn3");
+	var contentList = row.Columns.ToList();
+}
+<!-- This elements allows users to set two columns in a single row. They can dictate the % of space that each column will consume-->
+<section class="columns-section">
+	<div class="columns-container">
+		@{
+
+			// Get first element of the list
+			var contentOne = contentList[0].Content as IPublishedElement;
+			// Access the text value
+			var textContent = contentOne.Value<string>("Content");
+			// Render the content
+			<div class="column" style="flex: 0 0 @(withColumn1 + "%");">
+				@Html.Raw(textContent)
+			</div>
+			// Get second element of the list
+			var contentTwo = contentList[1].Content as IPublishedElement;
+			// Access the text value
+			textContent = contentTwo.Value<string>("Content");
+			// Render the content
+			<div class="column" style="flex: 0 0 @(withColumn2 + "%");">
+				@Html.Raw(textContent)
+			</div>
+			// Get second element of the list
+			var contentThree = contentList[2].Content as IPublishedElement;
+			// Access the text value
+			textContent = contentThree.Value<string>("Content");
+			// Render the content
+			<div class="column" style="flex: 0 0 @(withColumn3 + "%");">
+				@Html.Raw(textContent)
+			</div>
+		}
+	</div>
+</section>
