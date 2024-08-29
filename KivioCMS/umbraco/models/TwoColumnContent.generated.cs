@@ -18,14 +18,14 @@ using Umbraco.Extensions;
 
 namespace Umbraco.Cms.Web.Common.PublishedModels
 {
-	/// <summary>Person Information</summary>
-	[PublishedModel("personInformation")]
-	public partial class PersonInformation : PublishedElementModel
+	/// <summary>Two Column Content</summary>
+	[PublishedModel("twoColumnContent")]
+	public partial class TwoColumnContent : PublishedElementModel
 	{
 		// helpers
 #pragma warning disable 0109 // new is redundant
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.4.1+d72fc5c")]
-		public new const string ModelTypeAlias = "personInformation";
+		public new const string ModelTypeAlias = "twoColumnContent";
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.4.1+d72fc5c")]
 		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.4.1+d72fc5c")]
@@ -34,14 +34,14 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 			=> PublishedModelUtility.GetModelContentType(publishedSnapshotAccessor, ModelItemType, ModelTypeAlias);
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.4.1+d72fc5c")]
 		[return: global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		public static IPublishedPropertyType GetModelPropertyType<TValue>(IPublishedSnapshotAccessor publishedSnapshotAccessor, Expression<Func<PersonInformation, TValue>> selector)
+		public static IPublishedPropertyType GetModelPropertyType<TValue>(IPublishedSnapshotAccessor publishedSnapshotAccessor, Expression<Func<TwoColumnContent, TValue>> selector)
 			=> PublishedModelUtility.GetModelPropertyType(GetModelContentType(publishedSnapshotAccessor), selector);
 #pragma warning restore 0109
 
 		private IPublishedValueFallback _publishedValueFallback;
 
 		// ctor
-		public PersonInformation(IPublishedElement content, IPublishedValueFallback publishedValueFallback)
+		public TwoColumnContent(IPublishedElement content, IPublishedValueFallback publishedValueFallback)
 			: base(content, publishedValueFallback)
 		{
 			_publishedValueFallback = publishedValueFallback;
@@ -50,34 +50,25 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		// properties
 
 		///<summary>
-		/// Height of Picture: Enter how big the picture must be displayed in pixels.
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.4.1+d72fc5c")]
-		[ImplementPropertyType("heightOfPicture")]
-		public virtual int HeightOfPicture => this.Value<int>(_publishedValueFallback, "heightOfPicture");
-
-		///<summary>
-		/// Information: Enter the information for the person.
+		/// Columns
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.4.1+d72fc5c")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("information")]
-		public virtual global::Umbraco.Cms.Core.Strings.IHtmlEncodedString Information => this.Value<global::Umbraco.Cms.Core.Strings.IHtmlEncodedString>(_publishedValueFallback, "information");
+		[ImplementPropertyType("columns")]
+		public virtual global::Umbraco.Cms.Core.Models.Blocks.BlockListModel Columns => this.Value<global::Umbraco.Cms.Core.Models.Blocks.BlockListModel>(_publishedValueFallback, "columns");
 
 		///<summary>
-		/// Name of Person: Enter the name of the person.
+		/// Width of Column 1: Enter the with in percentage of Column 1. Column 1 +  Column 2 must be a total of 100.
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.4.1+d72fc5c")]
-		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("nameOfPerson")]
-		public virtual global::Umbraco.Cms.Core.Strings.IHtmlEncodedString NameOfPerson => this.Value<global::Umbraco.Cms.Core.Strings.IHtmlEncodedString>(_publishedValueFallback, "nameOfPerson");
+		[ImplementPropertyType("widthOfColumn1")]
+		public virtual int WidthOfColumn1 => this.Value<int>(_publishedValueFallback, "widthOfColumn1");
 
 		///<summary>
-		/// Picture: Attach the picture of the person.
+		/// Width of Column 2: Enter the with in percentage of Column 2. Column 1 +  Column 2 must be a total of 100.
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.4.1+d72fc5c")]
-		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("picture")]
-		public virtual global::Umbraco.Cms.Core.Models.MediaWithCrops Picture => this.Value<global::Umbraco.Cms.Core.Models.MediaWithCrops>(_publishedValueFallback, "picture");
+		[ImplementPropertyType("widthOfColumn2")]
+		public virtual int WidthOfColumn2 => this.Value<int>(_publishedValueFallback, "widthOfColumn2");
 	}
 }
