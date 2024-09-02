@@ -1,0 +1,46 @@
+@using Umbraco.Cms.Core.Models
+@using Umbraco.Cms.Core.Models.Blocks
+@using Umbraco.Cms.Web.Common.PublishedModels
+@inherits UmbracoViewPage<BlockListItem>
+<script src="~/js/animations.js"></script>
+
+@{
+	var row = (ListOfHighlightCards2)Model.Content;
+	if (row == null) return;
+	var listOfCards = row.Cards.ToList();
+	var animDirection = new List<string>
+    {
+        "top",
+        "bottom",
+        "left",
+		"right"
+    };
+	var random = new Random();
+	
+}
+<!-- Sección para desplegar un banner con una imágen de fondo con N botónes -->
+<section class="centered-section ">
+	<div class="columns-container">
+		@foreach (var element in listOfCards)
+		{
+			var randomNumber = random.Next(0, 3);
+			// Loop through each element in the block list
+			var content = element.Content as IPublishedElement;
+			// Access the text value
+			var text = content.Value<string>("text");
+			// Access the image
+			var image = content.Value<IPublishedContent>("image");
+			// Access background color
+			var color = content.Value<string>("color");
+			// Access the text value
+			var description = content.Value<string>("description");
+			<div class="columnCards" data-animation="fly-from-@animDirection[randomNumber]">
+                <div class="image-container">
+                    <img src="@image.Url()" alt="Icon 1">
+                    <div class="overlay-text">@text</div>
+                </div>
+                <p class="description">@Html.Raw(description)</p>
+            </div>
+		}
+	</div>
+</section>
