@@ -7,13 +7,20 @@
 	var row = (BannerWithButtons)Model.Content;
 	if (row == null) return;
 	var listOfButtons = row.ListOfButtons.ToList();
+	// Access the height of the banner
+    var height = row.Value<int>("height");
 }
 <!-- Sección para desplegar un banner con una imágen de fondo con N botónes -->
-<section id="bannerBanner2">
+<section id="bannerBanner2" @(height != 0 ? $"style=height:{height}px;" : "")>
 	<picture>
 		<source media="(max-width: 768px)" srcset="@row.ImageMobile.Url()">
-		<img src="@row.ImageDesktop.Url()" alt="Banner Image" id="banner-imgBanner2">
+		<img src="@row.ImageDesktop.Url()" alt="Banner Image" id="banner-imgBanner2" @(height != 0 ? $"style=height:{height}px;" : "")>
 	</picture>
+	@if(@row.Title != ""){
+		<div id="overlayTextBanner2">
+			<p>@row.Title</p>
+		</div>
+	}
 	<div id="overlayBanner2">
 		@if(listOfButtons.Any()){
 			<div id="button-groupBanner2">
