@@ -10,24 +10,28 @@
 <!-- This elements allows users to set two columns in a single row. They can dictate the % of space that each column will consume-->
 <section class="columns-section">
 	<div class="columns-container">
-		@{
-
-			// Get first element of the list
-			var contentOne = contentList[0].Content as IPublishedElement;
-			// Access the text value
-			var textContent = contentOne.Value<string>("Content");
-			// Render the content
-			<div class="column" style="flex: 0 0 @(withColumn1 + "%");">
-				@Html.Raw(textContent)
-			</div>
-			// Get second element of the list
-			var contentTwo = contentList[1].Content as IPublishedElement;
-			// Access the text value
-			textContent = contentTwo.Value<string>("Content");
-			// Render the content
-			<div class="column" style="flex: 0 0 @(withColumn2 + "%");">
-				@Html.Raw(textContent)
-			</div>
-		}
+		@for (var i = 0; i < contentList.Count; i++)
+        {
+            var content = contentList[i].Content as IPublishedElement;
+            if (content != null)
+            {
+                // Check if the content is a Rich Text Editor
+                if (content.HasProperty("content"))
+                {
+                    var textContent = content.Value<string>("content");
+                    <div class="column" style="flex: 0 0 @(i == 0 ? withColumn1 : withColumn2)%;">
+                        @Html.Raw(textContent)
+                    </div>
+                }
+                // Check if the content is an Image
+                else if (content.HasProperty("image"))
+                {
+                    var image = content.Value<IPublishedContent>("image");
+                    <div class="column" style="flex: 0 0 @(i == 0 ? withColumn1 : withColumn2)%;">
+                        <img src="@image.Url()" alt=@image.Name />
+                    </div>
+                }
+            }
+        }
 	</div>
 </section>

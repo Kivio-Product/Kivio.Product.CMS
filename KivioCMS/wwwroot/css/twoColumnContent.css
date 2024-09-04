@@ -19,3 +19,25 @@
     max-width: 500px;
     text-align: left;
 }
+
+.columns-section {
+    padding: 50px 0;
+    text-align: center;
+}
+
+/* Add the following CSS */
+@media screen and (max-width: 768px) {
+    .columns-container {
+        flex-direction: column-reverse; /* This makes the image appear above the text */
+    }
+
+    .column {
+        text-align: left; /* Optional: center-align text for better presentation on mobile */
+    }
+    .columns-section {
+        text-align: left;
+    }
+    .columns-container .column p {
+        text-align: left !important; /* Override the inline style on mobile */
+    }
+}
