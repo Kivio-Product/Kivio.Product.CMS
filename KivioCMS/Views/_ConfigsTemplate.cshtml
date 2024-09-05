@@ -1,0 +1,22 @@
+
+@model Umbraco.Cms.Web.Common.PublishedModels.BannerWithButtons
+
+@{
+    // Access custom fields from the model
+    var customCSS = Model.Value<string>("customCSS");
+    var scripts = Model.Value<string>("scripts");
+}
+
+@if (!string.IsNullOrEmpty(customCSS))
+{
+    <style>
+        @Html.Raw(customCSS)
+    </style>
+}
+
+@if (!string.IsNullOrEmpty(scripts))
+{
+    <script>
+        @Html.Raw(scripts)
+    </script>
+}

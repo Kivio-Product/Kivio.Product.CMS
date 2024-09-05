@@ -64,5 +64,12 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
 		[ImplementPropertyType("text")]
 		public virtual string Text => this.Value<string>(_publishedValueFallback, "text");
+
+		///<summary>
+		/// Width of Image: Please enter the width of the image. This field is optional, the images will default to 170 px if left blank.
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.4.1+d72fc5c")]
+		[ImplementPropertyType("widthOfImage")]
+		public virtual int WidthOfImage => this.Value<int>(_publishedValueFallback, "widthOfImage");
 	}
 }

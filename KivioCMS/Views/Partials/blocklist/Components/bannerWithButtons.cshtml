@@ -10,6 +10,7 @@
 	// Access the height of the banner
     var height = row.Value<int>("height");
 }
+@await Html.PartialAsync("~/Views/_ConfigsTemplate.cshtml",row)
 <!-- Sección para desplegar un banner con una imágen de fondo con N botónes -->
 <section id="bannerBanner2" @(height != 0 ? $"style=height:{height}px;" : "")>
 	<picture>
