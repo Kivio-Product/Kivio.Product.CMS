@@ -50,6 +50,13 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		// properties
 
 		///<summary>
+		/// Column Reverse for Mobile: Set this value to true if you want the columns to be reversed in the mobile viewport.
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.4.1+d72fc5c")]
+		[ImplementPropertyType("columnReverseMobile")]
+		public virtual bool ColumnReverseMobile => this.Value<bool>(_publishedValueFallback, "columnReverseMobile");
+
+		///<summary>
 		/// Columns
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.4.1+d72fc5c")]

@@ -6,10 +6,12 @@
 	var withColumn1 = row.Value<int>("widthOfColumn1");
 	var withColumn2 = row.Value<int>("widthOfColumn2");
 	var contentList = row.Columns.ToList();
+    // Boolean value from Umbraco CMS to control column-reversal
+    var columnReverseMobile = row.Value<bool>("columnReverseMobile");
 }
 <!-- This elements allows users to set two columns in a single row. They can dictate the % of space that each column will consume-->
 <section class="columns-section">
-	<div class="columns-container">
+	<div class="columns-container @(columnReverseMobile ? "reverse-columns" : "")">
 		@for (var i = 0; i < contentList.Count; i++)
         {
             var content = contentList[i].Content as IPublishedElement;

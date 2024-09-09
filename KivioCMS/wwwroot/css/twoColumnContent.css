@@ -1,5 +1,5 @@
 .columns-section {
-    padding: 50px 0;
+    padding: 0px 0;
     text-align: center;
 }
 
@@ -15,8 +15,6 @@
 
 .column {
     flex: 1;
-    min-width: 300px;
-    max-width: 500px;
     text-align: left;
 }
 
@@ -28,16 +26,19 @@
 /* Add the following CSS */
 @media screen and (max-width: 768px) {
     .columns-container {
-        flex-direction: column-reverse; /* This makes the image appear above the text */
+        flex-direction: column; /* Default: Do not reverse on mobile */
+    }
+
+    /* Reverse columns only when 'reverse-columns' class is applied */
+    .columns-container.reverse-columns {
+        flex-direction: column-reverse;
     }
 
     .column {
-        text-align: left; /* Optional: center-align text for better presentation on mobile */
-    }
-    .columns-section {
         text-align: left;
     }
+
     .columns-container .column p {
-        text-align: left !important; /* Override the inline style on mobile */
+        text-align: left !important; /* Override the inline style */
     }
 }
