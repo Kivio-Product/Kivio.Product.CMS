@@ -1,6 +1,10 @@
 @using Umbraco.Cms.Core.Models
 @using Umbraco.Cms.Core.Models.Blocks
 @using Umbraco.Cms.Web.Common.PublishedModels
+@using KivioCMS.HelperClasses
+@using Umbraco.Cms.Core.Models.PublishedContent;
+@using Umbraco.Extensions;
+
 @inherits UmbracoViewPage<BlockListItem>
 
 @{
@@ -9,6 +13,7 @@
 	var listOfButtons = row.ListOfButtons.ToList();
 	// Access the height of the banner
     var height = row.Value<int>("height");
+	//var helper = new transformConfigs(publishedValueFallback);
 }
 @await Html.PartialAsync("~/Views/_ConfigsTemplate.cshtml",row)
 <!-- Sección para desplegar un banner con una imágen de fondo con N botónes -->
