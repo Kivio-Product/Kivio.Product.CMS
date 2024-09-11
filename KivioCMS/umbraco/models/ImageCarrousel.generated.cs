@@ -58,6 +58,13 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		public virtual global::Umbraco.Cms.Core.Models.Blocks.BlockListModel DesktopImages => this.Value<global::Umbraco.Cms.Core.Models.Blocks.BlockListModel>(_publishedValueFallback, "desktopImages");
 
 		///<summary>
+		/// Height of images: Enter the height of the images within the banner. The number is in pixels.
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.4.1+d72fc5c")]
+		[ImplementPropertyType("heightOfImages")]
+		public virtual int HeightOfImages => this.Value<int>(_publishedValueFallback, "heightOfImages");
+
+		///<summary>
 		/// Mobile Images: Optional field -- Attach here all images that will be displayed in the mobile version.
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.4.1+d72fc5c")]

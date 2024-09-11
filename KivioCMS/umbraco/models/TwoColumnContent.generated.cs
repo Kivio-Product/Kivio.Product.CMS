@@ -65,14 +65,14 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		public virtual global::Umbraco.Cms.Core.Models.Blocks.BlockListModel Columns => this.Value<global::Umbraco.Cms.Core.Models.Blocks.BlockListModel>(_publishedValueFallback, "columns");
 
 		///<summary>
-		/// Width of Column 1: Enter the with in percentage of Column 1. Column 1 +  Column 2 must be a total of 100.
+		/// Width of Column 1
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.4.1+d72fc5c")]
 		[ImplementPropertyType("widthOfColumn1")]
 		public virtual int WidthOfColumn1 => this.Value<int>(_publishedValueFallback, "widthOfColumn1");
 
 		///<summary>
-		/// Width of Column 2: Enter the with in percentage of Column 2. Column 1 +  Column 2 must be a total of 100.
+		/// Width of Column 2
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.4.1+d72fc5c")]
 		[ImplementPropertyType("widthOfColumn2")]
