@@ -11,6 +11,7 @@
 	var listDesktop = row.DesktopImages.ToList();
 	var listMobile = row.MobileImages.ToList();
 	var multipleImageToggle = row.Value<bool>("multipleImagesAtOnce");
+	var heightofImages = row.Value<int>("heightOfImages");
 }
 <!-- Image banner Section 
 	This section contains a banner. The section is divided in two. One for the desktop viewport and one for the 
@@ -152,7 +153,7 @@
 					var caption = content.Value<string>("caption");
 					// Access the image (assuming it's a single image picker)
 					var image = content.Value<IPublishedContent>("image");
-					<img src="@image.Url()" alt="@caption" style="height: 150px;">
+					<img src="@image.Url()" alt="@caption" style="height: @(heightofImages + "px");">
 				}
             </div>
         </div>
