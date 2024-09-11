@@ -23,6 +23,28 @@
     text-align: center;
 }
 
+.section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.icon {
+    width: 80px;
+    height: 80px;
+    margin-right: 20px;
+}
+
+.pill {
+    background-color: #9bc11c;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
 /* Add the following CSS */
 @media screen and (max-width: 768px) {
     .columns-container {
