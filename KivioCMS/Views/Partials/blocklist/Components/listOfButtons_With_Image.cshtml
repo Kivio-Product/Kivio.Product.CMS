@@ -32,27 +32,41 @@
 	</div>
 </section>
 <section id="buttonType3Section">
-	<div id="overlayButtonType3">
-		@if(listOfButtons.Any()){
-			<div id="button-ButtonType3">
-				@foreach (var element in listOfButtons)
-				{
-					// Loop through each element in the block list
-					var content = element.Content as IPublishedElement;
-					// Access the image
-					var buttonImageDesktop = content.Value<IPublishedContent>("imageDesktop");
-					var buttonImageMobile = content.Value<IPublishedContent>("imageMobile");
-					// Access the link
-					var link = content.Value<Link>("link");
+
+	@if (listOfButtons.Any())
+	{
+		@foreach (var element in listOfButtons)
+		{
+			
+			// Loop through each element in the block lis
+			var content = element.Content as IPublishedElement;
+			// Access the image
+			var buttonImageDesktop = content.Value<IPublishedContent>("imageDesktop");
+			var buttonImageMobile = content.Value<IPublishedContent>("imageMobile");
+			var padding = content.Value<int>("padding");
+			var horizontalAlignment = content.Value<string>("horizontalAlignment");
+			// Access the link
+			var link = content.Value<Link>("link");
+			// Convert horizontal alignment to valid flexbox values
+			var alignment = horizontalAlignment switch
+			{
+				"Left" => "flex-start",
+				"Center" => "center",
+				"Right" => "flex-end",
+				_ => "center"  // default value
+			};
+			//@(horizontalAlignment + ":")
+			<div id="overlayButtonType3" style="align-items: @alignment; @(horizontalAlignment + ":" + padding + "%;")">
+				<div id="button-ButtonType3">
 					<div id="button-ButtonType3">
 						<a href="@link.Url" target="@link.Target" id="btnButtonType3">
-							<img src="@buttonImageDesktop.Url()"
-								srcset="@buttonImageDesktop.Url(), @buttonImageMobile.Url()" /> </a>
+							<img src="@buttonImageDesktop.Url()" srcset="@buttonImageDesktop.Url(), @buttonImageMobile.Url()" />
+						</a>
 					</div>
-				}
+				</div>
 			</div>
 		}
-	</div>
+	}
 </section>
 <section
 	class="elementor-section elementor-top-section elementor-element elementor-element-a31a189 elementor-section-boxed elementor-section-height-default elementor-section-height-default"
