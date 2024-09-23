@@ -1,0 +1,68 @@
+.container {
+    display: flex;
+    justify-content: center;   /* Ensures the cards are centered horizontally */
+    align-items: center;       /* Aligns the cards vertically in case of wrapping */
+    gap: 20px;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;            /* Centers the container within the body */
+}
+
+.card {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    width: 250px;
+    transition: transform 0.2s;
+	max-width: 260px;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+}
+
+.product-image {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.card h2 {
+    font-size: 1.2em;
+    color: #066eb1;
+    margin: 10px 0;
+}
+
+.price {
+    font-size: 1.1em;
+    color: #666;
+    margin: 5px 0;
+}
+
+.buy-button {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #1a73e8;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+.buy-button:hover {
+    background-color: #155db0;
+}
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card {
+        width: 80%;
+    }
+}
