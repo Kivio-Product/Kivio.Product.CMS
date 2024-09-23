@@ -18,14 +18,14 @@ using Umbraco.Extensions;
 
 namespace Umbraco.Cms.Web.Common.PublishedModels
 {
-	/// <summary>Button_With_Image</summary>
-	[PublishedModel("button_With_Image")]
-	public partial class Button_With_Image : PublishedElementModel
+	/// <summary>Store</summary>
+	[PublishedModel("store")]
+	public partial class Store : PublishedContentModel
 	{
 		// helpers
 #pragma warning disable 0109 // new is redundant
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.4.1+d72fc5c")]
-		public new const string ModelTypeAlias = "button_With_Image";
+		public new const string ModelTypeAlias = "store";
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.4.1+d72fc5c")]
 		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.4.1+d72fc5c")]
@@ -34,14 +34,14 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 			=> PublishedModelUtility.GetModelContentType(publishedSnapshotAccessor, ModelItemType, ModelTypeAlias);
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.4.1+d72fc5c")]
 		[return: global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		public static IPublishedPropertyType GetModelPropertyType<TValue>(IPublishedSnapshotAccessor publishedSnapshotAccessor, Expression<Func<Button_With_Image, TValue>> selector)
+		public static IPublishedPropertyType GetModelPropertyType<TValue>(IPublishedSnapshotAccessor publishedSnapshotAccessor, Expression<Func<Store, TValue>> selector)
 			=> PublishedModelUtility.GetModelPropertyType(GetModelContentType(publishedSnapshotAccessor), selector);
 #pragma warning restore 0109
 
 		private IPublishedValueFallback _publishedValueFallback;
 
 		// ctor
-		public Button_With_Image(IPublishedElement content, IPublishedValueFallback publishedValueFallback)
+		public Store(IPublishedContent content, IPublishedValueFallback publishedValueFallback)
 			: base(content, publishedValueFallback)
 		{
 			_publishedValueFallback = publishedValueFallback;
@@ -50,42 +50,27 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		// properties
 
 		///<summary>
-		/// Horizontal Alignment: Select the alignment for the button. The default alignment will be centered.
+		/// Phone Number: Enter the contact phone number.
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.4.1+d72fc5c")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("horizontalAlignment")]
-		public virtual string HorizontalAlignment => this.Value<string>(_publishedValueFallback, "horizontalAlignment");
+		[ImplementPropertyType("phoneNumber")]
+		public virtual string PhoneNumber => this.Value<string>(_publishedValueFallback, "phoneNumber");
 
 		///<summary>
-		/// Image Desktop: Attach the image for the desktop version of the button.
+		/// Store Email: Enter the store's contact email.
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.4.1+d72fc5c")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("imageDesktop")]
-		public virtual global::Umbraco.Cms.Core.Models.MediaWithCrops ImageDesktop => this.Value<global::Umbraco.Cms.Core.Models.MediaWithCrops>(_publishedValueFallback, "imageDesktop");
+		[ImplementPropertyType("storeEmail")]
+		public virtual string StoreEmail => this.Value<string>(_publishedValueFallback, "storeEmail");
 
 		///<summary>
-		/// Image Mobile: Attach the image for the mobile version of the button.
+		/// Store Name: Enter the store's name.
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.4.1+d72fc5c")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("imageMobile")]
-		public virtual global::Umbraco.Cms.Core.Models.MediaWithCrops ImageMobile => this.Value<global::Umbraco.Cms.Core.Models.MediaWithCrops>(_publishedValueFallback, "imageMobile");
-
-		///<summary>
-		/// Link: Enter the link information for the button.
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.4.1+d72fc5c")]
-		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("link")]
-		public virtual global::Umbraco.Cms.Core.Models.Link Link => this.Value<global::Umbraco.Cms.Core.Models.Link>(_publishedValueFallback, "link");
-
-		///<summary>
-		/// Padding: Add the padding in percentage of the element. Default padding is 0.
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.4.1+d72fc5c")]
-		[ImplementPropertyType("padding")]
-		public virtual int Padding => this.Value<int>(_publishedValueFallback, "padding");
+		[ImplementPropertyType("storeName")]
+		public virtual string StoreName => this.Value<string>(_publishedValueFallback, "storeName");
 	}
 }

@@ -1,0 +1,146 @@
+@using Umbraco.Cms.Core.Models
+@using Umbraco.Cms.Core.Models.Blocks
+@using Umbraco.Cms.Web.Common.PublishedModels
+@using KivioCMS.HelperClasses
+@using Umbraco.Cms.Core.Models.PublishedContent;
+@using Umbraco.Extensions;
+
+@inherits UmbracoViewPage<BlockListItem>
+
+@{
+	var row = (ProductSummarizedContent)Model.Content;
+	if (row == null) return;
+
+	// Access the Category field (assuming it's a string-based dropdown)
+    var productCategory = row.Value<string>("productCategory");
+}
+
+<section class="container">
+		@foreach (var element in row.ListOfProducts.ToList())
+		{
+			// Loop through each element in the block list
+			var content = element.Content as IPublishedElement;
+			// Fetch the selected products from the Content Picker (alias: productPicker)
+			var selectedProducts = content.Value<IPublishedContent>("productsPicker");
+			// Access the name of the product
+			var name = selectedProducts.Value<string>("productName");
+			// Access the product's image
+			var picture = selectedProducts.Value<IPublishedContent>("productImage");
+			// Access the product's full description
+			var description = selectedProducts.Value<string>("productDescription");
+			// Access the produc's price
+			var price = selectedProducts.Value<int>("productPrice");
+			// Access the message that will be sent when clicking on the purchase button
+			var purchaseMessage = selectedProducts.Value<string>("productPurchaseMessage");
+			// Access the product's category
+			var category = selectedProducts.Value<string>("productCategory");
+			// Render the content
+			<div class="card">
+				<img src="@picture.Url()" alt="Arroz con leche" class="product-image">
+				<h2>@name</h2>
+				<p class="price">$@price</p>
+				<a href="https://wa.me/123456789" target="_blank" class="buy-button">Compra aquí</a>
+            </div>          
+		}
+		@foreach (var productNode in row.ListOfProducts2) // Assuming 'ListOfProducts2' is the Multinode Treepicker alias
+		{
+			// Cast each productNode to IPublishedContent
+			var product = productNode as IPublishedContent;
+
+			if (product != null)
+			{
+				// Access the product's name
+				var name = product.Value<string>("productName");
+				// Access the product's image
+				var picture = product.Value<IPublishedContent>("productImage");
+				// Access the product's description
+				var description = product.Value<string>("productDescription");
+				// Access the product's price
+				var price = product.Value<decimal>("productPrice"); // Assuming price is a decimal
+				// Access the purchase message
+				var purchaseMessage = product.Value<string>("productPurchaseMessage");
+
+				// Render the product information
+				<div class="card">
+					@if (picture != null)
+					{
+						<img src="@picture.Url()" alt="@name" class="product-image" style="height: 200px;">
+					}
+					<h2>@name</h2>
+					<p class="price">$@price</p>
+					<a href="https://wa.me/?text=@purchaseMessage" target="_blank" class="buy-button">Compra aquí</a>
+				</div>
+			}
+		}
+</section>
+
+<style>
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    max-width: 1200px;
+}
+
+.card {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    width: 250px;
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+}
+
+.product-image {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+h2 {
+    font-size: 1.2em;
+    color: #333;
+    margin: 10px 0;
+}
+
+.price {
+    font-size: 1.1em;
+    color: #666;
+    margin: 5px 0;
+}
+
+.buy-button {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #1a73e8;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+.buy-button:hover {
+    background-color: #155db0;
+}
+
+@@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card {
+        width: 80%;
+    }
+}
+
+</style>
