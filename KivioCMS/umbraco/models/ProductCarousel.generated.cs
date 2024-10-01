@@ -58,6 +58,13 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		public virtual global::Umbraco.Cms.Core.Models.Link AllProductsButtonLink => this.Value<global::Umbraco.Cms.Core.Models.Link>(_publishedValueFallback, "allProductsButtonLink");
 
 		///<summary>
+		/// Centered Images: Set this toggle to true if you want your products to be centered within the carousel.
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.4.1+d72fc5c")]
+		[ImplementPropertyType("centeredImages")]
+		public virtual bool CenteredImages => this.Value<bool>(_publishedValueFallback, "centeredImages");
+
+		///<summary>
 		/// List of Products: Select all the products that you want to display in this carousel section.
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.4.1+d72fc5c")]

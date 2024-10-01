@@ -4,6 +4,7 @@
 @using KivioCMS.HelperClasses
 @using Umbraco.Cms.Core.Models.PublishedContent;
 @using Umbraco.Extensions;
+<script src="~/js/slickControls.js"></script>
 
 @inherits UmbracoViewPage<BlockListItem>
 
@@ -12,10 +13,11 @@
 	if (row == null) return;
 	// Access the link
 	var link = row.Value<Link>("allProductsButtonLink");
+    var centeredImages = row.Value<int>("centeredImages");
 }
 
 <section>
-	<div class="carousel-background">
+	<div class="carousel-background carousel-desktop" data-centered-images="@centeredImages">
     <div class="carousel-container">
         <!-- Slick Carousel (items) -->
         <div class="carousel">
@@ -107,6 +109,13 @@
 	margin: 10px;
 	border-radius: 10px;
 	box-shadow: 5px 5px 5px rgb(102, 102, 102);
+}
+
+.carousel-image-item {
+	background-color: #e0dfdf;
+    padding: 5px;
+	margin: 5px;
+	border-radius: 5px;
 }
 
 .carousel-item img {
@@ -205,28 +214,3 @@ h2 {
     opacity: 1;
 }
 </style>
-
-<script>
-	$(document).ready(function(){
-    $('.carousel').slick({
-        infinite: true,         // Enables endless looping
-        slidesToShow: 4,        // Number of visible slides (set to 1 for small screens)
-        slidesToScroll: 1,      // How many slides to scroll per click
-        autoplay: true,         // Enable autoplay
-        autoplaySpeed: 2000,    // Delay between slides (in ms)
-        arrows: false,           // Show navigation arrows
-        dots: true,             // Show dots below the carousel
-        centerMode: false,       // Center the active slide
-        variableWidth: true,    // Enable variable width for slides
-        responsive: [
-            {
-                breakpoint: 768, // Mobile settings
-                settings: {
-                    slidesToShow: 1,  // Show 1 slide on smaller screens
-                    centerMode: false
-                }
-            }
-        ]
-    });
-});
-</script>

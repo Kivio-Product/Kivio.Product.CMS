@@ -50,6 +50,13 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		// properties
 
 		///<summary>
+		/// Centered Images: Turn on if you need the images to be centered within the carousel. By default they will not be centered.
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.4.1+d72fc5c")]
+		[ImplementPropertyType("centeredImages")]
+		public virtual bool CenteredImages => this.Value<bool>(_publishedValueFallback, "centeredImages");
+
+		///<summary>
 		/// Desktop Images: Attach here all the images that will be displayed in the desktop banner.
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.4.1+d72fc5c")]
