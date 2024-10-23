@@ -1,0 +1,41 @@
+@using Umbraco.Cms.Core.Models
+@using Umbraco.Cms.Core.Models.Blocks
+@using Umbraco.Cms.Web.Common.PublishedModels
+@using KivioCMS.HelperClasses
+@using Umbraco.Cms.Core.Models.PublishedContent;
+@using Umbraco.Extensions;
+
+@inherits UmbracoViewPage<BlockListItem>
+
+@{
+	var row = (Location)Model.Content;
+	if (row == null) return;
+	var title = row.Value<string>("title");
+	var address = row.Value<string>("fullAddress");
+	var city = row.Value<string>("city");
+	var state = row.Value<string>("state");
+	var country = row.Value<string>("country");
+	var phoneNumber = row.Value<string>("phoneNumber");
+	var whatsApp = row.Value<string>("whatsApp");
+	var eMail = row.Value<string>("eMail");
+	var googleMapsSource = row.Value<string>("googleMapsSource");
+}
+<!-- Sección para desplegar una ubicación con mapa embebido de google -->
+ <section class="contact-section">
+	<!-- Left side: Contact Information -->
+	<div class="contact-info">
+		<h2>@title</h2>
+		<p>@address</p>
+		<p>@city - @state - @country</p>
+		<p>Teléfono: @phoneNumber</p>
+		<p>WhatsApp: @whatsApp</p>
+		<p>Correo: @eMail</p>
+	</div>
+
+	<!-- Right side: Embedded Google Map -->
+	<div class="map-container">
+		<iframe 
+			src="@googleMapsSource" 
+			allowfullscreen="" loading="lazy"></iframe>
+	</div>
+</section>
