@@ -16,8 +16,7 @@
    color: white;
 }
 
-
-   .carousel-background {
+.carousel-background {
    background-color: #9bc11c;
    width: 100vw; /* Full width of the screen */
    padding: 40px 0;
@@ -137,4 +136,4 @@ h2 {
 .slick-dots li.slick-active button:before {
    color: #1a73e8; /* Active dot color */
    opacity: 1;
-}
+}   
