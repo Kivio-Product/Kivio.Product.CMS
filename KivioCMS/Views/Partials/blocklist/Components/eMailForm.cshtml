@@ -10,13 +10,11 @@
 @inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
 @inherits UmbracoViewPage<BlockListItem>
 
-@{
-	var row = (EMailForm)Model.Content;
-	if (row == null) return;
-}
 
 @{
-    var model = Model.Content;
+    var row = (EMailForm)Model.Content;
+	if (row == null) return;
+    var subject = row.Value<string>("subject");
     var successMessage = "";
     var errorMessage = "";
 
@@ -32,18 +30,31 @@
 
         try
         {
-            // Send the form data via email
+            // Set up the email
             var mail = new MailMessage();
-            mail.From = new MailAddress("your-email@example.com");
-            mail.To.Add("recipient-email@example.com");
-            mail.Subject = $"New Form Submission from {firstName} {lastName}";
-            mail.Body = $"Name: {firstName} {lastName}\nPhone: {phoneNumber}\nEmail: {email}\nMessage: {message}";
+            mail.From = new MailAddress("sebastian@kivio.com.co"); // Your GoDaddy email address
+            @foreach (var element in row.TargetEmailsList.ToList())
+            {
+                // Loop through each element in the block list
+                var content = element.Content as IPublishedElement;
+                // Access the text value
+                var eMail = content.Value<string>("eMailField");
+                mail.To.Add(eMail); // The recipient's email address
+            }
             
-            // Configure your SMTP client (you can update this to match your email provider)
-            var smtpClient = new SmtpClient("smtp.yourserver.com");
-            smtpClient.Credentials = new System.Net.NetworkCredential("your-email@example.com", "your-password");
-            smtpClient.Send(mail);
+            mail.Subject = subject;
+            mail.Body = $"Nombre: {firstName} {lastName}\nTeléfono: {phoneNumber}\nEmail: {email}\nMensaje: {message}";
+            
+            // Configure the GoDaddy SMTP client
+            var smtpClient = new SmtpClient("smtpout.secureserver.net")
+            {
+                Port = 587, // Use TLS on port 587
+                Credentials = new System.Net.NetworkCredential("sebastian@kivio.com.co", "BYh!BNS6?8NT*8f"),
+                EnableSsl = true // This enables TLS/SSL encryption
+            };
 
+            // Send the email
+            smtpClient.Send(mail);
             successMessage = "Your message has been sent successfully.";
         }
         catch (Exception ex)
@@ -66,87 +77,38 @@
         }
 
         <form method="post" action="">
-            <div class="form-group">
-                <label for="firstName">Nombre *</label>
-                <input type="text" id="firstName" name="firstName" placeholder="Nombre" required />
+            <!-- Name and Last Name on the same row -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="firstName">Nombre <span class="required">*</span></label>
+                    <input type="text" id="firstName" name="firstName" placeholder="Nombre" required />
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Apellido <span class="required">*</span></label>
+                    <input type="text" id="lastName" name="lastName" placeholder="Apellido" required />
+                </div>
             </div>
-            <div class="form-group">
-                <label for="lastName">Apellido *</label>
-                <input type="text" id="lastName" name="lastName" placeholder="Apellido" required />
+
+            <!-- Phone and Email on the same row -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="phoneNumber">Teléfono o Celular <span class="required">*</span></label>
+                    <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="Teléfono o Celular" required />
+                </div>
+                <div class="form-group">
+                    <label for="email">Email <span class="required">*</span></label>
+                    <input type="email" id="email" name="email" placeholder="Email" required />
+                </div>
             </div>
+
+            <!-- Message on its own row -->
             <div class="form-group">
-                <label for="phoneNumber">Teléfono o Celular *</label>
-                <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="Teléfono o Celular" required />
-            </div>
-            <div class="form-group">
-                <label for="email">Email *</label>
-                <input type="email" id="email" name="email" placeholder="Email" required />
-            </div>
-            <div class="form-group">
-                <label for="message">Mensaje *</label>
+                <label for="message">Mensaje <span class="required">*</span></label>
                 <textarea id="message" name="message" placeholder="Mensaje" required></textarea>
             </div>
-            <button type="submit" class="submit-button">Enviar</button>
+
+            <!-- Submit button -->
+            <button type="submit" class="submit-button-eform">Enviar</button>
         </form>
     }
 </section>
-
-
-<style>
-	.contact-form-section {
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.form-group {
-    margin-bottom: 15px;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-}
-
-.form-group input, .form-group textarea {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-}
-
-.form-group textarea {
-    height: 150px;
-    resize: none;
-}
-
-.submit-button {
-    background-color: #8bc34a;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.submit-button:hover {
-    background-color: #689f38;
-}
-
-.success-message, .error-message {
-    padding: 15px;
-    margin-bottom: 15px;
-    border-radius: 5px;
-}
-
-.success-message {
-    background-color: #d4edda;
-    color: #155724;
-}
-
-.error-message {
-    background-color: #f8d7da;
-    color: #721c24;
-}
-</style>
