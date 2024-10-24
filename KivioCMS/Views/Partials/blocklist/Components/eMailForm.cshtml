@@ -1,0 +1,152 @@
+@using Umbraco.Cms.Core.Models
+@using Umbraco.Cms.Core.Models.Blocks
+@using Umbraco.Cms.Web.Common.PublishedModels
+@using KivioCMS.HelperClasses
+@using Umbraco.Cms.Core.Models.PublishedContent;
+@using Umbraco.Extensions;
+@using System.Net.Mail;
+@using System.Web;
+@using Microsoft.AspNetCore.Http;
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@inherits UmbracoViewPage<BlockListItem>
+
+@{
+	var row = (EMailForm)Model.Content;
+	if (row == null) return;
+}
+
+@{
+    var model = Model.Content;
+    var successMessage = "";
+    var errorMessage = "";
+
+    // Check if the form is submitted
+    if (HttpContextAccessor.HttpContext.Request.Method == "POST")
+    {
+        // Retrieve form values
+        var firstName = HttpContextAccessor.HttpContext.Request.Form["firstName"].ToString();
+        var lastName = HttpContextAccessor.HttpContext.Request.Form["lastName"].ToString();
+        var phoneNumber = HttpContextAccessor.HttpContext.Request.Form["phoneNumber"].ToString();
+        var email = HttpContextAccessor.HttpContext.Request.Form["email"].ToString();
+        var message = HttpContextAccessor.HttpContext.Request.Form["message"].ToString();
+
+        try
+        {
+            // Send the form data via email
+            var mail = new MailMessage();
+            mail.From = new MailAddress("your-email@example.com");
+            mail.To.Add("recipient-email@example.com");
+            mail.Subject = $"New Form Submission from {firstName} {lastName}";
+            mail.Body = $"Name: {firstName} {lastName}\nPhone: {phoneNumber}\nEmail: {email}\nMessage: {message}";
+            
+            // Configure your SMTP client (you can update this to match your email provider)
+            var smtpClient = new SmtpClient("smtp.yourserver.com");
+            smtpClient.Credentials = new System.Net.NetworkCredential("your-email@example.com", "your-password");
+            smtpClient.Send(mail);
+
+            successMessage = "Your message has been sent successfully.";
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"There was an error sending the message: {ex.Message}";
+        }
+    }
+}
+
+<section class="contact-form-section">
+    @if (!string.IsNullOrEmpty(successMessage))
+    {
+        <div class="success-message">@successMessage</div>
+    }
+    else
+    {
+        if (!string.IsNullOrEmpty(errorMessage))
+        {
+            <div class="error-message">@errorMessage</div>
+        }
+
+        <form method="post" action="">
+            <div class="form-group">
+                <label for="firstName">Nombre *</label>
+                <input type="text" id="firstName" name="firstName" placeholder="Nombre" required />
+            </div>
+            <div class="form-group">
+                <label for="lastName">Apellido *</label>
+                <input type="text" id="lastName" name="lastName" placeholder="Apellido" required />
+            </div>
+            <div class="form-group">
+                <label for="phoneNumber">Teléfono o Celular *</label>
+                <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="Teléfono o Celular" required />
+            </div>
+            <div class="form-group">
+                <label for="email">Email *</label>
+                <input type="email" id="email" name="email" placeholder="Email" required />
+            </div>
+            <div class="form-group">
+                <label for="message">Mensaje *</label>
+                <textarea id="message" name="message" placeholder="Mensaje" required></textarea>
+            </div>
+            <button type="submit" class="submit-button">Enviar</button>
+        </form>
+    }
+</section>
+
+
+<style>
+	.contact-form-section {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group input, .form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.form-group textarea {
+    height: 150px;
+    resize: none;
+}
+
+.submit-button {
+    background-color: #8bc34a;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.submit-button:hover {
+    background-color: #689f38;
+}
+
+.success-message, .error-message {
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+}
+
+.success-message {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.error-message {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+</style>
