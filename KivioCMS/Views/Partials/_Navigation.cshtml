@@ -69,7 +69,7 @@
                                                         var link = content.Value<Link>("link");
                                                         var isActive = IsActive(link.Url, currentPageUrl);
                                                         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children">
-                                                        <a href="@link.Url" class="elementor-item @(isActive ? "elementor-item-active" : "")">@content.Value("title")</a>
+                                                        <a href="@link.Url" target="@link.Target" class="elementor-item @(isActive ? "elementor-item-active" : "")">@content.Value("title")</a>
                                                         <ul class="sub-menu elementor-nav-menu--dropdown">
                                                             @foreach(var subMenuItem in subMenu){
                                                                 var subContent = subMenuItem.Content as IPublishedElement;
@@ -78,7 +78,7 @@
                                                                     var subLink = subContent.Value<Link>("link");
                                                                     var isSubActive = IsActive(subLink.Url, currentPageUrl);
                                                                     <li class="menu-item menu-item-type-post_type menu-item-object-page">
-                                                                        <a href="@subLink.Url" class="elementor-sub-item @(isSubActive ? "elementor-item-active" : "")">@subContent.Value("title")</a>
+                                                                        <a href="@subLink.Url" target="@subLink.Target" class="elementor-sub-item @(isSubActive ? "elementor-item-active" : "")">@subContent.Value("title")</a>
                                                                     </li>
                                                                 }
                                                                 
@@ -90,9 +90,9 @@
                                                     <li class="menu-item menu-item-type-custom menu-item-object-custom">
                                                         @if (content.HasValue("link"))
                                                         {
-                                                            var link = content.Value<Link>("link");
+                                                            var link = content.Value<Umbraco.Cms.Core.Models.Link>("link");
                                                             var isActive = IsActive(link.Url, currentPageUrl);
-                                                            <a href="@link.Url" aria-current="page" class="elementor-item @(isActive ? "elementor-item-active" : "")">@content.Value("title")</a>
+                                                            <a href="@link.Url"  target="@link.Target" aria-current="page" class="elementor-item @(isActive ? "elementor-item-active" : "")">@content.Value("title")</a>
                                                         }
                                                     </li>
                                                 }
@@ -183,7 +183,7 @@
                                                         var link = content.Value<Link>("link");
                                                         var isActive = IsActive(link.Url, currentPageUrl);
                                                         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children">
-                                                        <a href="@link.Url" class="elementor-item @(isActive ? "elementor-item-active" : "")" tabindex="-1">@content.Value("title")</a>
+                                                        <a href="@link.Url" target="@link.Target"class="elementor-item @(isActive ? "elementor-item-active" : "")" tabindex="-1">@content.Value("title")</a>
                                                         <ul class="sub-menu elementor-nav-menu--dropdown">
                                                             @foreach(var subMenuItem in subMenu){
                                                                 var subContent = subMenuItem.Content as IPublishedElement;
@@ -192,7 +192,7 @@
                                                                     var subLink = subContent.Value<Link>("link");
                                                                     var isSubActive = IsActive(subLink.Url, currentPageUrl);
                                                                     <li class="menu-item menu-item-type-post_type menu-item-object-page">
-                                                                        <a href="@subLink.Url" class="elementor-sub-item @(isSubActive ? "elementor-item-active" : "")"  tabindex="-1">@subContent.Value("title")</a>
+                                                                        <a href="@subLink.Url"  target="@subLink.Target" class="elementor-sub-item @(isSubActive ? "elementor-item-active" : "")"  tabindex="-1">@subContent.Value("title")</a>
                                                                     </li>
                                                                 }
                                                                 
@@ -206,7 +206,7 @@
                                                         {
                                                             var link = content.Value<Link>("link");
                                                             var isActive = IsActive(link.Url, currentPageUrl);
-                                                            <a href="@link.Url" aria-current="page" class="elementor-item @(isActive ? "elementor-item-active" : "")" tabindex="-1">@content.Value("title")</a>
+                                                            <a href="@link.Url"  target="@link.Target" aria-current="page" class="elementor-item @(isActive ? "elementor-item-active" : "")" tabindex="-1">@content.Value("title")</a>
                                                         }
                                                     </li>
                                                 }
