@@ -56,13 +56,5 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
 		[ImplementPropertyType("targetEmail")]
 		public virtual string TargetEmail => this.Value<string>(_publishedValueFallback, "targetEmail");
-
-		///<summary>
-		/// Target Emails List: Select all the emails that the form will be sent to.
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.4.1+d72fc5c")]
-		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("targetEmailsList")]
-		public virtual global::Umbraco.Cms.Core.Models.Blocks.BlockListModel TargetEmailsList => this.Value<global::Umbraco.Cms.Core.Models.Blocks.BlockListModel>(_publishedValueFallback, "targetEmailsList");
 	}
 }
