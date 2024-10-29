@@ -20,7 +20,7 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 {
 	/// <summary>Home Page</summary>
 	[PublishedModel("homePage")]
-	public partial class HomePage : PublishedContentModel, IContent, IDonationOptions, IFooterProperties, IHeaderProperties, IMainMenu, IMasterProperties
+	public partial class HomePage : PublishedContentModel, IContent, IDonationOptions, IFooterProperties, IHeaderProperties, IMainMenu
 	{
 		// helpers
 #pragma warning disable 0109 // new is redundant
@@ -128,21 +128,5 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
 		[ImplementPropertyType("nutrirLogo")]
 		public virtual global::Umbraco.Cms.Core.Models.MediaWithCrops NutrirLogo => global::Umbraco.Cms.Web.Common.PublishedModels.MainMenu.GetNutrirLogo(this, _publishedValueFallback);
-
-		///<summary>
-		/// Css References
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.4.1+d72fc5c")]
-		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("cssReferences")]
-		public virtual string CssReferences => global::Umbraco.Cms.Web.Common.PublishedModels.MasterProperties.GetCssReferences(this, _publishedValueFallback);
-
-		///<summary>
-		/// Scripts References
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.4.1+d72fc5c")]
-		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("scriptsReferences")]
-		public virtual string ScriptsReferences => global::Umbraco.Cms.Web.Common.PublishedModels.MasterProperties.GetScriptsReferences(this, _publishedValueFallback);
 	}
 }
