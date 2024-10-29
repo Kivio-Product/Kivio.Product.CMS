@@ -45,6 +45,57 @@
     font-size: 1.2em;
 }
 
+/* Styles for the products */
+
+.cardTwoCol {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 5px;
+    text-align: center;
+    width: 190px;
+    transition: transform 0.2s;
+	max-width: 260px;
+}
+
+.cardTwoCol:hover {
+    transform: translateY(-10px);
+}
+
+.product-imageTwoCol {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.cardTwoCol h2 {
+    font-size: 1.2em;
+    color: #066eb1;
+    margin: 10px 0;
+}
+
+.priceTwoCol {
+    font-size: 1.1em;
+    color: #666;
+    margin: 5px 0;
+}
+
+.buy-buttonTwoCol {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #1a73e8;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+.buy-buttonTwoCol:hover {
+    background-color: #155db0;
+}
+
+
 /* Add the following CSS */
 @media screen and (max-width: 768px) {
     .columns-container {
@@ -62,5 +113,15 @@
 
     .columns-container .column p {
         text-align: left !important; /* Override the inline style */
+    }
+
+    /* Style for products */
+    .containerTwoCol {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .cardTwoCol {
+        width: 80%;
     }
 }
