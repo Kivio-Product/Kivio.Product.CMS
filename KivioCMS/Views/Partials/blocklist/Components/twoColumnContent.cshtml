@@ -36,42 +36,89 @@
                 // Check if the content is a group of producs
                 else if (content.HasProperty("listOfProducts"))
                 {
-                    
-                        var productsList = (ProductSummarizedContent)content;
-                        foreach (var productNode in productsList.ListOfProducts) // Assuming 'ListOfProducts2' is the Multinode Treepicker alias
+                    <script src="~/js/listofProductsTwoColumnsControl.js"></script>
+                    var productsList = (ProductSummarizedContent)content;
+                    <div class="desktop-viewport" style="display:flex;">
+                    @foreach (var productNode in productsList.ListOfProducts) // Assuming 'ListOfProducts2' is the Multinode Treepicker alias
+                    {
+                        // Cast each productNode to IPublishedContent
+                        var product = productNode as IPublishedContent;
+                        if (product != null)
                         {
-                            // Cast each productNode to IPublishedContent
-                            var product = productNode as IPublishedContent;
-                            if (product != null)
-                            {
-                                // Access the parent node (Tienda Nutrir)
-                                var storeNode = product.AncestorOrSelf("store");
-                                // Access the store's phone number
-                                var storePhoneNumber = storeNode?.Value<string>("phoneNumber");
-                                // Access the product's name
-                                var name = product.Value<string>("productName");
-                                // Access the product's image
-                                var picture = product.Value<IPublishedContent>("productImage");
-                                // Access the product's description
-                                var description = product.Value<string>("productDescription");
-                                // Access the product's price
-                                var price = product.Value<decimal>("productPrice"); // Assuming price is a decimal
-                                // Access the purchase message
-                                var purchaseMessage = product.Value<string>("productPurchaseMessage");
-                                // Format the price with commas
-                                var formattedPrice = price.ToString("N0"); // 'N0' for thousands with no decimals
-                                // Render the product information
-                                <div class="cardTwoCol">
-                                    @if (picture != null)
-                                    {
-                                        <img src="@picture.Url()" alt="@name" class="product-imageTwoCol">
-                                    }
-                                    <h2>@name</h2>
-                                    <p class="priceTwoCol">$@formattedPrice</p>
-                                    <a href="https://api.whatsapp.com/send/?phone=@storePhoneNumber&text=@purchaseMessage &type=phone_number&app_absent=0" target="_blank" class="buy-buttonTwoCol">Compra aquí</a>
-                                </div>
-                            }
+                            // Access the parent node (Tienda Nutrir)
+                            var storeNode = product.AncestorOrSelf("store");
+                            // Access the store's phone number
+                            var storePhoneNumber = storeNode?.Value<string>("phoneNumber");
+                            // Access the product's name
+                            var name = product.Value<string>("productName");
+                            // Access the product's image
+                            var picture = product.Value<IPublishedContent>("productImage");
+                            // Access the product's description
+                            var description = product.Value<string>("productDescription");
+                            // Access the product's price
+                            var price = product.Value<decimal>("productPrice"); // Assuming price is a decimal
+                            // Access the purchase message
+                            var purchaseMessage = product.Value<string>("productPurchaseMessage");
+                            // Format the price with commas
+                            var formattedPrice = price.ToString("N0"); // 'N0' for thousands with no decimals
+                            // Render the product information
+                            <div class="cardTwoCol">
+                                @if (picture != null)
+                                {
+                                    <img src="@picture.Url()" alt="@name" class="product-imageTwoCol">
+                                }
+                                <h2>@name</h2>
+                                <p class="priceTwoCol">$@formattedPrice</p>
+                                <a href="https://api.whatsapp.com/send/?phone=@storePhoneNumber&text=@purchaseMessage &type=phone_number&app_absent=0" target="_blank" class="buy-buttonTwoCol">Compra aquí</a>
+                            </div>
                         }
+                    }
+                    </div>
+                    <div class="mobile-viewport">
+                        <div class="carousel-background carousel-mobile" style="background-color: transparent; padding: 0px;" data-amount-of-images="1" data-centered-images="true">
+                            <div class="carousel-container" style=" width: 100%;">
+                                <!-- Slick Carousel (mobile items) -->
+                                <div class="carousel" style=" width: 100%;">
+                                    @foreach (var productNode in productsList.ListOfProducts) // Assuming 'ListOfProducts2' is the Multinode Treepicker alias
+                                    {
+                                        // Cast each productNode to IPublishedContent
+                                        var product = productNode as IPublishedContent;
+                                        if (product != null)
+                                        {
+                                            // Access the parent node (Tienda Nutrir)
+                                            var storeNode = product.AncestorOrSelf("store");
+                                            // Access the store's phone number
+                                            var storePhoneNumber = storeNode?.Value<string>("phoneNumber");
+                                            // Access the product's name
+                                            var name = product.Value<string>("productName");
+                                            // Access the product's image
+                                            var picture = product.Value<IPublishedContent>("productImage");
+                                            // Access the product's description
+                                            var description = product.Value<string>("productDescription");
+                                            // Access the product's price
+                                            var price = product.Value<decimal>("productPrice"); // Assuming price is a decimal
+                                            // Access the purchase message
+                                            var purchaseMessage = product.Value<string>("productPurchaseMessage");
+                                            // Format the price with commas
+                                            var formattedPrice = price.ToString("N0"); // 'N0' for thousands with no decimals
+                                            // Render the product information    
+                                            <div class="carousel-image-item" style="background-color: transparent;">
+                                                <div class="cardTwoCol">
+                                                    @if (picture != null)
+                                                    {
+                                                        <img src="@picture.Url()" alt="@name" class="product-imageTwoCol">
+                                                    }
+                                                    <h2>@name</h2>
+                                                    <p class="priceTwoCol">$@formattedPrice</p>
+                                                    <a href="https://api.whatsapp.com/send/?phone=@storePhoneNumber&text=@purchaseMessage &type=phone_number&app_absent=0" target="_blank" class="buy-buttonTwoCol">Compra aquí</a>
+                                                </div>
+                                            </div>
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 }
                 else if (content.HasProperty("gridName"))
                 {

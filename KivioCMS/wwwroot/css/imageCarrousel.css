@@ -123,7 +123,7 @@
 }
 
 .carousel-image-item {
-	background-color: #e0dfdf;
+	background-color: transparent;
     padding: 5px;
 	margin: 5px;
 	border-radius: 5px;

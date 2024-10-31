@@ -16,7 +16,8 @@
 <!-- Image banner Section 
 	This section contains a banner. The section is divided in two. One for the desktop viewport and one for the 
 	mobile viewport-->
-@if(multipleImageToggle==false){
+
+@if(listMobile.Any()){
 	<section>
 		<!-- Desktop Carousel -->
 		<div class="carousel-background carousel-desktop" style="background-color: transparent;" data-amount-of-images="@(multipleImageToggle ? 4 : 1)" data-centered-images="@centeredImages">
@@ -39,7 +40,7 @@
 			</div>
 		</div>
 		<!-- Mobile Carousel -->
-		<div class="carousel-background carousel-mobile" style="background-color: transparent;" data-amount-of-images="1" data-centered-images="@centeredImages">
+		<div class="carousel-background carousel-mobile" style="background-color: transparent;" data-amount-of-images="@(multipleImageToggle ? 4 : 1)" data-centered-images="@centeredImages">
 			<div class="carousel-container" style=" width: 90%;">
 				<!-- Slick Carousel (mobile items) -->
 				<div class="carousel" style=" width: 100%;">
@@ -61,7 +62,7 @@
 	</section>
 }else{
 	<section>
-		<div class="carousel-background carousel-desktop" style="background-color: transparent;" data-amount-of-images="4" data-centered-images="@centeredImages">
+		<div class="carousel-background carousel-desktop" style="background-color: transparent;" data-amount-of-images="@(multipleImageToggle ? 4 : 1)" data-centered-images="@centeredImages">
 			<div class="carousel-container">
 				<!-- Slick Carousel (items) -->
 				<div class="carousel">
@@ -77,6 +78,26 @@
 								<img src="@image.Url()" alt="@caption" style="height: @(heightofImages + "px");">
 							</div>
 						}
+				</div>
+			</div>
+		</div>
+		<!-- Mobile Carousel -->
+		<div class="carousel-background carousel-mobile" style="background-color: transparent;" data-amount-of-images="@(multipleImageToggle ? 4 : 1)" data-centered-images="@centeredImages">
+			<div class="carousel-container" style=" width: 90%;">
+				<!-- Slick Carousel (mobile items) -->
+				<div class="carousel" style=" width: 100%;">
+					@foreach (var element in listDesktop)
+					{
+						// Loop through each element in the block list
+						var content = element.Content as IPublishedElement;
+						// Access the text value
+						var caption = content.Value<string>("caption");
+						// Access the image (assuming it's a single image picker)
+						var image = content.Value<IPublishedContent>("image");
+						<div class="carousel-image-item" style="background-color: transparent;">
+							<img src="@image.Url()" alt="@caption" style="height: @((heightofImages) + "px");">
+						</div>
+					}
 				</div>
 			</div>
 		</div>

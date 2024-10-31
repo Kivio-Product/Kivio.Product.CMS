@@ -18,7 +18,7 @@ function showDonateButtons(selectedId, selectedTime) {
         document.getElementById("altext").innerHTML = "Para almuerzo semestre";
         document.getElementById('copAl').href = 'https://api.whatsapp.com/send/?phone=573216453086&text=¡Hola! Estoy interesado en apadrinar el almuerzo de un niño por un semestre en COP, por un total de $508.000.&type=phone_number&app_absent=0';
         document.getElementById('usdAl').href = 'https://api.whatsapp.com/send/?phone=573216453086&text=¡Hola! Estoy interesado en apadrinar el almuerzo de un niño por un semestre en USD, por un total de $113.&type=phone_number&app_absent=0';
-        document.getElementById('copDesAl').href = 'https://api.whatsapp.com/send/?phone=573216453086&text=¡Hola! Estoy interesado en apadrinar el desayuno y almuerzo de un niño por un semestre en COP, por un total de $784.00.&type=phone_number&app_absent=0';
+        document.getElementById('copDesAl').href = 'https://api.whatsapp.com/send/?phone=573216453086&text=¡Hola! Estoy interesado en apadrinar el desayuno y almuerzo de un niño por un semestre en COP, por un total de $784.000.&type=phone_number&app_absent=0';
         document.getElementById('usdDesAl').href = 'https://api.whatsapp.com/send/?phone=573216453086&text=¡Hola! Estoy interesado en apadrinar el desayuno y almuerzo de un niño por un semestre en USD, por un total de $174.&type=phone_number&app_absent=0';
     }else if(selectedTime=="ano"){
         document.getElementById("desAltext").innerHTML = "Para desayuno y almuerzo año";
