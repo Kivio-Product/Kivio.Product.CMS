@@ -137,11 +137,11 @@
 														@foreach (var socialIcon in footerIcons)
 														{
 															<span class="elementor-grid-item">
-																<a class="elementor-icon elementor-social-icon elementor-social-icon-@socialIcon.Network elementor-repeater-item-1d3786c"
-																	href="@socialIcon.Url" target="_blank">
+																<a class="elementor-icon elementor-social-icon elementor-social-icon-@socialIcon.Network"
+																	href="@socialIcon.Url" target="_blank" style="width: 1.5em; height: 1.5em">
 																	<span
 																		class="elementor-screen-only">@socialIcon.Network</span>
-																	<i class="fab fa-@socialIcon.Network"></i>
+																	<i class="fab fa-@socialIcon.Network fa" style="margin-left: 12px;margin-top: 12px"></i>
 																</a>
 															</span>
 														}

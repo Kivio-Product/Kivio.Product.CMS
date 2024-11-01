@@ -1,27 +1,22 @@
 $(document).ready(function () {
     // Function to initialize slick for desktop or mobile
-    var amountOfImages = 1;
-    var centeredImages = true;
     function initSlick(selector) {
-        amountOfImages = $(selector).data('amount-of-images') || 1;  // Default to 1 if undefined
-        centeredImages = $(selector).data('centered-images') || false;
-
         $(selector + ' .carousel').slick({
             infinite: true,         // Enables endless looping
-            slidesToShow: amountOfImages,  // Number of visible slides based on parameter
+            slidesToShow: 1,  // Number of visible slides based on parameter
             slidesToScroll: 1,      // How many slides to scroll per click
             autoplay: true,         // Enable autoplay
             autoplaySpeed: 2000,    // Delay between slides (in ms)
             arrows: false,          // Show navigation arrows
             dots: true,             // Show dots below the carousel
-            centerMode: centeredImages, // Center the active slide
+            centerMode: true, // Center the active slide
             variableWidth: true,    // Enable variable width for slides
             responsive: [
                 {
                     breakpoint: 768, // Mobile settings
                     settings: {
                         slidesToShow: 1,  // Show 1 slide on smaller screens
-                        centerMode: centeredImages
+                        centerMode: true
                     }
                 }
             ]
@@ -37,25 +32,17 @@ $(document).ready(function () {
             if (!$('.carousel-mobile .carousel').hasClass('slick-initialized')) {
                 initSlick('.carousel-mobile');
             }
-            // Destroy desktop slick carousel if initialized
-            if ($('.carousel-desktop .carousel').hasClass('slick-initialized')) {
-                $('.carousel-desktop .carousel').slick('unslick');
-            }
             // Hide the desktop carousel and show the mobile carousel
-            $('.carousel-desktop').hide();
-            $('.carousel-mobile').show();
+            $('.desktop-viewport').hide();
+            $('.mobile-viewport').show();
         } else {
-            // Initialize desktop slick carousel if not already initialized
-            if (!$('.carousel-desktop .carousel').hasClass('slick-initialized')) {
-                initSlick('.carousel-desktop');
-            }
             // Destroy mobile slick carousel if initialized
             if ($('.carousel-mobile .carousel').hasClass('slick-initialized')) {
                 $('.carousel-mobile .carousel').slick('unslick');
             }
             // Hide the mobile carousel and show the desktop carousel
-            $('.carousel-mobile').hide();
-            $('.carousel-desktop').show();
+            $('.mobile-viewport').hide();
+            $('.desktop-viewport').show();
         }
     }
 
@@ -64,9 +51,6 @@ $(document).ready(function () {
 
     // Re-check on window resize and adjust the carousel accordingly
     $(window).resize(function () {
-        
             handleCarousel();
-        
-        
     });
 });

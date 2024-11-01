@@ -56,6 +56,7 @@
     width: 190px;
     transition: transform 0.2s;
 	max-width: 260px;
+    margin-left: 20px;
 }
 
 .cardTwoCol:hover {
@@ -95,6 +96,129 @@
     background-color: #155db0;
 }
 
+/* Styles for cost table */
+
+.donation-grid {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.donation-header{
+    margin-left: 120px;
+}
+
+.header-cell {
+    display: inline-block;
+    width: 50%;
+    padding: 5px;
+    color: white;
+    font-family: "NeutraText-BookAlt", Sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.bold { font-weight: bold; }
+
+.blue {
+    background-color: #066eb1;
+    border-radius: 30px 0px 0px 0px;
+    margin-right: -5px;
+}
+
+.green {
+    background-color: #9bc11c;
+    border-radius: 0px 30px 0px 0px;
+}
+
+.donation-values {
+    display: grid;
+    grid-template-columns: auto repeat(4, 1fr); /* Extra column for buttons */
+    gap: 0;
+    margin-top: 0;
+}
+
+.cell, .currency-switch {
+    padding: 10px;
+    border: 1px solid black;
+    background-color: #fcfcfc;
+}
+
+.no-border{border: 0px; background-color: transparent;}
+
+.cell p, .currency-switch p {
+    color: #0066b3;
+    text-decoration: none;
+    font-weight: bold;
+    text-align: center;
+    font-family: "NeutraText-BookAlt", Sans-serif;
+    font-size: 20px;
+}
+
+.currency-switch {
+    font-size: 14px;
+}
+
+.buttons-cell {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    margin-left: 110px;
+}
+
+.donation-buttons {
+    margin-top: 0px;
+    text-align: center;
+}
+
+.donation-buttons h2 {
+    color: #066EB1;
+    font-family: "NeutraText-BookAlt", Sans-serif;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.donate-btn {
+    padding: 5px 30px;
+    margin: 10px;
+    background-color: #97c021;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.green-btn a{
+    color: white;
+    font-size: 23px;
+    font-weight: bold;
+}
+
+.donate-btn:hover {
+    background-color: #88a81b;
+}
+
+/* Time button styling */
+.time-btn {
+    background-color: #066EB1;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    color: white;
+    height: 40px;
+    margin-top: 10px;
+    width: 120px;
+    border-radius: 15px 0px 0px 15px;
+}
+
+.time-btn:hover {
+    background-color: #97c021;
+}
+
+.hidden {
+    display: none;
+}
+
 
 /* Add the following CSS */
 @media screen and (max-width: 768px) {
@@ -123,5 +247,76 @@
 
     .cardTwoCol {
         width: 80%;
+    }
+
+    /* Styles for cost table */
+    .donation-header {
+        width: 100%;
+        margin-left: 20px;
+    }
+
+    .header-cell {
+        width: 44%;
+        margin: 0;
+        display: inline-block;
+        padding: 5px;
+        color: white;
+        font-family: "NeutraText-BookAlt", Sans-serif;
+        font-size: 15px;
+        font-weight: 400;
+        box-sizing: border-box;
+    }
+    .blue {
+        background-color: #066eb1;
+        border-radius: 30px 0px 0px 0px;
+        margin-right: -4px;
+    }
+
+    .donation-values {
+        gap: 0px;
+    }
+
+    .cell, .currency-switch, .time-btn {
+        font-size: 16px;
+        padding: 5px;
+    }
+
+    .buttons-cell {
+        grid-template-columns: 1fr;
+        margin-left: 0;
+    }
+
+    .donation-buttons h2 {
+        font-size: 18px;
+    }
+
+    .donate-btn {
+        width: 80%;
+        padding: 10px;
+    }
+
+    .donate-btn a {
+        font-size: 20px;
+    }
+
+    .time-btn {
+        text-align: center;
+        cursor: pointer;
+        color: white;
+        height: 100px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        width: 40px;
+        border-radius: 15px 0px 0px 15px;
+        writing-mode: vertical-rl;
+        text-orientation: mixed;
+    }
+    .cell p, .currency-switch p {
+        color: #0066b3;
+        text-decoration: none;
+        font-weight: bold;
+        text-align: center;
+        font-family: "NeutraText-BookAlt", Sans-serif;
+        font-size: 15px;
     }
 }

@@ -58,11 +58,11 @@
 
             // Send the email
             smtpClient.Send(mail);
-            successMessage = "Your message has been sent successfully.";
+            successMessage = "Su mensaje ha sido enviado exitosamente.";
         }
         catch (Exception ex)
         {
-            errorMessage = $"There was an error sending the message: {ex.Message}";
+            errorMessage = $"Ha ocurrido un error al enviar su mensaje: {ex.Message}";
         }
     }
 }
