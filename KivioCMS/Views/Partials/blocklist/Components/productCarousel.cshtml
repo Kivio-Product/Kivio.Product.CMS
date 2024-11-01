@@ -18,91 +18,92 @@
     var uniqueCSSId = GeneralConfigs.AddStyle(row.CustomCss ?? string.Empty);
 }
 
-<section>
-	<div class="carousel-background carousel-desktop" data-amount-of-images="4" data-centered-images="@centeredImages">
-        <div class="carousel-container">
-            <!-- Slick Carousel (items) -->
-            <div class="carousel">
-                @foreach (var productNode in row.ListOfProducts)
-                {
-                    // Cast each productNode to IPublishedContent
-                    var product = productNode as IPublishedContent;
-                    if (product != null)
+<div class="@uniqueCSSId">
+    <section>
+        <div class="carousel-background carousel-desktop" data-amount-of-images="4" data-centered-images="@centeredImages">
+            <div class="carousel-container">
+                <!-- Slick Carousel (items) -->
+                <div class="carousel">
+                    @foreach (var productNode in row.ListOfProducts)
                     {
-                        // Access the parent node (Tienda Nutrir)
-                        var storeNode = product.AncestorOrSelf("store");
-                        // Access the store's phone number
-                        var storePhoneNumber = storeNode?.Value<string>("phoneNumber");
-                        // Access the product's name
-                        var name = product.Value<string>("productName");
-                        // Access the product's image
-                        var picture = product.Value<IPublishedContent>("productImage");
-                        // Access the product's description
-                        var description = product.Value<string>("productDescription");
-                        // Access the product's price
-                        var price = product.Value<decimal>("productPrice"); // Assuming price is a decimal
-                        // Access the purchase message
-                        var purchaseMessage = product.Value<string>("productPurchaseMessage");
-                        // Format the price with commas
-                        var formattedPrice = price.ToString("N0"); // 'N0' for thousands with no decimals
-                        // Render the product information
-                        <div class="carousel-item">
-                            @if (picture != null)
-                            {
-                                <img src="@picture.Url()" alt="@name">
-                            }
-                            <h2>@name</h2>
-                            <p class="price">$@formattedPrice</p>
-                            <a href="https://api.whatsapp.com/send/?phone=@storePhoneNumber&text=@purchaseMessage &type=phone_number&app_absent=0" class="buy-button" target="_blank">Compra aquí</a>
-                        </div>
+                        // Cast each productNode to IPublishedContent
+                        var product = productNode as IPublishedContent;
+                        if (product != null)
+                        {
+                            // Access the parent node (Tienda Nutrir)
+                            var storeNode = product.AncestorOrSelf("store");
+                            // Access the store's phone number
+                            var storePhoneNumber = storeNode?.Value<string>("phoneNumber");
+                            // Access the product's name
+                            var name = product.Value<string>("productName");
+                            // Access the product's image
+                            var picture = product.Value<IPublishedContent>("productImage");
+                            // Access the product's description
+                            var description = product.Value<string>("productDescription");
+                            // Access the product's price
+                            var price = product.Value<decimal>("productPrice"); // Assuming price is a decimal
+                            // Access the purchase message
+                            var purchaseMessage = product.Value<string>("productPurchaseMessage");
+                            // Format the price with commas
+                            var formattedPrice = price.ToString("N0"); // 'N0' for thousands with no decimals
+                                                                       // Render the product information
+                            <div class="carousel-item">
+                                @if (picture != null)
+                                {
+                                    <img src="@picture.Url()" alt="@name">
+                                }
+                                <h2>@name</h2>
+                                <p class="price">$@formattedPrice</p>
+                                <a href="https://api.whatsapp.com/send/?phone=@storePhoneNumber&text=@purchaseMessage &type=phone_number&app_absent=0" class="buy-button" target="_blank">Compra aquí</a>
+                            </div>
+                        }
                     }
-                }
+                </div>
+                <a href="@link.Url" class="productsButton" target="_self">Ver Más productos</a>
             </div>
-            <a href="@link.Url" class="productsButton" target="_self">Ver Más productos</a>
         </div>
-    </div>
-    <div class="carousel-background carousel-mobile" data-amount-of-images="4" data-centered-images="@centeredImages">
-        <div class="carousel-container">
-            <!-- Slick Carousel (items) -->
-            <div class="carousel">
-                @foreach (var productNode in row.ListOfProducts)
-                {
-                    // Cast each productNode to IPublishedContent
-                    var product = productNode as IPublishedContent;
-                    if (product != null)
+        <div class="carousel-background carousel-mobile" data-amount-of-images="4" data-centered-images="@centeredImages">
+            <div class="carousel-container">
+                <!-- Slick Carousel (items) -->
+                <div class="carousel">
+                    @foreach (var productNode in row.ListOfProducts)
                     {
-                        // Access the parent node (Tienda Nutrir)
-                        var storeNode = product.AncestorOrSelf("store");
-                        // Access the store's phone number
-                        var storePhoneNumber = storeNode?.Value<string>("phoneNumber");
-                        // Access the product's name
-                        var name = product.Value<string>("productName");
-                        // Access the product's image
-                        var picture = product.Value<IPublishedContent>("productImage");
-                        // Access the product's description
-                        var description = product.Value<string>("productDescription");
-                        // Access the product's price
-                        var price = product.Value<decimal>("productPrice"); // Assuming price is a decimal
-                        // Access the purchase message
-                        var purchaseMessage = product.Value<string>("productPurchaseMessage");
-                        // Format the price with commas
-                        var formattedPrice = price.ToString("N0"); // 'N0' for thousands with no decimals
-                        // Render the product information
-                        <div class="carousel-item">
-                            @if (picture != null)
-                            {
-                                <img src="@picture.Url()" alt="@name">
-                            }
-                            <h2>@name</h2>
-                            <p class="price">$@formattedPrice</p>
-                            <a href="https://api.whatsapp.com/send/?phone=@storePhoneNumber&text=@purchaseMessage &type=phone_number&app_absent=0" class="buy-button" target="_blank">Compra aquí</a>
-                        </div>
+                        // Cast each productNode to IPublishedContent
+                        var product = productNode as IPublishedContent;
+                        if (product != null)
+                        {
+                            // Access the parent node (Tienda Nutrir)
+                            var storeNode = product.AncestorOrSelf("store");
+                            // Access the store's phone number
+                            var storePhoneNumber = storeNode?.Value<string>("phoneNumber");
+                            // Access the product's name
+                            var name = product.Value<string>("productName");
+                            // Access the product's image
+                            var picture = product.Value<IPublishedContent>("productImage");
+                            // Access the product's description
+                            var description = product.Value<string>("productDescription");
+                            // Access the product's price
+                            var price = product.Value<decimal>("productPrice"); // Assuming price is a decimal
+                            // Access the purchase message
+                            var purchaseMessage = product.Value<string>("productPurchaseMessage");
+                            // Format the price with commas
+                            var formattedPrice = price.ToString("N0"); // 'N0' for thousands with no decimals
+                                                                       // Render the product information
+                            <div class="carousel-item">
+                                @if (picture != null)
+                                {
+                                    <img src="@picture.Url()" alt="@name">
+                                }
+                                <h2>@name</h2>
+                                <p class="price">$@formattedPrice</p>
+                                <a href="https://api.whatsapp.com/send/?phone=@storePhoneNumber&text=@purchaseMessage &type=phone_number&app_absent=0" class="buy-button" target="_blank">Compra aquí</a>
+                            </div>
+                        }
                     }
-                }
+                </div>
+                <a href="@link.Url" class="productsButton" target="_self">Ver Más productos</a>
             </div>
-            <a href="@link.Url" class="productsButton" target="_self">Ver Más productos</a>
         </div>
-    </div>
 
         <!-- jQuery and Slick JS -->
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -258,5 +259,7 @@
                     opacity: 1;
                 }
     </style>
+
+
 </div>
 
