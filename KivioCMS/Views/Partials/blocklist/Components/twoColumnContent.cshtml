@@ -1,3 +1,6 @@
+@using Umbraco.Cms.Core.Models
+@using Umbraco.Cms.Core.Models.Blocks
+@using Umbraco.Cms.Web.Common.PublishedModels
 @inherits UmbracoViewPage<BlockListItem>
 
 @{
@@ -180,30 +183,99 @@
                 }
                 else if (content.HasProperty("image2"))
                 {
-                    <div class="container">
-                        <!-- Images Row -->
-                        <div class="images-row">
-                            <div class="image-column">
-                                <img src="https://www.nutrirong.com/wp-content/uploads/2021/11/food-buffet-catering-on-the-table-1.jpg" alt="Empresarial">
+                    <script src="~/js/listofProductsTwoColumnsControl.js"></script>
+                    var image1 = content.Value<IPublishedContent>("image1");
+                    var image2 = content.Value<IPublishedContent>("image2");
+                    var image3 = content.Value<IPublishedContent>("image3");
+                    var title1 = content.Value<string>("titleimage1");
+                    var title2 = content.Value<string>("titleimage2");
+                    var title3 = content.Value<string>("titleimage3");
+                    var link = content.Value<Link>("buttonLink");
+                    <div class="desktop-viewport">
+                        <div class="container">
+                            <!-- Images Row -->
+                            <div class="images-row">
+                                <div class="image-column">
+                                    <img src="@image1.Url()" alt="@image1.Name" style="height: 355px;">
+                                </div>
+                                <div class="image-column">
+                                    <img src="@image2.Url()" alt="@image2.Name" style="height: 355px;">
+                                </div>
+                                <div class="image-column">
+                                    <img src="@image3.Url()" alt="@image3.Name" style="height: 355px;">
+                                </div>
                             </div>
-                            <div class="image-column">
-                                <img src="https://www.nutrirong.com/wp-content/uploads/2021/11/food-buffet-catering-on-the-table-1.jpg" alt="Hospitalaria">
-                            </div>
-                            <div class="image-column">
-                                <img src="https://www.nutrirong.com/wp-content/uploads/2021/11/food-buffet-catering-on-the-table-1.jpg" alt="Educativa">
-                            </div>
-                        </div>
 
-                        <!-- Pills Row -->
-                        <div class="pills-row">
-                            <span class="pill blue">Empresarial</span>
-                            <span class="pill blue">Hospitalaria</span>
-                            <span class="pill blue">Educativa</span>
+                            <!-- Pills Row -->
+                            <div class="pills-row">
+                                @if(title1!=""){
+                                    <span class="pill blue">@title1</span>
+                                }
+                                @if(title2!=""){
+                                    <span class="pill blue">@title2</span>
+                                }
+                                @if(title3!=""){
+                                    <span class="pill blue">@title3</span>
+                                }
+                            </div>
+                            <!-- Contact Button -->
+                            @if(link!=null){
+                                <div class="contact-button">
+                                    <a href="@link.Url" class="pill green" target="@link.Target">Contáctanos</a>
+                                </div>
+                            }
                         </div>
-
-                        <!-- Contact Button -->
-                        <div class="contact-button">
-                            <a href="#" class="pill green">Contáctanos</a>
+                    </div>
+                    <div class="mobile-viewport">
+                        <div class="carousel-background carousel-mobile" style="background-color: transparent; padding: 0px;" data-amount-of-images="1" data-centered-images="true">
+                            <div class="carousel-container" style=" width: 100%;">
+                                <!-- Slick Carousel (mobile items) -->
+                                <div class="carousel" style=" width: 100%;">  
+                                    
+                                        <div class="carousel-image-item" style="background-color: transparent;">
+                                            <div class="images-row">
+                                                <div class="image-column">
+                                                    <img src="@image1.Url()" alt="@image1.Name" style="height: 355px;">
+                                                    @if(title1!=""){
+                                                        <div class="pills-row">
+                                                            <span class="pill blue" style="margin-top: 20px;">@title1</span>
+                                                        </div>
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="carousel-image-item" style="background-color: transparent;">
+                                            <div class="images-row">
+                                                <div class="image-column">
+                                                    <img src="@image2.Url()" alt="@image2.Name" style="height: 355px;">
+                                                    @if(title2!=""){
+                                                        <div class="pills-row">
+                                                            <span class="pill blue" style="margin-top: 20px;">@title2</span>
+                                                        </div>
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="carousel-image-item" style="background-color: transparent;">
+                                            <div class="images-row">
+                                                <div class="image-column">
+                                                    <img src="@image3.Url()" alt="@image3.Name" style="height: 355px;">
+                                                    @if(title2!=""){
+                                                        <div class="pills-row">
+                                                            <span class="pill blue" style="margin-top: 20px;">@title2</span>
+                                                        </div>
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                </div>
+                                <!-- Contact Button -->
+                                @if(link!=null){
+                                <div class="contact-button">
+                                    <a href="@link.Url" class="pill green" target="@link.Target">Contáctanos</a>
+                                </div>
+                            }
+                            </div>
                         </div>
                     </div>
                     <style>
@@ -217,7 +289,7 @@
     .images-row {
         display: flex;
         justify-content: space-between;
-        margin-bottom: 20px;
+        margin-bottom: 0px;
     }
 
     .images-row img {

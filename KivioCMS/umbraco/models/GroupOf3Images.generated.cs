@@ -50,6 +50,14 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		// properties
 
 		///<summary>
+		/// Button Link: Enter the link for the button. This field is optional. Will not display a button if left empty.
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.4.1+d72fc5c")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("buttonLink")]
+		public virtual global::Umbraco.Cms.Core.Models.Link ButtonLink => this.Value<global::Umbraco.Cms.Core.Models.Link>(_publishedValueFallback, "buttonLink");
+
+		///<summary>
 		/// Image 1: Select an image that will be shown on the left.
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.4.1+d72fc5c")]
@@ -72,5 +80,29 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
 		[ImplementPropertyType("image3")]
 		public virtual global::Umbraco.Cms.Core.Models.MediaWithCrops Image3 => this.Value<global::Umbraco.Cms.Core.Models.MediaWithCrops>(_publishedValueFallback, "image3");
+
+		///<summary>
+		/// Title image 1: Enter title for pill under image 1. This field is optional. Will not display a pill if left empty.
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.4.1+d72fc5c")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("titleImage1")]
+		public virtual string TitleImage1 => this.Value<string>(_publishedValueFallback, "titleImage1");
+
+		///<summary>
+		/// Title image 2: Enter title for pill under image 2. This field is optional. Will not display a pill if left empty.
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.4.1+d72fc5c")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("titleImage2")]
+		public virtual string TitleImage2 => this.Value<string>(_publishedValueFallback, "titleImage2");
+
+		///<summary>
+		/// Title image 3: Enter title for pill under image 3. This field is optional. Will not display a pill if left empty.
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.4.1+d72fc5c")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("titleImage3")]
+		public virtual string TitleImage3 => this.Value<string>(_publishedValueFallback, "titleImage3");
 	}
 }
