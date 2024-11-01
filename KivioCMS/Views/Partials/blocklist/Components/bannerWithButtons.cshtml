@@ -8,44 +8,54 @@
 @inherits UmbracoViewPage<BlockListItem>
 
 @{
-	var row = (BannerWithButtons)Model.Content;
-	if (row == null) return;
-	var listOfButtons = row.ListOfButtons.ToList();
-	// Access the height of the banner
+    var row = (BannerWithButtons)Model.Content;
+    if (row == null) return;
+    var listOfButtons = row.ListOfButtons.ToList();
+    // Access the height of the banner
     var height = row.Value<int>("height");
-	//var helper = new transformConfigs(publishedValueFallback);
+    //var helper = new transformConfigs(publishedValueFallback);
+
+    var uniqueCSSId = GeneralConfigs.AddStyle(row.CustomCss ?? string.Empty);
 }
-@await Html.PartialAsync("~/Views/_ConfigsTemplate.cshtml",row)
+
+@await Html.PartialAsync("~/Views/_ConfigsTemplate.cshtml", row)
+
 <!-- Sección para desplegar un banner con una imágen de fondo con N botónes -->
-<section id="bannerBanner2" @(height != 0 ? $"style=height:{height}px;" : "")>
-	<picture>
-		<source media="(max-width: 768px)" srcset="@row.ImageMobile.Url()">
-		<img src="@row.ImageDesktop.Url()" alt="Banner Image" id="banner-imgBanner2" @(height != 0 ? $"style=height:{height}px;" : "")>
-	</picture>
-	@if(@row.Title != ""){
-		<div id="overlayTextBanner2">
-			<p>@row.Title</p>
-		</div>
-	}
-	<div id="overlayBanner2">
-		@if(listOfButtons.Any()){
-			<div id="button-groupBanner2">
-				@foreach (var element in listOfButtons)
-				{
-					// Loop through each element in the block list
-					var content = element.Content as IPublishedElement;
-					// Access the image
-					var buttonImageDesktop = content.Value<IPublishedContent>("imageDesktop");
-					var buttonImageMobile = content.Value<IPublishedContent>("imageMobile");
-					// Access the link
-					var link = content.Value<Link>("link");
-					<div id="button-groupBanner2">
-						<a href="@link.Url" target="@link.Target" id="btnBanner2">
-							<img src="@buttonImageDesktop.Url()"
-								srcset="@buttonImageDesktop.Url(), @buttonImageMobile.Url()" /> </a>
-					</div>
-				}
-			</div>
-		}
-	</div>
-</section>
+
+<div class="@uniqueCSSId">
+    <section id="bannerBanner2" @(height != 0 ? $"style=height:{height}px;" : "")>
+        <picture>
+            <source media="(max-width: 768px)" srcset="@row.ImageMobile.Url()">
+            <img src="@row.ImageDesktop.Url()" alt="Banner Image" id="banner-imgBanner2" @(height != 0 ? $"style=height:{height}px;" : "")>
+        </picture>
+        @if (@row.Title != "")
+        {
+            <div id="overlayTextBanner2">
+                <p>@row.Title</p>
+            </div>
+        }
+        <div id="overlayBanner2">
+            @if (listOfButtons.Any())
+            {
+                <div id="button-groupBanner2">
+                    @foreach (var element in listOfButtons)
+                    {
+                        // Loop through each element in the block list
+                        var content = element.Content as IPublishedElement;
+                        // Access the image
+                        var buttonImageDesktop = content.Value<IPublishedContent>("imageDesktop");
+                        var buttonImageMobile = content.Value<IPublishedContent>("imageMobile");
+                        // Access the link
+                        var link = content.Value<Link>("link");
+                        <div id="button-groupBanner2">
+                            <a href="@link.Url" target="@link.Target" id="btnBanner2">
+                                <img src="@buttonImageDesktop.Url()"
+                                     srcset="@buttonImageDesktop.Url(), @buttonImageMobile.Url()" />
+                            </a>
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+    </section>
+</div>

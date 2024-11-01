@@ -5,24 +5,28 @@
 @{
     var row = (ListOfImageAndText)Model.Content;
     if (row == null) return;
+
+    var uniqueCSSId = GeneralConfigs.AddStyle(row.CustomCss ?? string.Empty);
 }
 
-<section class="metrics-section">
-	@foreach (var element in row.List.ToList())
-    {
-		// Loop through each element in the block list
-        var content = element.Content as IPublishedElement;
+<div class="@uniqueCSSId">
+    <section class="metrics-section">
+        @foreach (var element in row.List.ToList())
+        {
+            // Loop through each element in the block list
+            var content = element.Content as IPublishedElement;
 
-        // Access the text value
-        var text = content.Value<string>("text");
-		// Access the height of the banner
-    	var width = content.Value<int>("widthOfImage");
+            // Access the text value
+            var text = content.Value<string>("text");
+            // Access the height of the banner
+            var width = content.Value<int>("widthOfImage");
 
-        // Access the image
-        var image = content.Value<IPublishedContent>("image");
-		<div class="metric-item">
-			<img src="@image.Url()" alt="@image.Name" class="metric-image" @(width != 0 ? $"style=width:{width}px;" : "")>
-			<p class="metric-text">@text</p>
-		</div>
-	}
-</section>
+            // Access the image
+            var image = content.Value<IPublishedContent>("image");
+            <div class="metric-item">
+                <img src="@image.Url()" alt="@image.Name" class="metric-image" @(width != 0 ? $"style=width:{width}px;" : "")>
+                <p class="metric-text">@text</p>
+            </div>
+        }
+    </section>
+</div>

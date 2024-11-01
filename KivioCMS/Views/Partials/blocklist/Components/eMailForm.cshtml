@@ -14,6 +14,9 @@
 @{
     var row = (EMailForm)Model.Content;
 	if (row == null) return;
+
+    var uniqueCSSId = GeneralConfigs.AddStyle(row.CustomCss ?? string.Empty);
+
     var subject = row.Value<string>("subject");
     var successMessage = "";
     var errorMessage = "";
@@ -64,51 +67,54 @@
     }
 }
 
-<section class="contact-form-section">
-    @if (!string.IsNullOrEmpty(successMessage))
-    {
-        <div class="success-message">@successMessage</div>
-    }
-    else
-    {
-        if (!string.IsNullOrEmpty(errorMessage))
+<div class="@uniqueCSSId">
+    <section class="contact-form-section">
+        @if (!string.IsNullOrEmpty(successMessage))
         {
-            <div class="error-message">@errorMessage</div>
+            <div class="success-message">@successMessage</div>
         }
+        else
+        {
+            if (!string.IsNullOrEmpty(errorMessage))
+            {
+                <div class="error-message">@errorMessage</div>
+            }
 
-        <form method="post" action="">
-            <!-- Name and Last Name on the same row -->
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="firstName">Nombre <span class="required">*</span></label>
-                    <input type="text" id="firstName" name="firstName" placeholder="Nombre" required />
+            <form method="post" action="">
+                <!-- Name and Last Name on the same row -->
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstName">Nombre <span class="required">*</span></label>
+                        <input type="text" id="firstName" name="firstName" placeholder="Nombre" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Apellido <span class="required">*</span></label>
+                        <input type="text" id="lastName" name="lastName" placeholder="Apellido" required />
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="lastName">Apellido <span class="required">*</span></label>
-                    <input type="text" id="lastName" name="lastName" placeholder="Apellido" required />
-                </div>
-            </div>
 
-            <!-- Phone and Email on the same row -->
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="phoneNumber">Teléfono o Celular <span class="required">*</span></label>
-                    <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="Teléfono o Celular" required />
+                <!-- Phone and Email on the same row -->
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="phoneNumber">Teléfono o Celular <span class="required">*</span></label>
+                        <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="Teléfono o Celular" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email <span class="required">*</span></label>
+                        <input type="email" id="email" name="email" placeholder="Email" required />
+                    </div>
                 </div>
+
+                <!-- Message on its own row -->
                 <div class="form-group">
-                    <label for="email">Email <span class="required">*</span></label>
-                    <input type="email" id="email" name="email" placeholder="Email" required />
+                    <label for="message">Mensaje <span class="required">*</span></label>
+                    <textarea id="message" name="message" placeholder="Mensaje" required></textarea>
                 </div>
-            </div>
 
-            <!-- Message on its own row -->
-            <div class="form-group">
-                <label for="message">Mensaje <span class="required">*</span></label>
-                <textarea id="message" name="message" placeholder="Mensaje" required></textarea>
-            </div>
+                <!-- Submit button -->
+                <button type="submit" class="submit-button-eform">Enviar</button>
+            </form>
+        }
+    </section>
+</div>
 
-            <!-- Submit button -->
-            <button type="submit" class="submit-button-eform">Enviar</button>
-        </form>
-    }
-</section>

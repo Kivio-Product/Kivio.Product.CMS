@@ -20,7 +20,7 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 {
 	/// <summary>Product Carousel</summary>
 	[PublishedModel("productCarousel")]
-	public partial class ProductCarousel : PublishedElementModel
+	public partial class ProductCarousel : PublishedElementModel, IConfigurationsComponent
 	{
 		// helpers
 #pragma warning disable 0109 // new is redundant
@@ -71,5 +71,21 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
 		[ImplementPropertyType("listOfProducts")]
 		public virtual global::System.Collections.Generic.IEnumerable<global::Umbraco.Cms.Core.Models.PublishedContent.IPublishedContent> ListOfProducts => this.Value<global::System.Collections.Generic.IEnumerable<global::Umbraco.Cms.Core.Models.PublishedContent.IPublishedContent>>(_publishedValueFallback, "listOfProducts");
+
+		///<summary>
+		/// Custom CSS
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.4.1+d72fc5c")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("customCSS")]
+		public virtual string CustomCss => global::Umbraco.Cms.Web.Common.PublishedModels.ConfigurationsComponent.GetCustomCss(this, _publishedValueFallback);
+
+		///<summary>
+		/// Scripts
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.4.1+d72fc5c")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("scripts")]
+		public virtual string Scripts => global::Umbraco.Cms.Web.Common.PublishedModels.ConfigurationsComponent.GetScripts(this, _publishedValueFallback);
 	}
 }

@@ -1,5 +1,7 @@
 ﻿@using Umbraco.Cms.Web.Common.PublishedModels;
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@inject GeneralConfigs GeneralConfigs
+
 @{
 	Layout = null;
 
@@ -8,7 +10,9 @@
 	var cssReferences = masterSettings?.CssReferences;
 	var scriptsReferencces = masterSettings?.ScriptsReferences;
 
+	Console.WriteLine(GeneralConfigs.GetAllStyles());
 }
+
 <!doctype html>
 <html lang="es">
 <head>
@@ -52,8 +56,14 @@
 </head>
 <body
 	class="home page-template page-template-elementor_header_footer page page-id-23 theme-hello-elementor woocommerce-no-js elementor-default elementor-template-full-width elementor-kit-5 elementor-page elementor-page-23">
+
 	<!-- Page Header-->
 	@await Html.PartialAsync("~/Views/Partials/_Navigation.cshtml")
+	
+	<style id="dynamic-styles">
+        @Html.Raw(GeneralConfigs.GetAllStyles())
+    </style>
+
 	@RenderBody()
 	@await Html.PartialAsync("~/Views/Partials/_Donate.cshtml")
 	@await Html.PartialAsync("~/Views/Partials/_Footer.cshtml")

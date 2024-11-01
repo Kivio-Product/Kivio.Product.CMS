@@ -13,19 +13,22 @@
 
 	// Access the Category field (assuming it's a string-based dropdown)
     var productCategory = row.Value<string>("productCategory");
+
+	var uniqueCSSId = GeneralConfigs.AddStyle(row.CustomCss ?? string.Empty);
 }
 
-<section class="container">
+<div class="@uniqueCSSId">
+	<section class="container">
 		@foreach (var productNode in row.ListOfProducts) // Assuming 'ListOfProducts2' is the Multinode Treepicker alias
 		{
 			// Cast each productNode to IPublishedContent
 			var product = productNode as IPublishedContent;
 			if (product != null)
 			{
-				 // Access the parent node (Tienda Nutrir)
-            	var storeNode = product.AncestorOrSelf("store");
+				// Access the parent node (Tienda Nutrir)
+				var storeNode = product.AncestorOrSelf("store");
 				// Access the store's phone number
-           		var storePhoneNumber = storeNode?.Value<string>("phoneNumber");
+				var storePhoneNumber = storeNode?.Value<string>("phoneNumber");
 				// Access the product's name
 				var name = product.Value<string>("productName");
 				// Access the product's image
@@ -34,11 +37,11 @@
 				var description = product.Value<string>("productDescription");
 				// Access the product's price
 				var price = product.Value<decimal>("productPrice"); // Assuming price is a decimal
-				// Access the purchase message
+																	// Access the purchase message
 				var purchaseMessage = product.Value<string>("productPurchaseMessage");
 				// Format the price with commas
-            	var formattedPrice = price.ToString("N0"); // 'N0' for thousands with no decimals
-				// Render the product information
+				var formattedPrice = price.ToString("N0"); // 'N0' for thousands with no decimals
+																	// Render the product information
 				<div class="card">
 					@if (picture != null)
 					{
@@ -50,4 +53,7 @@
 				</div>
 			}
 		}
-</section>
+	</section>
+
+</div>
+

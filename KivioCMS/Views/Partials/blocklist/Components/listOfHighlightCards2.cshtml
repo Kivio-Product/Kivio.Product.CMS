@@ -16,31 +16,35 @@
 		"right"
     };
 	var random = new Random();
-	
+
+	var uniqueCSSId = GeneralConfigs.AddStyle(row.CustomCss ?? string.Empty);
 }
 <!-- Sección para desplegar una lista de tarjetas de información. Esta lista permite seleccionar una imágen y el color de la misma-->
-<section class="centered-section ">
-	<div class="columns-container">
-		@foreach (var element in listOfCards)
-		{
-			var randomNumber = random.Next(0, 3);
-			// Loop through each element in the block list
-			var content = element.Content as IPublishedElement;
-			// Access the text value
-			var text = content.Value<string>("text");
-			// Access the image
-			var image = content.Value<IPublishedContent>("image");
-			// Access background color
-			var color = content.Value<string>("color");
-			// Access the text value
-			var description = content.Value<string>("description");
-			<div class="columnCards" data-animation="fly-from-@animDirection[randomNumber]">
-                <div class="image-container">
-                    <img src="@image.Url()" alt="Icon 1">
-                    <div class="overlay-text">@text</div>
-                </div>
-                <p class="description">@Html.Raw(description)</p>
-            </div>
-		}
-	</div>
-</section>
+
+<div class="@uniqueCSSId">
+	<section class="centered-section ">
+		<div class="columns-container">
+			@foreach (var element in listOfCards)
+			{
+				var randomNumber = random.Next(0, 3);
+				// Loop through each element in the block list
+				var content = element.Content as IPublishedElement;
+				// Access the text value
+				var text = content.Value<string>("text");
+				// Access the image
+				var image = content.Value<IPublishedContent>("image");
+				// Access background color
+				var color = content.Value<string>("color");
+				// Access the text value
+				var description = content.Value<string>("description");
+				<div class="columnCards" data-animation="fly-from-@animDirection[randomNumber]">
+					<div class="image-container">
+						<img src="@image.Url()" alt="Icon 1">
+						<div class="overlay-text">@text</div>
+					</div>
+					<p class="description">@Html.Raw(description)</p>
+				</div>
+			}
+		</div>
+	</section>
+</div>

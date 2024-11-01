@@ -20,7 +20,7 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 {
 	/// <summary>Button_With_Text_and_Image</summary>
 	[PublishedModel("button_With_Text_and_Image")]
-	public partial class Button_With_Text_and_Image : PublishedElementModel
+	public partial class Button_With_Text_and_Image : PublishedElementModel, IConfigurationsComponent
 	{
 		// helpers
 #pragma warning disable 0109 // new is redundant
@@ -80,5 +80,21 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
 		[ImplementPropertyType("text")]
 		public virtual string Text => this.Value<string>(_publishedValueFallback, "text");
+
+		///<summary>
+		/// Custom CSS
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.4.1+d72fc5c")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("customCSS")]
+		public virtual string CustomCss => global::Umbraco.Cms.Web.Common.PublishedModels.ConfigurationsComponent.GetCustomCss(this, _publishedValueFallback);
+
+		///<summary>
+		/// Scripts
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.4.1+d72fc5c")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("scripts")]
+		public virtual string Scripts => global::Umbraco.Cms.Web.Common.PublishedModels.ConfigurationsComponent.GetScripts(this, _publishedValueFallback);
 	}
 }

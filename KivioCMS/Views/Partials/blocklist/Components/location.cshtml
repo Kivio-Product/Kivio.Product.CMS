@@ -19,23 +19,27 @@
 	var whatsApp = row.Value<string>("whatsApp");
 	var eMail = row.Value<string>("eMail");
 	var googleMapsSource = row.Value<string>("googleMapsSource");
-}
-<!-- Sección para desplegar una ubicación con mapa embebido de google -->
- <section class="contact-section">
-	<!-- Left side: Contact Information -->
-	<div class="contact-info">
-		<h2>@title</h2>
-		<p>@address</p>
-		<p>@city - @state - @country</p>
-		<p>Teléfono: @phoneNumber</p>
-		<p>WhatsApp: @whatsApp</p>
-		<p>Correo: @eMail</p>
-	</div>
 
-	<!-- Right side: Embedded Google Map -->
-	<div class="map-container">
-		<iframe 
-			src="@googleMapsSource" 
-			allowfullscreen="" loading="lazy"></iframe>
-	</div>
-</section>
+	var uniqueCSSId = GeneralConfigs.AddStyle(row.CustomCss ?? string.Empty);
+}
+
+<div class="@uniqueCSSId">
+	<!-- Sección para desplegar una ubicación con mapa embebido de google -->
+	<section class="contact-section">
+		<!-- Left side: Contact Information -->
+		<div class="contact-info">
+			<h2>@title</h2>
+			<p>@address</p>
+			<p>@city - @state - @country</p>
+			<p>Teléfono: @phoneNumber</p>
+			<p>WhatsApp: @whatsApp</p>
+			<p>Correo: @eMail</p>
+		</div>
+
+		<!-- Right side: Embedded Google Map -->
+		<div class="map-container">
+			<iframe src="@googleMapsSource"
+					allowfullscreen="" loading="lazy"></iframe>
+		</div>
+	</section>
+</div>

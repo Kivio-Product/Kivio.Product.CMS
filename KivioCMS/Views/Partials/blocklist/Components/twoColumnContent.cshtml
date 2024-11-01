@@ -8,35 +8,39 @@
 	var contentList = row.Columns.ToList();
     // Boolean value from Umbraco CMS to control column-reversal
     var columnReverseMobile = row.Value<bool>("columnReverseMobile");
+
+    var uniqueCSSId = GeneralConfigs.AddStyle(row.CustomCss ?? string.Empty);
 }
 <!-- This elements allows users to set two columns in a single row. They can dictate the % of space that each column will consume-->
-<section class="columns-section">
-	<div class="columns-container @(columnReverseMobile ? "reverse-columns" : "")">
-		@for (var i = 0; i < contentList.Count; i++)
-        {
-            var content = contentList[i].Content as IPublishedElement;
-            if (content != null)
+
+<div class="@uniqueCSSId">
+    <section class="columns-section">
+        <div class="columns-container @(columnReverseMobile ? "reverse-columns" : "")">
+            @for (var i = 0; i < contentList.Count; i++)
             {
-                // Check if the content is a Rich Text Editor
-                if (content.HasProperty("content"))
+                var content = contentList[i].Content as IPublishedElement;
+                if (content != null)
                 {
-                    var textContent = content.Value<string>("content");
-                    <div class="column" style="flex: 0 0 @(i == 0 ? withColumn1 : withColumn2)%;">
-                        @Html.Raw(textContent)
-                    </div>
-                }
-                // Check if the content is an Image
-                else if (content.HasProperty("image"))
-                {
-                    var image = content.Value<IPublishedContent>("image");
-                    <div class="column" style="flex: 0 0 @(i == 0 ? withColumn1 : withColumn2)%;">
-                        <img src="@image.Url()" alt=@image.Name />
-                    </div>
-                }
-                // Check if the content is a group of producs
-                else if (content.HasProperty("listOfProducts"))
-                {
-                    
+                    // Check if the content is a Rich Text Editor
+                    if (content.HasProperty("content"))
+                    {
+                        var textContent = content.Value<string>("content");
+                        <div class="column" style="flex: 0 0 @(i == 0 ? withColumn1 : withColumn2)%;">
+                            @Html.Raw(textContent)
+                        </div>
+                    }
+                    // Check if the content is an Image
+                    else if (content.HasProperty("image"))
+                    {
+                        var image = content.Value<IPublishedContent>("image");
+                        <div class="column" style="flex: 0 0 @(i == 0 ? withColumn1 : withColumn2)%;">
+                            <img src="@image.Url()" alt=@image.Name />
+                        </div>
+                    }
+                    // Check if the content is a group of producs
+                    else if (content.HasProperty("listOfProducts"))
+                    {
+
                         var productsList = (ProductSummarizedContent)content;
                         foreach (var productNode in productsList.ListOfProducts) // Assuming 'ListOfProducts2' is the Multinode Treepicker alias
                         {
@@ -56,7 +60,7 @@
                                 var description = product.Value<string>("productDescription");
                                 // Access the product's price
                                 var price = product.Value<decimal>("productPrice"); // Assuming price is a decimal
-                                // Access the purchase message
+                                                                                    // Access the purchase message
                                 var purchaseMessage = product.Value<string>("productPurchaseMessage");
                                 // Format the price with commas
                                 var formattedPrice = price.ToString("N0"); // 'N0' for thousands with no decimals
@@ -72,225 +76,232 @@
                                 </div>
                             }
                         }
-                }
-                else if (content.HasProperty("gridName"))
-                {
-                    <div class="donation-grid">
-                        <div class="donation-header">
-                            <div class="header-cell blue">Apadrina un niño que <br> <div class="bold">Desayuna y Almuerza</div> diariamente.</div>
-                            <div class="header-cell green">Apadrina un niño que <br> <div class="bold">Almuerza</div> diariamente.</div>
-                        </div>
-
-                        <!-- Donation Values with Row Buttons -->
-                        <div class="donation-values">
-                            <!-- Row for "Mes" -->
-                            <button class="btn time-btn no-border" onclick="showDonateButtons('hiddenButtons','mes')">Mes <i class="fa-solid fa-arrow-pointer"></i></button>
-                            <div class="cell"><p>$130.700</p></div>
-                            <div class="cell"><p>$29</p></div>
-                            <div class="cell"><p>$84.600</p></div>
-                            <div class="cell"><p>$19</p></div>
-
-                            <!-- Row for "Semestre" -->
-                            <button class="btn time-btn no-border" onclick="showDonateButtons('hiddenButtons','semestre')">Semestre <i class="fa-solid fa-arrow-pointer"></i></button>
-                            <div class="cell"><p>$784.000</p></div>
-                            <div class="cell"><p>$174</p></div>
-                            <div class="cell"><p>$508.000</p></div>
-                            <div class="cell"><p>$113</p></div>
-
-                            <!-- Row for "Año" -->
-                            <button class="btn time-btn no-border" onclick="showDonateButtons('hiddenButtons','ano')">Año <i class="fa-solid fa-arrow-pointer"></i></button>
-                            <div class="cell"><p>$1.568.000</p></div>
-                            <div class="cell"><p>$348</p></div>
-                            <div class="cell"><p>$1.015.000</p></div>
-                            <div class="cell"><p>$226</p></div>
-
-                            <!-- Currency Switch Row -->
-                            <div class="currency-switch no-border"><p></p></div>
-                            <div class="currency-switch"><p>$ COP</p></div>
-                            <div class="currency-switch"><p>$ USD</p></div>
-                            <div class="currency-switch"><p>$ COP</p></div>
-                            <div class="currency-switch"><p>$ USD</p></div>
-                        </div>
-
-                        <!-- Donation Buttons for Columns 1 and 2 -->
-                        <div class="buttons-cell hidden" id="hiddenButtons">
-                            <div class="donation-buttons left-buttons">
-                                <h2 id="desAltext">Para desayuno y almuerzo mensual</h2>
-                                <button class="donate-btn green-btn"><a target="_blank" id="copDesAl" href="https://api.whatsapp.com/send/?phone=573216453086&text=¡Hola! Estoy interesado en aportar con apadrinar un niño por [TIEMPO] en [MONEDA], por un total de [VALOR]&type=phone_number&app_absent=0">Donar en COP</a></button>
-                                <button class="donate-btn green-btn"><a target="_blank" id="usdDesAl" href="https://api.whatsapp.com/send/?phone=573216453086&text=¡Hola! Estoy interesado en aportar con apadrinar un niño por [TIEMPO] en [MONEDA], por un total de [VALOR]&type=phone_number&app_absent=0">Donar en USD</a></button>
+                    }
+                    else if (content.HasProperty("gridName"))
+                    {
+                        <div class="donation-grid">
+                            <div class="donation-header">
+                                <div class="header-cell blue">Apadrina un niño que <br> <div class="bold">Desayuna y Almuerza</div> diariamente.</div>
+                                <div class="header-cell green">Apadrina un niño que <br> <div class="bold">Almuerza</div> diariamente.</div>
                             </div>
 
-                            <!-- Donation Buttons for Columns 3 and 4 -->
-                            <div class="donation-buttons right-buttons">
-                                <h2 id="altext">Para almuerzo mensual</h2>
-                                <br>
-                                <button class="donate-btn green-btn"><a target="_blank" id="copAl" href="https://api.whatsapp.com/send/?phone=573216453086&text=¡Hola! Estoy interesado en aportar con apadrinar un niño por [TIEMPO] en [MONEDA], por un total de [VALOR]&type=phone_number&app_absent=0">Donar en COP</a></button>
-                                <button class="donate-btn green-btn"><a target="_blank" id="usdAl" href="https://api.whatsapp.com/send/?phone=573216453086&text=¡Hola! Estoy interesado en aportar con apadrinar un niño por [TIEMPO] en [MONEDA], por un total de [VALOR]&type=phone_number&app_absent=0">Donar en USD</a></button>
+                            <!-- Donation Values with Row Buttons -->
+                            <div class="donation-values">
+                                <!-- Row for "Mes" -->
+                                <button class="btn time-btn no-border" onclick="showDonateButtons('hiddenButtons','mes')">Mes <i class="fa-solid fa-arrow-pointer"></i></button>
+                                <div class="cell"><p>$130.700</p></div>
+                                <div class="cell"><p>$29</p></div>
+                                <div class="cell"><p>$84.600</p></div>
+                                <div class="cell"><p>$19</p></div>
+
+                                <!-- Row for "Semestre" -->
+                                <button class="btn time-btn no-border" onclick="showDonateButtons('hiddenButtons','semestre')">Semestre <i class="fa-solid fa-arrow-pointer"></i></button>
+                                <div class="cell"><p>$784.000</p></div>
+                                <div class="cell"><p>$174</p></div>
+                                <div class="cell"><p>$508.000</p></div>
+                                <div class="cell"><p>$113</p></div>
+
+                                <!-- Row for "Año" -->
+                                <button class="btn time-btn no-border" onclick="showDonateButtons('hiddenButtons','ano')">Año <i class="fa-solid fa-arrow-pointer"></i></button>
+                                <div class="cell"><p>$1.568.000</p></div>
+                                <div class="cell"><p>$348</p></div>
+                                <div class="cell"><p>$1.015.000</p></div>
+                                <div class="cell"><p>$226</p></div>
+
+                                <!-- Currency Switch Row -->
+                                <div class="currency-switch no-border"><p></p></div>
+                                <div class="currency-switch"><p>$ COP</p></div>
+                                <div class="currency-switch"><p>$ USD</p></div>
+                                <div class="currency-switch"><p>$ COP</p></div>
+                                <div class="currency-switch"><p>$ USD</p></div>
+                            </div>
+
+                            <!-- Donation Buttons for Columns 1 and 2 -->
+                            <div class="buttons-cell hidden" id="hiddenButtons">
+                                <div class="donation-buttons left-buttons">
+                                    <h2 id="desAltext">Para desayuno y almuerzo mensual</h2>
+                                    <button class="donate-btn green-btn"><a target="_blank" id="copDesAl" href="https://api.whatsapp.com/send/?phone=573216453086&text=¡Hola! Estoy interesado en aportar con apadrinar un niño por [TIEMPO] en [MONEDA], por un total de [VALOR]&type=phone_number&app_absent=0">Donar en COP</a></button>
+                                    <button class="donate-btn green-btn"><a target="_blank" id="usdDesAl" href="https://api.whatsapp.com/send/?phone=573216453086&text=¡Hola! Estoy interesado en aportar con apadrinar un niño por [TIEMPO] en [MONEDA], por un total de [VALOR]&type=phone_number&app_absent=0">Donar en USD</a></button>
+                                </div>
+
+                                <!-- Donation Buttons for Columns 3 and 4 -->
+                                <div class="donation-buttons right-buttons">
+                                    <h2 id="altext">Para almuerzo mensual</h2>
+                                    <br>
+                                    <button class="donate-btn green-btn"><a target="_blank" id="copAl" href="https://api.whatsapp.com/send/?phone=573216453086&text=¡Hola! Estoy interesado en aportar con apadrinar un niño por [TIEMPO] en [MONEDA], por un total de [VALOR]&type=phone_number&app_absent=0">Donar en COP</a></button>
+                                    <button class="donate-btn green-btn"><a target="_blank" id="usdAl" href="https://api.whatsapp.com/send/?phone=573216453086&text=¡Hola! Estoy interesado en aportar con apadrinar un niño por [TIEMPO] en [MONEDA], por un total de [VALOR]&type=phone_number&app_absent=0">Donar en USD</a></button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-    <style>
-        /* General Styles */
+                        <style>
+                            /* General Styles */
 
-.donation-grid {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-}
+                            .donation-grid {
+                                max-width: 600px;
+                                margin: 0 auto;
+                                padding: 20px;
+                            }
 
-.donation-header{
-    margin-left: 120px;
-}
+                            .donation-header {
+                                margin-left: 120px;
+                            }
 
-.header-cell {
-    display: inline-block;
-    width: 50%;
-    padding: 5px;
-    color: white;
-    font-family: "NeutraText-BookAlt", Sans-serif;
-    font-size: 16px;
-    font-weight: 400;
-    margin: 0;
-    box-sizing: border-box;
-}
+                            .header-cell {
+                                display: inline-block;
+                                width: 50%;
+                                padding: 5px;
+                                color: white;
+                                font-family: "NeutraText-BookAlt", Sans-serif;
+                                font-size: 16px;
+                                font-weight: 400;
+                                margin: 0;
+                                box-sizing: border-box;
+                            }
 
-.bold { font-weight: bold; }
+                            .bold {
+                                font-weight: bold;
+                            }
 
-.blue {
-    background-color: #066eb1;
-    border-radius: 30px 0px 0px 0px;
-    margin-right: -5px;
-}
+                            .blue {
+                                background-color: #066eb1;
+                                border-radius: 30px 0px 0px 0px;
+                                margin-right: -5px;
+                            }
 
-.green {
-    background-color: #9bc11c;
-    border-radius: 0px 30px 0px 0px;
-}
+                            .green {
+                                background-color: #9bc11c;
+                                border-radius: 0px 30px 0px 0px;
+                            }
 
-.donation-values {
-    display: grid;
-    grid-template-columns: auto repeat(4, 1fr); /* Extra column for buttons */
-    gap: 0;
-    margin-top: 0;
-}
+                            .donation-values {
+                                display: grid;
+                                grid-template-columns: auto repeat(4, 1fr); /* Extra column for buttons */
+                                gap: 0;
+                                margin-top: 0;
+                            }
 
-.cell, .currency-switch {
-    padding: 10px;
-    border: 1px solid black;
-    background-color: #fcfcfc;
-}
+                            .cell, .currency-switch {
+                                padding: 10px;
+                                border: 1px solid black;
+                                background-color: #fcfcfc;
+                            }
 
-.no-border{border: 0px; background-color: transparent;}
+                            .no-border {
+                                border: 0px;
+                                background-color: transparent;
+                            }
 
-.cell p, .currency-switch p {
-    color: #0066b3;
-    text-decoration: none;
-    font-weight: bold;
-    text-align: center;
-    font-family: "NeutraText-BookAlt", Sans-serif;
-    font-size: 20px;
-}
+                            .cell p, .currency-switch p {
+                                color: #0066b3;
+                                text-decoration: none;
+                                font-weight: bold;
+                                text-align: center;
+                                font-family: "NeutraText-BookAlt", Sans-serif;
+                                font-size: 20px;
+                            }
 
-.currency-switch {
-    font-size: 14px;
-}
+                            .currency-switch {
+                                font-size: 14px;
+                            }
 
-.buttons-cell {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    margin-left: 110px;
-}
+                            .buttons-cell {
+                                display: grid;
+                                grid-template-columns: repeat(2, 1fr);
+                                margin-left: 110px;
+                            }
 
-.donation-buttons {
-    margin-top: 0px;
-    text-align: center;
-}
+                            .donation-buttons {
+                                margin-top: 0px;
+                                text-align: center;
+                            }
 
-.donation-buttons h2 {
-    color: #066EB1;
-    font-family: "NeutraText-BookAlt", Sans-serif;
-    font-size: 22px;
-    font-weight: 600;
-}
+                                .donation-buttons h2 {
+                                    color: #066EB1;
+                                    font-family: "NeutraText-BookAlt", Sans-serif;
+                                    font-size: 22px;
+                                    font-weight: 600;
+                                }
 
-.donate-btn {
-    padding: 5px 30px;
-    margin: 10px;
-    background-color: #97c021;
-    border: none;
-    border-radius: 20px;
-    cursor: pointer;
-}
+                            .donate-btn {
+                                padding: 5px 30px;
+                                margin: 10px;
+                                background-color: #97c021;
+                                border: none;
+                                border-radius: 20px;
+                                cursor: pointer;
+                            }
 
-.green-btn a{
-    color: white;
-    font-size: 23px;
-    font-weight: bold;
-}
+                            .green-btn a {
+                                color: white;
+                                font-size: 23px;
+                                font-weight: bold;
+                            }
 
-.donate-btn:hover {
-    background-color: #88a81b;
-}
+                            .donate-btn:hover {
+                                background-color: #88a81b;
+                            }
 
-/* Time button styling */
-.time-btn {
-    background-color: #066EB1;
-    font-weight: bold;
-    text-align: center;
-    cursor: pointer;
-    color: white;
-    height: 40px;
-    margin-top: 10px;
-    width: 120px;
-    border-radius: 15px 0px 0px 15px;
-}
+                            /* Time button styling */
+                            .time-btn {
+                                background-color: #066EB1;
+                                font-weight: bold;
+                                text-align: center;
+                                cursor: pointer;
+                                color: white;
+                                height: 40px;
+                                margin-top: 10px;
+                                width: 120px;
+                                border-radius: 15px 0px 0px 15px;
+                            }
 
-.time-btn:hover {
-    background-color: #97c021;
-}
+                                .time-btn:hover {
+                                    background-color: #97c021;
+                                }
 
-.hidden {
-    display: none;
-}
+                            .hidden {
+                                display: none;
+                            }
 
-    </style>
+                        </style>
 
-    <script>
-        function showDonateButtons(selectedId, selectedTime) {
-            // Hide all donation button sections
-            document.querySelectorAll('.buttons-cell').forEach(function (section) {
-                section.classList.add('hidden');
-            });
+                        <script>
+                            function showDonateButtons(selectedId, selectedTime) {
+                                // Hide all donation button sections
+                                document.querySelectorAll('.buttons-cell').forEach(function (section) {
+                                    section.classList.add('hidden');
+                                });
 
-            // Show the selected donation buttons
-            document.getElementById(selectedId).classList.remove('hidden');
-            if(selectedTime=="mes"){
-                document.getElementById("desAltext").innerHTML = "Para desayuno y almuerzo mensual";
-                document.getElementById("altext").innerHTML = "Para almuerzo mensual";
-                document.getElementById('copAl').href = 'https://api.whatsapp.com/send/?phone=573216453086&text=¡Hola! Estoy interesado en apadrinar el almuerzo de un niño por un mes en COP, por un total de $84.600.&type=phone_number&app_absent=0';
-                document.getElementById('usdAl').href = 'https://api.whatsapp.com/send/?phone=573216453086&text=¡Hola! Estoy interesado en apadrinar el almuerzo de un niño por un mes en USD, por un total de $19.&type=phone_number&app_absent=0';
-                document.getElementById('copDesAl').href = 'https://api.whatsapp.com/send/?phone=573216453086&text=¡Hola! Estoy interesado en apadrinar el desayuno y almuerzo de un niño por un mes en COP, por un total de $130.700.&type=phone_number&app_absent=0';
-                document.getElementById('usdDesAl').href = 'https://api.whatsapp.com/send/?phone=573216453086&text=¡Hola! Estoy interesado en apadrinar el desayuno y almuerzo de un niño por un mes en USD, por un total de $29.&type=phone_number&app_absent=0';
-            }else if(selectedTime=="semestre"){
-                document.getElementById("desAltext").innerHTML = "Para desayuno y almuerzo semestre";
-                document.getElementById("altext").innerHTML = "Para almuerzo semestre";
-                document.getElementById('copAl').href = 'https://api.whatsapp.com/send/?phone=573216453086&text=¡Hola! Estoy interesado en apadrinar el almuerzo de un niño por un semestre en COP, por un total de $508.000.&type=phone_number&app_absent=0';
-                document.getElementById('usdAl').href = 'https://api.whatsapp.com/send/?phone=573216453086&text=¡Hola! Estoy interesado en apadrinar el almuerzo de un niño por un semestre en USD, por un total de $113.&type=phone_number&app_absent=0';
-                document.getElementById('copDesAl').href = 'https://api.whatsapp.com/send/?phone=573216453086&text=¡Hola! Estoy interesado en apadrinar el desayuno y almuerzo de un niño por un semestre en COP, por un total de $784.00.&type=phone_number&app_absent=0';
-                document.getElementById('usdDesAl').href = 'https://api.whatsapp.com/send/?phone=573216453086&text=¡Hola! Estoy interesado en apadrinar el desayuno y almuerzo de un niño por un semestre en USD, por un total de $174.&type=phone_number&app_absent=0';
-            }else if(selectedTime=="ano"){
-                document.getElementById("desAltext").innerHTML = "Para desayuno y almuerzo año";
-                document.getElementById("altext").innerHTML = "Para almuerzo año";
-                document.getElementById('copAl').href = 'https://api.whatsapp.com/send/?phone=573216453086&text=¡Hola! Estoy interesado en apadrinar el almuerzo de un niño por un año en COP, por un total de $1.015.000.&type=phone_number&app_absent=0';
-                document.getElementById('usdAl').href = 'https://api.whatsapp.com/send/?phone=573216453086&text=¡Hola! Estoy interesado en apadrinar el almuerzo de un niño por un año en USD, por un total de $226.&type=phone_number&app_absent=0';
-                document.getElementById('copDesAl').href = 'https://api.whatsapp.com/send/?phone=573216453086&text=¡Hola! Estoy interesado en apadrinar el desayuno y almuerzo de un niño por un año en COP, por un total de $1.568.000.&type=phone_number&app_absent=0';
-                document.getElementById('usdDesAl').href = 'https://api.whatsapp.com/send/?phone=573216453086&text=¡Hola! Estoy interesado en apadrinar el desayuno y almuerzo de un niño por un año en USD, por un total de $348.&type=phone_number&app_absent=0';
-            }
-            
-        }
-    </script>
+                                // Show the selected donation buttons
+                                document.getElementById(selectedId).classList.remove('hidden');
+                                if (selectedTime == "mes") {
+                                    document.getElementById("desAltext").innerHTML = "Para desayuno y almuerzo mensual";
+                                    document.getElementById("altext").innerHTML = "Para almuerzo mensual";
+                                    document.getElementById('copAl').href = 'https://api.whatsapp.com/send/?phone=573216453086&text=¡Hola! Estoy interesado en apadrinar el almuerzo de un niño por un mes en COP, por un total de $84.600.&type=phone_number&app_absent=0';
+                                    document.getElementById('usdAl').href = 'https://api.whatsapp.com/send/?phone=573216453086&text=¡Hola! Estoy interesado en apadrinar el almuerzo de un niño por un mes en USD, por un total de $19.&type=phone_number&app_absent=0';
+                                    document.getElementById('copDesAl').href = 'https://api.whatsapp.com/send/?phone=573216453086&text=¡Hola! Estoy interesado en apadrinar el desayuno y almuerzo de un niño por un mes en COP, por un total de $130.700.&type=phone_number&app_absent=0';
+                                    document.getElementById('usdDesAl').href = 'https://api.whatsapp.com/send/?phone=573216453086&text=¡Hola! Estoy interesado en apadrinar el desayuno y almuerzo de un niño por un mes en USD, por un total de $29.&type=phone_number&app_absent=0';
+                                } else if (selectedTime == "semestre") {
+                                    document.getElementById("desAltext").innerHTML = "Para desayuno y almuerzo semestre";
+                                    document.getElementById("altext").innerHTML = "Para almuerzo semestre";
+                                    document.getElementById('copAl').href = 'https://api.whatsapp.com/send/?phone=573216453086&text=¡Hola! Estoy interesado en apadrinar el almuerzo de un niño por un semestre en COP, por un total de $508.000.&type=phone_number&app_absent=0';
+                                    document.getElementById('usdAl').href = 'https://api.whatsapp.com/send/?phone=573216453086&text=¡Hola! Estoy interesado en apadrinar el almuerzo de un niño por un semestre en USD, por un total de $113.&type=phone_number&app_absent=0';
+                                    document.getElementById('copDesAl').href = 'https://api.whatsapp.com/send/?phone=573216453086&text=¡Hola! Estoy interesado en apadrinar el desayuno y almuerzo de un niño por un semestre en COP, por un total de $784.00.&type=phone_number&app_absent=0';
+                                    document.getElementById('usdDesAl').href = 'https://api.whatsapp.com/send/?phone=573216453086&text=¡Hola! Estoy interesado en apadrinar el desayuno y almuerzo de un niño por un semestre en USD, por un total de $174.&type=phone_number&app_absent=0';
+                                } else if (selectedTime == "ano") {
+                                    document.getElementById("desAltext").innerHTML = "Para desayuno y almuerzo año";
+                                    document.getElementById("altext").innerHTML = "Para almuerzo año";
+                                    document.getElementById('copAl').href = 'https://api.whatsapp.com/send/?phone=573216453086&text=¡Hola! Estoy interesado en apadrinar el almuerzo de un niño por un año en COP, por un total de $1.015.000.&type=phone_number&app_absent=0';
+                                    document.getElementById('usdAl').href = 'https://api.whatsapp.com/send/?phone=573216453086&text=¡Hola! Estoy interesado en apadrinar el almuerzo de un niño por un año en USD, por un total de $226.&type=phone_number&app_absent=0';
+                                    document.getElementById('copDesAl').href = 'https://api.whatsapp.com/send/?phone=573216453086&text=¡Hola! Estoy interesado en apadrinar el desayuno y almuerzo de un niño por un año en COP, por un total de $1.568.000.&type=phone_number&app_absent=0';
+                                    document.getElementById('usdDesAl').href = 'https://api.whatsapp.com/send/?phone=573216453086&text=¡Hola! Estoy interesado en apadrinar el desayuno y almuerzo de un niño por un año en USD, por un total de $348.&type=phone_number&app_absent=0';
+                                }
+
+                            }
+                        </script>
+                    }
                 }
             }
-        }
-	</div>
-</section>
+        </div>
+    </section>
+</div>
+

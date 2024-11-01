@@ -1,4 +1,8 @@
+using KivioCMS.HelperClasses;
+
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddSingleton<GeneralConfigs>();
 
 builder.CreateUmbracoBuilder()
     .AddBackOffice()
