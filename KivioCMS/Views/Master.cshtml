@@ -8,6 +8,7 @@
 <head>
 	@await Html.PartialAsync("~/Views/Partials/_MetaData.cshtml")
 	<!-- Propietary css files -->
+	<link rel="canonical" href="https://www.nutrirong.com/" />
 	<link rel="stylesheet" href='@Url.Content("~/css/productCarousel.css")' />
 	<link rel="stylesheet" href='@Url.Content("~/css/stylesRichTextEditor.css")' />
 	<link rel="stylesheet" href='@Url.Content("~/css/bannerWithButtons.css")' />
@@ -27,81 +28,44 @@
 	<link rel="stylesheet" href='@Url.Content("~/slick/slick.css")' />
 	<link rel="stylesheet" href='@Url.Content("~/slick/slick-theme.css")' />
 	<script src="https://kit.fontawesome.com/86caee2b3f.js" crossorigin="anonymous"></script>
-	
+
+	<!-- required for carousel-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<!-- required for menu-->
+	<link rel='stylesheet' id='elementor-frontend-css'
+		href='https://www.nutrirong.com/wp-content/plugins/elementor/assets/css/frontend-lite.min.css' media='all' />
+	<link rel='stylesheet' id='elementor-post-5-css'
+		href='https://www.nutrirong.com/wp-content/uploads/elementor/css/post-5.css' media='all' />
+	<link rel='stylesheet' id='elementor-post-7-css'
+		href='https://www.nutrirong.com/wp-content/uploads/elementor/css/post-7.css' media='all' />
+	<!-- required for payment pop up modal-->
+	<link rel='stylesheet' id='elementor-icons-css'
+		href='https://www.nutrirong.com/wp-content/plugins/elementor/assets/lib/eicons/css/elementor-icons.min.css'
+		media='all' />
+	<link rel='stylesheet' id='elementor-pro-css'
+		href='https://www.nutrirong.com/wp-content/plugins/elementor-pro/assets/css/frontend-lite.min.css'
+		media='all' />
+	<!-- required for rounded green buttons-->
+	<link rel='stylesheet' id='elementor-post-23-css'
+		href='https://www.nutrirong.com/wp-content/uploads/elementor/css/post-23.css' media='all' />
+
+	<!-- required for footer and donation background-->
+	<link rel='stylesheet' id='elementor-post-12-css'
+		href='https://www.nutrirong.com/wp-content/uploads/elementor/css/post-12.css' media='all' />
 	
 	<!-- Nutrir css files -->
-	<link rel='stylesheet' href='css/masterStyles.css' media='all' />
 	<link rel="stylesheet" href='@Url.Content("~/css/animations.min.css")' />
 	<link rel='stylesheet' id='woocommerce-layout-css' href='~/css/woocommerce-layout.css' media='all' />
 	<link rel='stylesheet' id='woocommerce-smallscreen-css'	href='~/css/woocommerce-smallscreen.css' media='only screen and (max-width: 768px)' />
 	<link rel='stylesheet' id='woocommerce-general-css'	href='~/css/woocommerce.css' media='all' />
 	<link rel='stylesheet' id='hello-elementor-css'
-		href='https://www.nutrirong.com/wp-content/themes/hello-elementor/style.min.css' media='all' />
-	<link rel='stylesheet' id='hello-elementor-theme-style-css'
-		href='https://www.nutrirong.com/wp-content/themes/hello-elementor/theme.min.css' media='all' />
-	<link rel='stylesheet' id='hello-elementor-header-footer-css'
-		href='https://www.nutrirong.com/wp-content/themes/hello-elementor/header-footer.min.css' media='all' />
-	<link rel='stylesheet' id='elementor-frontend-css'
-		href='https://www.nutrirong.com/wp-content/plugins/elementor/assets/css/frontend-lite.min.css' media='all' />
-	<link rel='stylesheet' id='elementor-post-5-css'
-		href='https://www.nutrirong.com/wp-content/uploads/elementor/css/post-5.css' media='all' />
-	<link rel='stylesheet' id='jet-elements-css'
-		href='https://www.nutrirong.com/wp-content/plugins/jet-elements/assets/css/jet-elements.css' media='all' />
-	<link rel='stylesheet' id='jet-elements-skin-css'
-		href='https://www.nutrirong.com/wp-content/plugins/jet-elements/assets/css/jet-elements-skin.css' media='all' />
-	<link rel='stylesheet' id='elementor-icons-css'
-		href='https://www.nutrirong.com/wp-content/plugins/elementor/assets/lib/eicons/css/elementor-icons.min.css'
-		media='all' />
-	<link rel='stylesheet' id='swiper-css'
-		href='https://www.nutrirong.com/wp-content/plugins/elementor/assets/lib/swiper/v8/css/swiper.min.css'
-		media='all' />
-	<link rel='stylesheet' id='elementor-pro-css'
-		href='https://www.nutrirong.com/wp-content/plugins/elementor-pro/assets/css/frontend-lite.min.css'
-		media='all' />
-	<link rel='stylesheet' id='elementor-global-css'
-		href='https://www.nutrirong.com/wp-content/uploads/elementor/css/global.css' media='all' />
-	<link rel='stylesheet' id='elementor-post-23-css'
-		href='https://www.nutrirong.com/wp-content/uploads/elementor/css/post-23.css' media='all' />
-	<link rel='stylesheet' id='elementor-post-7-css'
-		href='https://www.nutrirong.com/wp-content/uploads/elementor/css/post-7.css' media='all' />
-	<link rel='stylesheet' id='elementor-post-12-css'
-		href='https://www.nutrirong.com/wp-content/uploads/elementor/css/post-12.css' media='all' />
-	<link rel='stylesheet' id='chld_thm_cfg_child-css'
-		href='https://www.nutrirong.com/wp-content/themes/hello-elementor-child/style.css' media='all' />
-	<link rel='stylesheet' id='google-fonts-1-css'
-		href='https://fonts.googleapis.com/css?family=Roboto%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic%7CRoboto+Slab%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic&#038;display=auto&#038;ver=6.4.3'
-		media='all' />
-	<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+	
 	<script src="https://www.nutrirong.com/wp-includes/js/jquery/jquery.min.js" id="jquery-core-js"></script>
 	<script src="https://www.nutrirong.com/wp-includes/js/jquery/jquery-migrate.min.js" id="jquery-migrate-js"></script>
-	<script defer
-		src="https://www.nutrirong.com/wp-content/plugins/woocommerce/assets/js/jquery-blockui/jquery.blockUI.min.js"
-		id="jquery-blockui-js" defer data-wp-strategy="defer"></script>
-	<script defer src="https://www.nutrirong.com/wp-content/plugins/woocommerce/assets/js/js-cookie/js.cookie.min.js"
-		id="js-cookie-js" defer data-wp-strategy="defer"></script>
-	<script id="woocommerce-js-extra">
-		var woocommerce_params = { "ajax_url": "\/wp-admin\/admin-ajax.php", "wc_ajax_url": "\/?wc-ajax=%%endpoint%%" };
-	</script>
-	<script defer src="https://www.nutrirong.com/wp-content/plugins/woocommerce/assets/js/frontend/woocommerce.min.js"
-		id="woocommerce-js" defer data-wp-strategy="defer"></script>
-	<link rel="https://api.w.org/" href="https://www.nutrirong.com/wp-json/" />
 	<link rel="alternate" type="application/json" href="https://www.nutrirong.com/wp-json/wp/v2/pages/23" />
-	<link rel="canonical" href="https://www.nutrirong.com/" />
-	<link rel="alternate" type="application/json+oembed"
-		href="https://www.nutrirong.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.nutrirong.com%2F" />
+	
 	<link rel="alternate" type="text/xml+oembed"
 		href="https://www.nutrirong.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.nutrirong.com%2F&#038;format=xml" />
-	<noscript>
-		<style>
-			.woocommerce-product-gallery {
-				opacity: 1 !important;
-			}
-		</style>
-	</noscript>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-	<script>
-		jQuery(document).ready(function () { jQuery("body").on("click", ".click-child", function () { var href = jQuery(this).find("a").attr('href'); window.location = href; }); });
-	</script>
 	<link rel='stylesheet' id='wc-blocks-style-css'
 		href='https://www.nutrirong.com/wp-content/plugins/woocommerce/assets/client/blocks/wc-blocks.css'
 		media='all' />
@@ -112,9 +76,6 @@
 	<script defer
 		src="https://www.nutrirong.com/wp-content/plugins/woocommerce/assets/js/sourcebuster/sourcebuster.min.js"
 		id="sourcebuster-js-js"></script>
-	<script id="wc-order-attribution-js-extra">
-		var wc_order_attribution = { "params": { "lifetime": 1.0e-5, "session": 30, "base64": false, "ajaxurl": "https:\/\/www.nutrirong.com\/wp-admin\/admin-ajax.php", "prefix": "wc_order_attribution_", "allowTracking": true }, "fields": { "source_type": "current.typ", "referrer": "current_add.rf", "utm_campaign": "current.cmp", "utm_source": "current.src", "utm_medium": "current.mdm", "utm_content": "current.cnt", "utm_id": "current.id", "utm_term": "current.trm", "utm_source_platform": "current.plt", "utm_creative_format": "current.fmt", "utm_marketing_tactic": "current.tct", "session_entry": "current_add.ep", "session_start_time": "current_add.fd", "session_pages": "session.pgs", "session_count": "udata.vst", "user_agent": "udata.uag" } };
-	</script>
 	<script defer
 		src="https://www.nutrirong.com/wp-content/plugins/woocommerce/assets/js/frontend/order-attribution.min.js"
 		id="wc-order-attribution-js"></script>
